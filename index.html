@@ -16,33 +16,28 @@
     <div id="tracks">Загрузка...</div>
 
     <script>
+        const BASE_URL = "ТВОЯ_ССЫЛКА_ИЗ_TUNNEL"; // ВСТАВЬ СЮДА ССЫЛКУ ИЗ ЛОКАЛТАННЕЛА
         const tg = window.Telegram.WebApp;
-        const userId = tg.initDataUnsafe.user.id;
+        const userId = tg.initDataUnsafe.user?.id || 0;
 
-        // 1. Проверяем доступ при открытии
-        fetch(`http://127.0.0.1:8000/check_access/${userId}`)
+        fetch(`${BASE_URL}/check_access/${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (!data.access) {
-                    document.body.innerHTML = "<h1>🚫 Доступ закрыт</h1><p>Подпишись на канал, чтобы слушать музыку!</p>";
+                    document.body.innerHTML = "<h1>🚫 Доступ закрыт</h1><p>Подпишись на канал!</p>";
                 } else {
                     loadTracks();
                 }
             });
 
-        // 2. Загружаем треки
         function loadTracks() {
-            fetch('http://127.0.0.1:8000/get_tracks')
+            fetch(`${BASE_URL}/get_tracks`)
                 .then(res => res.json())
                 .then(tracks => {
                     const container = document.getElementById('tracks');
                     container.innerHTML = '';
                     tracks.forEach(track => {
-                        container.innerHTML += `
-                            <div class="track-item">
-                                <div><b>${track[1]}</b> - ${track[2]}</div>
-                                <button onclick="play(${track[0]})">▶</button>
-                            </div>`;
+                        container.innerHTML += `<div class="track-item"><div><b>${track[1]}</b> - ${track[2]}</div><button>▶</button></div>`;
                     });
                 });
         }
