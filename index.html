@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncensored Music</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { background: #0f0a1a; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
+        .track-item { background: #1a1525; padding: 15px; margin-bottom: 10px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        button { background: #8b5cf6; border: none; padding: 10px 20px; border-radius: 20px; color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Топ треков</h1>
+    <div id="tracks">Загрузка...</div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        const userId = tg.initDataUnsafe.user.id;
+
+        // 1. Проверяем доступ при открытии
+        fetch(`http://127.0.0.1:8000/check_access/${userId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.access) {
+                    document.body.innerHTML = "<h1>🚫 Доступ закрыт</h1><p>Подпишись на канал, чтобы слушать музыку!</p>";
+                } else {
+                    loadTracks();
+                }
+            });
+
+        // 2. Загружаем треки
+        function loadTracks() {
+            fetch('http://127.0.0.1:8000/get_tracks')
+                .then(res => res.json())
+                .then(tracks => {
+                    const container = document.getElementById('tracks');
+                    container.innerHTML = '';
+                    tracks.forEach(track => {
+                        container.innerHTML += `
+                            <div class="track-item">
+                                <div><b>${track[1]}</b> - ${track[2]}</div>
+                                <button onclick="play(${track[0]})">▶</button>
+                            </div>`;
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
