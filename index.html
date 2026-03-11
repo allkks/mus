@@ -5,47 +5,63 @@
     <title>Uncensored Music</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { background: #0f0a1a; color: white; font-family: sans-serif; padding: 20px; }
-        .track-item { background: #1a1525; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
-        .play-btn { background: #8b5cf6; border: none; padding: 12px; border-radius: 50%; color: white; cursor: pointer; }
+        :root { --bg: #0f0a1a; --card: #1a1525; --accent: #8b5cf6; }
+        body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; padding: 20px; }
+        h1 { text-align: center; color: var(--accent); }
+        .track-item { 
+            background: var(--card); padding: 15px; border-radius: 20px; 
+            margin-bottom: 12px; display: flex; align-items: center; 
+            justify-content: space-between; border: 1px solid #2d2640;
+        }
+        .info { display: flex; align-items: center; gap: 15px; }
+        .cover { width: 50px; height: 50px; border-radius: 12px; background: #333; }
+        .play-btn { 
+            background: var(--accent); border: none; width: 45px; height: 45px; 
+            border-radius: 50%; color: white; font-size: 20px; cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Uncensored Music 🔥</h1>
-    <div id="tracks">Загрузка треков...</div>
+    <div id="tracks">Загрузка...</div>
 
     <script>
-        const BASE_URL = "https://forty-books-post.loca.lt"; // ВСТАВЬ СЮДА ССЫЛКУ ИЗ ЛОКАЛТАННЕЛА
-        const tg = window.Telegram.WebApp;
-        const userId = tg.initDataUnsafe.user?.id || 0;
+        const BASE_URL = "ТВОЯ_ССЫЛКА_ИЗ_TUNNEL"; // <-- ОБЯЗАТЕЛЬНО ЗАМЕНИ НА ССЫЛКУ ИЗ LOCAL TUNNEL
+        const userId = window.Telegram.WebApp.initDataUnsafe.user?.id || 0;
 
         fetch(`${BASE_URL}/check_access/${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (!data.access) {
-                    document.body.innerHTML = "<h1>🚫 Доступ закрыт</h1>";
+                    document.body.innerHTML = "<h1 style='margin-top:50px'>🚫 Доступ закрыт</h1><p style='text-align:center'>Подпишись на канал!</p>";
                 } else {
-                    fetch(`${BASE_URL}/get_library`)
-                        .then(res => res.json())
-                        .then(tracks => {
-                            const container = document.getElementById('tracks');
-                            container.innerHTML = '';
-                            tracks.forEach(t => {
-                                container.innerHTML += `
-                                    <div class="track-item">
-                                        <div><b>${t.artist}</b> - ${t.title}</div>
-                                        <button class="play-btn" onclick="play(${t.id})">▶</button>
-                                    </div>`;
-                            });
-                        });
+                    loadTracks();
                 }
             });
 
+        function loadTracks() {
+            fetch(`${BASE_URL}/get_library`)
+                .then(res => res.json())
+                .then(tracks => {
+                    const container = document.getElementById('tracks');
+                    container.innerHTML = '';
+                    tracks.forEach(t => {
+                        container.innerHTML += `
+                            <div class="track-item">
+                                <div class="info">
+                                    <div class="cover"></div>
+                                    <div><b>${t.artist}</b><br><small style="color:#aaa">${t.title}</small></div>
+                                </div>
+                                <button class="play-btn" onclick="play(${t.id})">▶</button>
+                            </div>`;
+                    });
+                });
+        }
+
         function play(id) {
             fetch(`${BASE_URL}/play/${id}`, { method: 'POST' });
-            alert("Начинаю воспроизведение трека #" + id);
+            alert("Играет трек #" + id);
         }
     </script>
 </body>
 </html>
-
