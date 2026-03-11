@@ -14,7 +14,6 @@
         :root {
             --accent: #9333ea;
             --bg-dark: #0f0a1e;
-            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         body { 
@@ -31,204 +30,186 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Эффект свечения для активных элементов */
-        .active-glow {
-            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Карточки рекомендаций */
-        .promo-card {
-            min-width: 140px;
-            height: 180px;
-            transition: transform 0.3s ease;
-        }
+        /* Карточки */
+        .promo-card { min-width: 140px; height: 180px; transition: transform 0.3s ease; }
         .promo-card:active { transform: scale(0.95); }
 
-        /* Стилизация инпута */
-        .search-box {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
+        .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s; }
+        .chip.active { background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%); border-color: transparent; }
 
-        /* Кнопки фильтры (Чипсы) */
-        .chip {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s;
-        }
-        .chip.active {
-            background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
-            border-color: transparent;
-        }
+        .track-item { background: rgba(255, 255, 255, 0.03); border-radius: 16px; transition: background 0.2s; }
+        .track-item.playing { background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); }
 
-        /* Список треков */
-        .track-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            transition: background 0.2s;
+        /* Полноэкранный плеер */
+        #full-player {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0f0a1e;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .track-item:active { background: rgba(255, 255, 255, 0.08); }
-        .track-item.playing {
-            background: rgba(147, 51, 234, 0.15);
-            border: 1px solid rgba(147, 51, 234, 0.3);
-        }
-
-        /* Нижний плеер */
-        .mini-player {
-            background: rgba(20, 15, 35, 0.95);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Навигация */
-        .nav-bar {
-            background: rgba(15, 10, 30, 0.98);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        #full-player.active { transform: translateY(0); }
 
         /* Прогресс-бар */
-        .progress-container {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: #9333ea;
-            border-radius: 2px;
-            position: relative;
-        }
+        .progress-container { height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; position: relative; }
+        .progress-fill { height: 100%; background: #9333ea; border-radius: 2px; position: relative; width: 0%; }
         .progress-fill::after {
-            content: '';
-            position: absolute;
-            right: -4px;
-            top: -3px;
-            width: 10px;
-            height: 100%;
-            padding: 5px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(147, 51, 234, 1);
+            content: ''; position: absolute; right: -6px; top: -4px;
+            width: 12px; height: 12px; background: white; border-radius: 50%;
+            box-shadow: 0 0 10px #9333ea;
         }
+
+        .animate-spin-slow { animation: spin 8s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="pb-48">
+<body class="pb-40">
 
     <!-- Header -->
     <div class="px-5 pt-8 pb-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full border-2 border-purple-500 p-0.5">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full bg-purple-900" alt="Avatar">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full bg-purple-900">
             </div>
-            <h1 class="text-lg font-bold">Uncensored Music 🔥</h1>
+            <h1 class="text-lg font-bold italic">UNCENSORED</h1>
         </div>
         <button class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full">
-            <i class="fa-solid fa-ellipsis text-gray-400"></i>
+            <i class="fa-solid fa-bell text-gray-400"></i>
         </button>
     </div>
 
     <!-- Tabs Top -->
     <div class="flex justify-center gap-8 mb-6 text-sm font-semibold text-gray-500">
-        <button class="text-white border-b-2 border-purple-500 pb-1">Треки</button>
-        <button class="">Исполнители</button>
+        <button onclick="switchTab('tracks')" id="tab-tracks" class="text-white border-b-2 border-purple-500 pb-1">Треки</button>
+        <button onclick="switchTab('artists')" id="tab-artists">Исполнители</button>
     </div>
 
     <!-- Search -->
     <div class="px-5 mb-6">
-        <div class="search-box flex items-center px-4 py-3 rounded-2xl">
+        <div class="glass flex items-center px-4 py-3 rounded-2xl">
             <i class="fa-solid fa-magnifying-glass text-gray-500 mr-3"></i>
-            <input type="text" id="search-input" placeholder="Поиск треков и исполнителей..." 
+            <input type="text" id="search-input" oninput="render()" placeholder="Поиск музыки..." 
                    class="bg-transparent w-full outline-none text-sm placeholder:text-gray-500">
         </div>
     </div>
 
-    <!-- Chips Filter -->
-    <div class="flex gap-3 overflow-x-auto no-scrollbar px-5 mb-8">
-        <button onclick="setFilter('')" id="cat-all" class="chip active px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🔥 Популярное</button>
-        <button onclick="setFilter('best')" id="cat-best" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">⭐ Лучшее</button>
-        <button onclick="setFilter('new')" id="cat-new" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🆕 Новинки</button>
-        <button onclick="setFilter('liked')" id="cat-liked" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">💜 Мне нравится</button>
-    </div>
+    <!-- Main View (Tracks) -->
+    <div id="view-tracks">
+        <!-- Chips Filter -->
+        <div class="flex gap-3 overflow-x-auto no-scrollbar px-5 mb-8">
+            <button onclick="setFilter('')" id="cat-all" class="chip active px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🔥 Популярное</button>
+            <button onclick="setFilter('Rock')" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🎸 Рок</button>
+            <button onclick="setFilter('Punk')" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🤘 Панк</button>
+            <button onclick="setFilter('Rap')" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🎤 Рэп</button>
+        </div>
 
-    <!-- Recommendations -->
-    <div class="px-5 mb-8">
-        <h2 class="text-md font-bold mb-4">Рекомендации</h2>
-        <div class="flex gap-4 overflow-x-auto no-scrollbar">
-            <!-- Card 1 -->
-            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-purple-600 to-indigo-900 shadow-xl">
-                <div class="absolute inset-0 bg-black/20"></div>
-                <div class="absolute bottom-4 left-4">
-                    <p class="text-xl font-black leading-none">RAP<br>HITS</p>
+        <!-- Recommendations -->
+        <div class="px-5 mb-8">
+            <h2 class="text-md font-bold mb-4">Рекомендации</h2>
+            <div class="flex gap-4 overflow-x-auto no-scrollbar">
+                <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-purple-600 to-indigo-900 shadow-xl p-4 flex flex-col justify-end">
+                    <p class="text-xl font-black leading-none">ROCK<br>PUNK</p>
+                </div>
+                <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-pink-600 to-purple-900 shadow-xl p-4 flex flex-col justify-end">
+                    <p class="text-xl font-black leading-none">NEW<br>WAVE</p>
                 </div>
             </div>
-            <!-- Card 2 -->
-            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-pink-600 to-purple-900 shadow-xl">
-                <div class="absolute inset-0 bg-black/20"></div>
-                <div class="absolute bottom-4 left-4">
-                    <p class="text-xl font-black leading-none">TOP<br>TRACKS</p>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=400&q=80" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                <div class="absolute bottom-4 left-4">
-                    <p class="text-[10px] font-bold text-gray-300 uppercase">New Releases</p>
-                    <p class="text-lg font-black leading-tight">SUMMER<br>MIX</p>
-                </div>
+        </div>
+
+        <!-- Track List -->
+        <div class="px-5">
+            <h2 id="list-title" class="text-md font-bold mb-4">Топ треков</h2>
+            <div id="track-container" class="space-y-3 pb-10">
+                <div class="flex items-center justify-center py-10 opacity-30"><i class="fa-solid fa-circle-notch animate-spin text-2xl"></i></div>
             </div>
         </div>
     </div>
 
-    <!-- Top Tracks -->
-    <div class="px-5">
-        <h2 class="text-md font-bold mb-4">Топ треков</h2>
-        <div id="track-container" class="space-y-3">
-            <!-- Треки будут здесь -->
-            <div class="flex items-center justify-center py-10 opacity-30">
-                <i class="fa-solid fa-circle-notch animate-spin text-2xl"></i>
+    <!-- Artists View (Hidden by default) -->
+    <div id="view-artists" class="hidden px-5">
+        <h2 class="text-md font-bold mb-4">Все исполнители</h2>
+        <div id="artists-container" class="grid grid-cols-3 gap-4">
+            <!-- Сюда вставим артистов -->
+        </div>
+    </div>
+
+    <!-- Mini Player -->
+    <div id="player-bar" class="fixed bottom-24 left-4 right-4 z-50 translate-y-[150%] transition-all duration-500">
+        <div class="glass rounded-[24px] p-3 shadow-2xl flex items-center justify-between" onclick="openFullPlayer()">
+            <div class="flex items-center gap-3 overflow-hidden">
+                <img id="p-img" src="" class="w-12 h-12 rounded-xl object-cover">
+                <div class="overflow-hidden">
+                    <h4 id="p-title" class="font-bold text-sm truncate">...</h4>
+                    <p id="p-artist" class="text-[10px] text-gray-400 truncate">...</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="p-play-btn" onclick="event.stopPropagation(); togglePlay();" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center">
+                    <i class="fa-solid fa-play ml-0.5"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Player -->
-    <div id="player-bar" class="fixed bottom-20 left-0 right-0 z-50 translate-y-full transition-all duration-500">
-        <div class="mini-player mx-4 rounded-3xl p-4 shadow-2xl">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-3 overflow-hidden">
-                    <img id="p-img" src="" class="w-12 h-12 rounded-xl object-cover">
-                    <div class="overflow-hidden">
-                        <h4 id="p-title" class="font-bold text-sm truncate">Название</h4>
-                        <p id="p-artist" class="text-[10px] text-gray-400 truncate">Артист</p>
-                        <p id="p-time-text" class="text-[10px] text-purple-400 font-mono mt-0.5">0:00 / 0:00</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button class="text-purple-500"><i class="fa-solid fa-heart"></i></button>
-                    <button id="p-play-btn" class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
-                        <i class="fa-solid fa-play ml-0.5"></i>
-                    </button>
-                </div>
+    <!-- Full Player -->
+    <div id="full-player" class="p-8 flex flex-col justify-between">
+        <div class="flex justify-between items-center">
+            <button onclick="closeFullPlayer()" class="w-10 h-10 glass rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="text-center">
+                <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Сейчас играет</p>
+                <p id="f-album" class="text-xs text-purple-400">Альбом</p>
             </div>
-            <!-- Progress Bar -->
-            <div id="p-progress-container" class="progress-container w-full cursor-pointer">
-                <div id="p-bar" class="progress-fill" style="width: 0%"></div>
+            <button class="w-10 h-10 glass rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <img id="f-img" src="" class="w-full aspect-square rounded-[40px] shadow-2xl shadow-purple-900/40 object-cover mb-10">
+            <div class="text-left w-full px-2">
+                <h2 id="f-title" class="text-2xl font-bold truncate">Название трека</h2>
+                <p id="f-artist" class="text-lg text-gray-400 mt-1">Исполнитель</p>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <div class="progress-container mb-2" id="f-progress-click">
+                <div id="f-progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-gray-500 font-mono mb-8">
+                <span id="f-time-curr">0:00</span>
+                <span id="f-time-total">0:00</span>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <button class="text-xl opacity-40"><i class="fa-solid fa-shuffle"></i></button>
+                <button onclick="prevTrack()" class="text-3xl"><i class="fa-solid fa-backward-step"></i></button>
+                <button onclick="togglePlay()" id="f-play-btn" class="w-20 h-20 bg-white text-black rounded-full text-3xl flex items-center justify-center shadow-xl">
+                    <i class="fa-solid fa-play ml-1"></i>
+                </button>
+                <button onclick="nextTrack()" class="text-3xl"><i class="fa-solid fa-forward-step"></i></button>
+                <button class="text-xl opacity-40"><i class="fa-solid fa-repeat"></i></button>
             </div>
         </div>
     </div>
 
     <!-- Navigation Bar -->
-    <nav class="nav-bar fixed bottom-0 left-0 right-0 px-10 py-5 flex justify-between items-center z-[60]">
-        <button class="text-white text-xl"><i class="fa-solid fa-house"></i></button>
-        <div class="relative">
-            <button class="text-purple-500 text-2xl"><i class="fa-solid fa-heart"></i></button>
-            <span class="absolute -top-1 -right-2 bg-purple-600 text-[8px] px-1.5 py-0.5 rounded-full border border-[#0f0a1e]">9</span>
-        </div>
-        <button class="text-gray-600 text-xl"><i class="fa-solid fa-gear"></i></button>
+    <nav class="glass fixed bottom-0 left-0 right-0 px-10 py-6 flex justify-between items-center z-[60] border-none rounded-t-[30px]">
+        <button onclick="switchTab('tracks')" class="text-purple-500 text-xl"><i class="fa-solid fa-house"></i></button>
+        <button class="text-gray-600 text-xl"><i class="fa-solid fa-heart"></i></button>
+        <button onclick="switchTab('artists')" class="text-gray-600 text-xl"><i class="fa-solid fa-user-group"></i></button>
     </nav>
 
-    <audio id="main-audio"></audio>
+    <audio id="audio-engine"></audio>
 
     <script>
         const tg = window.Telegram.WebApp;
@@ -239,16 +220,18 @@
         const SB_KEY = "sb_publishable_YOPX7PVk9K1d3gIH3kkQcw_HJlsk-OD";
         const supabase = window.supabase.createClient(SB_URL, SB_KEY);
 
-        const audio = document.getElementById('main-audio');
+        const audio = document.getElementById('audio-engine');
         let dbMusic = [];
         let currentFilter = '';
-        let playingId = null;
+        let currentTrackIdx = -1;
+        let activeTab = 'tracks';
 
         async function loadData() {
             const { data, error } = await supabase.from('music').select('*').order('created_at', { ascending: false });
             if (data) {
                 dbMusic = data;
                 render();
+                renderArtists();
             }
         }
 
@@ -262,111 +245,145 @@
             );
 
             container.innerHTML = filtered.map((t, index) => {
-                const isPlaying = playingId === t.id;
-                const activePause = isPlaying && !audio.paused;
-
+                const isPlaying = currentTrackIdx !== -1 && dbMusic[currentTrackIdx].id === t.id;
                 return `
-                    <div class="track-item flex items-center justify-between p-3 ${isPlaying ? 'playing' : ''}" onclick="playTrack(${t.id})">
+                    <div class="track-item flex items-center justify-between p-3 ${isPlaying ? 'playing' : ''}" onclick="playByIndex(${dbMusic.indexOf(t)})">
                         <div class="flex items-center gap-4 overflow-hidden">
-                            <div class="relative">
-                                <img src="${t.cover}" class="w-12 h-12 rounded-xl object-cover shadow-lg">
-                                ${activePause ? `
-                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
-                                        <div class="flex gap-0.5">
-                                            <div class="w-0.5 h-3 bg-white animate-pulse"></div>
-                                            <div class="w-0.5 h-4 bg-white animate-pulse" style="animation-delay: 0.2s"></div>
-                                            <div class="w-0.5 h-2 bg-white animate-pulse" style="animation-delay: 0.4s"></div>
-                                        </div>
-                                    </div>
-                                ` : ''}
-                            </div>
+                            <img src="${t.cover}" class="w-12 h-12 rounded-xl object-cover">
                             <div class="overflow-hidden">
-                                <h4 class="font-bold text-sm truncate text-gray-100">${index + 1}. ${t.title}</h4>
-                                <p class="text-[10px] text-gray-500 font-medium">${t.artist}</p>
-                                ${isPlaying ? `
-                                    <div class="mt-1 h-[2px] w-20 bg-white/10 rounded-full overflow-hidden">
-                                        <div class="h-full bg-purple-500" style="width: ${(audio.currentTime / audio.duration * 100) || 0}%"></div>
-                                    </div>
-                                ` : ''}
+                                <h4 class="font-bold text-sm truncate">${t.title}</h4>
+                                <p class="text-[10px] text-gray-500">${t.artist}</p>
                             </div>
                         </div>
-                        <button class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-purple-400 active:scale-90 transition-transform">
-                            <i class="fa-solid ${activePause ? 'fa-pause' : 'fa-play text-[10px] ml-0.5'}"></i>
-                        </button>
+                        <i class="fa-solid ${isPlaying && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500 text-xs px-2"></i>
                     </div>
                 `;
             }).join('');
         }
 
-        function playTrack(id) {
-            const track = dbMusic.find(t => t.id === id);
-            if (!track) return;
+        function renderArtists() {
+            const container = document.getElementById('artists-container');
+            const artists = [...new Set(dbMusic.map(t => t.artist))];
+            
+            container.innerHTML = artists.map(name => `
+                <div class="flex flex-col items-center gap-2" onclick="filterByArtist('${name}')">
+                    <div class="w-20 h-20 rounded-full border-2 border-purple-500 p-1">
+                        <img src="https://api.dicebear.com/7.x/micah/svg?seed=${name}" class="w-full h-full rounded-full bg-purple-900">
+                    </div>
+                    <p class="text-[10px] font-bold text-center truncate w-full">${name}</p>
+                </div>
+            `).join('');
+        }
 
-            if (playingId === id) {
-                if (audio.paused) audio.play();
-                else audio.pause();
-            } else {
-                playingId = id;
-                audio.src = track.url;
-                audio.play();
-                
-                document.getElementById('p-img').src = track.cover;
-                document.getElementById('p-title').innerText = track.title;
-                document.getElementById('p-artist').innerText = track.artist;
-                document.getElementById('player-bar').classList.remove('translate-y-full');
+        function playByIndex(index) {
+            if (index === currentTrackIdx) {
+                togglePlay();
+                return;
             }
+            currentTrackIdx = index;
+            const track = dbMusic[currentTrackIdx];
+            
+            audio.src = track.url;
+            audio.play();
+            
+            updatePlayerUI();
+            document.getElementById('player-bar').classList.remove('translate-y-[150%]');
             render();
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+
+        function togglePlay() {
+            if (audio.paused) audio.play();
+            else audio.pause();
             tg.HapticFeedback.impactOccurred('light');
+        }
+
+        function nextTrack() {
+            let next = currentTrackIdx + 1;
+            if (next >= dbMusic.length) next = 0;
+            playByIndex(next);
+        }
+
+        function prevTrack() {
+            let prev = currentTrackIdx - 1;
+            if (prev < 0) prev = dbMusic.length - 1;
+            playByIndex(prev);
+        }
+
+        function updatePlayerUI() {
+            const track = dbMusic[currentTrackIdx];
+            const icon = audio.paused ? 'fa-play' : 'fa-pause';
+            
+            // Mini
+            document.getElementById('p-img').src = track.cover;
+            document.getElementById('p-title').innerText = track.title;
+            document.getElementById('p-artist').innerText = track.artist;
+            document.getElementById('p-play-btn').innerHTML = `<i class="fa-solid ${icon} ${audio.paused ? 'ml-0.5' : ''}"></i>`;
+            
+            // Full
+            document.getElementById('f-img').src = track.cover;
+            document.getElementById('f-title').innerText = track.title;
+            document.getElementById('f-artist').innerText = track.artist;
+            document.getElementById('f-album').innerText = track.album || 'Single';
+            document.getElementById('f-play-btn').innerHTML = `<i class="fa-solid ${icon} ${audio.paused ? 'ml-1' : ''}"></i>`;
+        }
+
+        function openFullPlayer() {
+            document.getElementById('full-player').classList.add('active');
+        }
+
+        function closeFullPlayer() {
+            document.getElementById('full-player').classList.remove('active');
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.getElementById('view-tracks').classList.toggle('hidden', tab !== 'tracks');
+            document.getElementById('view-artists').classList.toggle('hidden', tab !== 'artists');
+            
+            document.getElementById('tab-tracks').classList.toggle('text-white', tab === 'tracks');
+            document.getElementById('tab-tracks').classList.toggle('border-b-2', tab === 'tracks');
+            document.getElementById('tab-artists').classList.toggle('text-white', tab === 'artists');
+            document.getElementById('tab-artists').classList.toggle('border-b-2', tab === 'artists');
+        }
+
+        function filterByArtist(name) {
+            switchTab('tracks');
+            document.getElementById('search-input').value = name;
+            render();
         }
 
         function setFilter(cat) {
             currentFilter = cat;
-            document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
-            const activeBtn = cat === '' ? document.getElementById('cat-all') : document.getElementById(`cat-${cat}`);
-            if (activeBtn) activeBtn.classList.add('active');
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
             render();
-            tg.HapticFeedback.selectionChanged();
         }
 
-        document.getElementById('p-play-btn').onclick = (e) => {
-            e.stopPropagation();
-            if (audio.paused) audio.play();
-            else audio.pause();
-            tg.HapticFeedback.impactOccurred('medium');
-        };
-
-        audio.onplay = () => {
-            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-            render();
-        };
-        audio.onpause = () => {
-            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
-            render();
-        };
-
+        // Audio Events
+        audio.onplay = () => updatePlayerUI();
+        audio.onpause = () => updatePlayerUI();
+        audio.onended = () => nextTrack();
         audio.ontimeupdate = () => {
-            const perc = (audio.currentTime / audio.duration) * 100;
-            document.getElementById('p-bar').style.width = perc + '%';
+            const perc = (audio.currentTime / audio.duration) * 100 || 0;
+            document.getElementById('f-progress-fill').style.width = perc + '%';
             
             const fmt = (t) => {
-                if(isNaN(t)) return "0:00";
+                if(!t) return "0:00";
                 const m = Math.floor(t / 60);
                 const s = Math.floor(t % 60);
                 return `${m}:${s < 10 ? '0' : ''}${s}`;
             };
-            document.getElementById('p-time-text').innerText = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
-            
-            // Также обновляем маленькую полоску в списке треков раз в секунду
-            if(Math.floor(audio.currentTime) % 2 === 0) render();
+            document.getElementById('f-time-curr').innerText = fmt(audio.currentTime);
+            document.getElementById('f-time-total').innerText = fmt(audio.duration);
         };
 
-        document.getElementById('p-progress-container').onclick = (e) => {
+        // Progress Click
+        document.getElementById('f-progress-click').onclick = (e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
             audio.currentTime = (x / rect.width) * audio.duration;
         };
-
-        document.getElementById('search-input').oninput = () => render();
 
         loadData();
     </script>
