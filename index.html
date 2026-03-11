@@ -9,23 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #080414; color: #f3f4f6; -webkit-user-select: none; user-select: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #080414; color: #f3f4f6; -webkit-user-select: none; user-select: none; overflow-x: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Эквалайзер */
-        @keyframes music-bar-1 { 0%, 100% { height: 4px; } 50% { height: 14px; } }
-        @keyframes music-bar-2 { 0%, 100% { height: 10px; } 50% { height: 4px; } }
-        @keyframes music-bar-3 { 0%, 100% { height: 6px; } 50% { height: 12px; } }
-        .animate-bar-1 { animation: music-bar-1 0.8s infinite ease-in-out; }
-        .animate-bar-2 { animation: music-bar-2 0.6s infinite ease-in-out; }
-        .animate-bar-3 { animation: music-bar-3 0.7s infinite ease-in-out; }
+        /* Анимация эквалайзера */
+        @keyframes music-bar { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+        .animate-bar-1 { animation: music-bar 0.8s infinite ease-in-out; }
+        .animate-bar-2 { animation: music-bar 0.6s infinite ease-in-out; }
+        .animate-bar-3 { animation: music-bar 0.7s infinite ease-in-out; }
+
+        .view-section { display: none; }
+        .view-section.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen pb-44">
 
-    <!-- Dynamic Background Glow -->
-    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/20 blur-[120px] pointer-events-none animate-pulse"></div>
+    <!-- Background Decor -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/10 blur-[120px] pointer-events-none"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/10 blur-[120px] pointer-events-none"></div>
 
     <!-- Header -->
@@ -38,90 +40,122 @@
             </div>
             <span class="font-bold text-lg tracking-tight">Uncensored Music <span class="text-orange-500">🔥</span></span>
         </div>
-        <button class="p-2 bg-white/5 rounded-xl"><i class="fa fa-ellipsis-h text-xl"></i></button>
+        <button class="p-2 bg-white/5 rounded-xl hover:bg-white/10 active:scale-90 transition-all">
+            <i class="fa fa-ellipsis-h text-xl"></i>
+        </button>
     </header>
 
-    <main class="px-5 space-y-8 mt-4">
+    <!-- VIEW: HOME (Плеер) -->
+    <main id="view-home" class="view-section active px-5 space-y-8 mt-4">
+        <!-- Tabs -->
+        <div class="flex gap-2 p-1 bg-white/5 rounded-2xl w-fit">
+            <button class="py-2 px-6 rounded-xl font-bold text-sm bg-purple-600 shadow-lg shadow-purple-600/20">Треки</button>
+            <button class="py-2 px-6 rounded-xl font-bold text-sm text-gray-400">Исполнители</button>
+        </div>
+
         <!-- Search -->
         <div class="relative group">
-            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" id="search-icon"></i>
-            <input type="text" id="search-input" placeholder="Поиск треков и исполнителей..." 
+            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-colors"></i>
+            <input type="text" id="search-input" placeholder="Поиск..." 
                 class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-purple-500/20 transition-all text-sm">
         </div>
 
         <!-- Categories -->
-        <div class="flex gap-3 overflow-x-auto no-scrollbar py-1">
-            <button class="flex items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-4 py-2 text-xs font-bold uppercase whitespace-nowrap"><i class="fa fa-fire text-orange-500"></i> Популярное</button>
-            <button class="flex items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-4 py-2 text-xs font-bold uppercase whitespace-nowrap">⭐ Лучшее</button>
-            <button class="flex items-center gap-2 bg-white/5 border border-white/5 rounded-xl px-4 py-2 text-xs font-bold uppercase whitespace-nowrap">🆕 Новинки</button>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar py-1" id="categories">
+            <button onclick="setCategory('pop')" id="cat-pop" class="cat-btn flex items-center gap-2 whitespace-nowrap border rounded-xl px-4 py-2.5 transition active:scale-95 text-xs font-bold uppercase bg-purple-600/20 border-purple-500 text-white">
+                <i class="fa fa-fire text-orange-500"></i> Популярное
+            </button>
+            <button onclick="setCategory('best')" id="cat-best" class="cat-btn flex items-center gap-2 whitespace-nowrap border rounded-xl px-4 py-2.5 transition active:scale-95 text-xs font-bold uppercase bg-white/5 border-white/5 text-gray-400">
+                ⭐ Лучшее
+            </button>
+            <button onclick="setCategory('liked')" id="cat-liked" class="cat-btn flex items-center gap-2 whitespace-nowrap border rounded-xl px-4 py-2.5 transition active:scale-95 text-xs font-bold uppercase bg-white/5 border-white/5 text-gray-400">
+                <i class="fa fa-heart text-purple-500"></i> Мне нравится
+            </button>
         </div>
-
-        <!-- Recommendations -->
-        <section>
-            <h2 class="text-lg font-black mb-4 flex items-center justify-between tracking-widest">РЕКОМЕНДАЦИИ <span class="text-[10px] text-purple-500">ВСЕ</span></h2>
-            <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
-                <div class="min-w-[180px] aspect-[1/1.2] rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-600 p-6 flex flex-col justify-end relative overflow-hidden shadow-xl">
-                    <i class="fa fa-music absolute top-4 right-4 text-6xl opacity-10"></i>
-                    <h3 class="font-black text-2xl leading-tight">RAP HITS</h3>
-                </div>
-                <div class="min-w-[180px] aspect-[1/1.2] rounded-3xl bg-gradient-to-br from-pink-600 to-purple-600 p-6 flex flex-col justify-end relative overflow-hidden shadow-xl">
-                    <i class="fa fa-bolt absolute top-4 right-4 text-6xl opacity-10"></i>
-                    <h3 class="font-black text-2xl leading-tight">TOP CHART</h3>
-                </div>
-            </div>
-        </section>
 
         <!-- Track List -->
         <section class="pb-10">
-            <h2 class="text-lg font-black mb-4 uppercase tracking-widest text-gray-400">Топ треков</h2>
+            <h2 id="list-title" class="text-lg font-black mb-4 uppercase tracking-widest text-gray-500">Топ треков</h2>
             <div class="space-y-3" id="track-container">
                 <!-- Треки генерятся через JS -->
             </div>
         </section>
     </main>
 
-    <!-- Floating Player -->
+    <!-- VIEW: OPTIONS (Настройки) -->
+    <main id="view-options" class="view-section px-5 space-y-6 mt-6">
+        <h2 class="text-2xl font-black uppercase tracking-tighter">Опции</h2>
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-5 space-y-6">
+            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl">
+                <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center font-black text-xl shadow-lg shadow-purple-500/20">U</div>
+                <div>
+                    <h3 class="font-bold" id="user-name">User #812</h3>
+                    <p class="text-xs text-gray-500">Premium подписка активна</p>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <label class="flex items-center gap-2 text-xs font-black text-gray-500 uppercase px-2">
+                    <i class="fa fa-palette"></i> Выбор темы
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="py-3 rounded-xl text-xs font-bold border bg-purple-600 border-purple-400 shadow-lg">Dark</button>
+                    <button class="py-3 rounded-xl text-xs font-bold border bg-white/5 border-white/10 text-gray-500">Glass</button>
+                    <button class="py-3 rounded-xl text-xs font-bold border bg-white/5 border-white/10 text-gray-500">Deep</button>
+                </div>
+            </div>
+
+            <button class="w-full flex items-center justify-between p-4 bg-indigo-600 hover:bg-indigo-500 transition-colors rounded-2xl shadow-xl shadow-indigo-900/20">
+                <div class="flex items-center gap-3 font-bold">
+                    <i class="fa fa-comment-dots"></i> Написать в поддержку
+                </div>
+                <i class="fa fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Floating Player Controls -->
     <div class="fixed bottom-6 left-4 right-4 z-[100] flex flex-col gap-4">
-        <div class="bg-[#120c24]/80 backdrop-blur-3xl border border-white/10 rounded-[32px] p-2 shadow-2xl">
+        <div class="bg-[#120c24]/90 backdrop-blur-3xl border border-white/10 rounded-[32px] p-2 shadow-2xl">
             
-            <!-- Player Content -->
             <div class="flex items-center justify-between p-3 bg-white/5 rounded-[24px] mb-2">
                 <div class="flex items-center gap-3 max-w-[60%]">
-                    <img id="p-img" src="https://via.placeholder.com/100" class="w-12 h-12 rounded-xl object-cover ring-1 ring-white/10">
+                    <img id="p-img" src="https://via.placeholder.com/100" class="w-12 h-12 rounded-xl object-cover shadow-lg">
                     <div class="overflow-hidden">
                         <h4 id="p-title" class="font-black text-sm truncate">Выберите трек</h4>
                         <p id="p-artist" class="text-[10px] font-bold text-purple-400/80 uppercase">АРТИСТ</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="prevTrack()" class="text-gray-400"><i class="fa fa-step-backward"></i></button>
-                    <button id="main-play-btn" class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg">
+                    <button id="p-play-btn" class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center active:scale-90 transition-all shadow-lg">
                         <i class="fa fa-play text-xl ml-1"></i>
                     </button>
-                    <button onclick="nextTrack()" class="text-gray-400"><i class="fa fa-step-forward"></i></button>
+                    <button onclick="nextTrack()" class="text-gray-400 active:scale-90 transition-all">
+                        <i class="fa fa-step-forward text-xl"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Progress -->
             <div class="px-4 mb-2">
-                <div class="w-full h-1 bg-white/10 rounded-full relative overflow-hidden">
-                    <div id="p-bar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-indigo-400" style="width: 0%"></div>
-                </div>
-                <div class="flex justify-between mt-1 text-[8px] font-bold text-gray-500 uppercase tracking-widest">
-                    <span id="p-current">0:00</span>
-                    <span id="p-duration">0:00</span>
+                <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    <div id="p-bar" class="h-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.6)] transition-all duration-300" style="width: 0%"></div>
                 </div>
             </div>
-
-            <!-- Nav Bar -->
-            <div class="flex justify-around items-center py-2">
-                <button class="flex flex-col items-center gap-1 text-purple-500"><i class="fa fa-home text-xl"></i><span class="text-[9px] font-black uppercase">Дом</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-500"><i class="fa fa-search text-xl"></i><span class="text-[9px] font-black uppercase">Поиск</span></button>
+            
+            <!-- Bottom Navigation -->
+            <div class="flex justify-around items-center py-2 px-2">
+                <button onclick="showView('home')" id="nav-home" class="nav-item flex flex-col items-center gap-1 text-purple-500">
+                    <i class="fa fa-home text-xl"></i><span class="text-[9px] font-black uppercase">Дом</span>
+                </button>
                 <div class="relative -top-3">
-                    <div class="p-3 rounded-2xl bg-purple-600 text-white shadow-lg"><i class="fa fa-heart text-xl"></i></div>
+                    <button onclick="filterLiked()" class="p-3 rounded-2xl bg-purple-600/80 text-white shadow-xl active:scale-90 transition-all relative">
+                        <i class="fa fa-heart text-xl"></i>
+                        <span id="like-count" class="absolute -top-1 -right-1 bg-red-500 text-[8px] font-black px-1.5 py-0.5 rounded-full border-2 border-[#120c24]">0</span>
+                    </button>
                 </div>
-                <button class="flex flex-col items-center gap-1 text-gray-500"><i class="fa fa-broadcast-tower text-xl"></i><span class="text-[9px] font-black uppercase">Радио</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-500"><i class="fa fa-cog text-xl"></i><span class="text-[9px] font-black uppercase">Опции</span></button>
+                <button onclick="showView('options')" id="nav-options" class="nav-item flex flex-col items-center gap-1 text-gray-500">
+                    <i class="fa fa-cog text-xl"></i><span class="text-[9px] font-black uppercase">Опции</span>
+                </button>
             </div>
         </div>
     </div>
@@ -135,23 +169,37 @@
         const tracks = [
             { id: 1, title: 'Деньги', artist: 'Kizaru', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
             { id: 2, title: 'Goosebumps', artist: 'Travis Scott', image: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
-            { id: 3, title: 'Cristal & МОЁТ', artist: 'Morgenshtern', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' }
+            { id: 3, title: 'Cristal & МОЁТ', artist: 'Morgenshtern', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
+            { id: 4, title: 'Life Is Good', artist: 'Future ft. Drake', image: 'https://images.unsplash.com/photo-1514525253361-bee8718a74a2?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3' },
+            { id: 5, title: 'Starboy', artist: 'The Weeknd', image: 'https://images.unsplash.com/photo-1459749411177-042180ce673c?w=200&h=200&fit=crop', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3' }
         ];
 
-        let currentIndex = 0;
+        let likedIds = new Set([1, 4]);
+        let currentIdx = 0;
         let isPlaying = false;
+        let currentCategory = 'pop';
         const audio = document.getElementById('main-audio');
-        const container = document.getElementById('track-container');
 
-        function render(filter = "") {
-            container.innerHTML = tracks
-                .filter(t => t.title.toLowerCase().includes(filter.toLowerCase()))
-                .map((t, i) => {
-                const active = i === currentIndex && isPlaying;
+        function renderTracks() {
+            const container = document.getElementById('track-container');
+            const search = document.getElementById('search-input').value.toLowerCase();
+            
+            let filtered = tracks.filter(t => t.title.toLowerCase().includes(search) || t.artist.toLowerCase().includes(search));
+            
+            if (currentCategory === 'liked') {
+                filtered = filtered.filter(t => likedIds.has(t.id));
+                document.getElementById('list-title').innerText = "Любимые треки";
+            } else {
+                document.getElementById('list-title').innerText = "Топ треков";
+            }
+
+            container.innerHTML = filtered.map((t) => {
+                const active = tracks[currentIdx].id === t.id && isPlaying;
+                const liked = likedIds.has(t.id);
                 return `
-                    <div onclick="playTrack(${i})" class="flex items-center justify-between p-3 rounded-2xl transition-all border ${active ? 'bg-purple-600/10 border-purple-500/30' : 'bg-white/[0.02] border-transparent'}">
+                    <div onclick="playTrackById(${t.id})" class="flex items-center justify-between p-3 rounded-2xl transition-all border ${active ? 'bg-purple-600/10 border-purple-500/30' : 'bg-white/[0.02] border-transparent'}">
                         <div class="flex items-center gap-4">
-                            <div class="relative w-14 h-14 rounded-2xl overflow-hidden">
+                            <div class="relative w-14 h-14 rounded-2xl overflow-hidden shadow-md">
                                 <img src="${t.image}" class="w-full h-full object-cover">
                                 ${active ? `<div class="absolute inset-0 bg-black/40 flex items-center justify-center gap-1">
                                     <div class="w-1 bg-white animate-bar-1"></div>
@@ -161,54 +209,108 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm ${active ? 'text-purple-400' : ''}">${t.title}</h4>
-                                <p class="text-xs text-gray-500">${t.artist}</p>
+                                <p class="text-xs text-gray-500 font-medium">${t.artist}</p>
                             </div>
                         </div>
-                        <i class="fa ${active ? 'fa-pause' : 'fa-play'} text-gray-500"></i>
+                        <button onclick="event.stopPropagation(); toggleLike(${t.id})" class="p-2 ${liked ? 'text-purple-500' : 'text-gray-600'} transition-all active:scale-125">
+                            <i class="${liked ? 'fa fa-heart' : 'fa-regular fa-heart'} text-xl"></i>
+                        </button>
                     </div>
                 `;
-            }).join('');
+            }).join('') || '<div class="text-center py-10 text-gray-600 font-bold uppercase tracking-widest text-xs">Ничего не найдено</div>';
+            
+            document.getElementById('like-count').innerText = likedIds.size;
         }
 
-        function playTrack(index) {
-            if (currentIndex === index && isPlaying) {
+        function playTrackById(id) {
+            const index = tracks.findIndex(t => t.id === id);
+            if (currentIdx === index && isPlaying) {
                 audio.pause();
                 isPlaying = false;
             } else {
-                currentIndex = index;
-                audio.src = tracks[index].url;
+                currentIdx = index;
+                audio.src = tracks[currentIdx].url;
                 audio.play();
                 isPlaying = true;
-                updatePlayerUI();
             }
-            render();
-            tg.HapticFeedback.impactOccurred('light');
+            updatePlayerUI();
+            renderTracks();
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+
+        function togglePlay() {
+            if (isPlaying) { audio.pause(); isPlaying = false; }
+            else { audio.play(); isPlaying = true; }
+            updatePlayerUI();
+            renderTracks();
         }
 
         function updatePlayerUI() {
-            const t = tracks[currentIndex];
+            const t = tracks[currentIdx];
             document.getElementById('p-title').innerText = t.title;
             document.getElementById('p-artist').innerText = t.artist;
             document.getElementById('p-img').src = t.image;
-            document.getElementById('main-play-btn').innerHTML = isPlaying ? '<i class="fa fa-pause text-xl"></i>' : '<i class="fa fa-play text-xl ml-1"></i>';
+            document.getElementById('p-play-btn').innerHTML = isPlaying ? '<i class="fa fa-pause text-xl"></i>' : '<i class="fa fa-play text-xl ml-1"></i>';
         }
 
-        document.getElementById('main-play-btn').onclick = () => playTrack(currentIndex);
-        
-        document.getElementById('search-input').oninput = (e) => render(e.target.value);
+        function nextTrack() {
+            currentIdx = (currentIdx + 1) % tracks.length;
+            audio.src = tracks[currentIdx].url;
+            if (isPlaying) audio.play();
+            updatePlayerUI();
+            renderTracks();
+        }
+
+        function toggleLike(id) {
+            if (likedIds.has(id)) likedIds.delete(id);
+            else likedIds.add(id);
+            renderTracks();
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function showView(view) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('view-' + view).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.replace('text-purple-500', 'text-gray-500'));
+            document.getElementById('nav-' + view).classList.replace('text-gray-500', 'text-purple-500');
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.replace('bg-purple-600/20', 'bg-white/5');
+                b.classList.replace('border-purple-500', 'border-white/5');
+                b.classList.replace('text-white', 'text-gray-400');
+            });
+            const activeBtn = document.getElementById('cat-' + cat);
+            activeBtn.classList.replace('bg-white/5', 'bg-purple-600/20');
+            activeBtn.classList.replace('border-white/5', 'border-purple-500');
+            activeBtn.classList.replace('text-gray-400', 'text-white');
+            renderTracks();
+        }
+
+        function filterLiked() {
+            showView('home');
+            setCategory('liked');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         audio.ontimeupdate = () => {
             const prog = (audio.currentTime / audio.duration) * 100 || 0;
             document.getElementById('p-bar').style.width = prog + '%';
-            const fmt = (s) => Math.floor(s/60) + ':' + ('0'+Math.floor(s%60)).slice(-2);
-            document.getElementById('p-current').innerText = fmt(audio.currentTime);
-            if(audio.duration) document.getElementById('p-duration').innerText = fmt(audio.duration);
         };
 
-        function nextTrack() { playTrack((currentIndex + 1) % tracks.length); }
-        function prevTrack() { playTrack((currentIndex - 1 + tracks.length) % tracks.length); }
+        document.getElementById('p-play-btn').onclick = togglePlay;
+        document.getElementById('search-input').oninput = renderTracks;
 
-        render();
+        if (tg.initDataUnsafe?.user?.first_name) {
+            document.getElementById('user-name').innerText = tg.initDataUnsafe.user.first_name;
+        }
+
+        renderTracks();
+        updatePlayerUI();
     </script>
 </body>
 </html>
