@@ -3,220 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Uncensored Music Pro 🔥</title>
+    <title>Uncensored Music Premium</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         :root {
-            --accent: #a855f7;
-            --bg: #030014;
+            --accent: #9333ea;
+            --bg-dark: #0f0a1e;
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.1) 0px, transparent 50%);
             color: white; 
-            -webkit-user-select: none; 
+            -webkit-user-select: none;
             overflow-x: hidden;
-            letter-spacing: -0.01em;
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Анимированный фон */
-        .bg-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
-            filter: blur(60px);
-            z-index: -1;
-            animation: float 20s infinite alternate;
+
+        /* Эффект свечения для активных элементов */
+        .active-glow {
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100vw, 100vh); }
+        /* Карточки рекомендаций */
+        .promo-card {
+            min-width: 140px;
+            height: 180px;
+            transition: transform 0.3s ease;
         }
+        .promo-card:active { transform: scale(0.95); }
 
-        /* Кастомный визуализатор */
-        .wave-container {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            height: 20px;
-        }
-        .wave-bar {
-            width: 3px;
-            background: var(--accent);
-            border-radius: 10px;
-        }
-        .animate-wave-1 { animation: wave 1s infinite ease-in-out; }
-        .animate-wave-2 { animation: wave 0.7s infinite ease-in-out 0.2s; }
-        .animate-wave-3 { animation: wave 1.2s infinite ease-in-out 0.4s; }
-
-        @keyframes wave {
-            0%, 100% { height: 4px; }
-            50% { height: 18px; }
-        }
-
-        .track-card {
-            background: rgba(255, 255, 255, 0.03);
+        /* Стилизация инпута */
+        .search-box {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .track-card.active {
-            background: linear-gradient(90deg, rgba(168, 85, 247, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
-            border-color: rgba(168, 85, 247, 0.4);
-            transform: scale(1.02);
         }
 
-        .filter-btn {
-            transition: all 0.3s ease;
+        /* Кнопки фильтры (Чипсы) */
+        .chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+        .chip.active {
+            background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+            border-color: transparent;
+        }
+
+        /* Список треков */
+        .track-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            transition: background 0.2s;
+        }
+        .track-item:active { background: rgba(255, 255, 255, 0.08); }
+        .track-item.playing {
+            background: rgba(147, 51, 234, 0.15);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        /* Нижний плеер */
+        .mini-player {
+            background: rgba(20, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Навигация */
+        .nav-bar {
+            background: rgba(15, 10, 30, 0.98);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Прогресс-бар */
+        .progress-container {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #9333ea;
+            border-radius: 2px;
             position: relative;
         }
-        .filter-btn.active {
-            color: white;
-            background: var(--accent);
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
-        }
-
-        .player-panel {
-            background: rgba(10, 5, 25, 0.85);
-            backdrop-filter: blur(25px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-        }
-
-        .progress-bar-fill {
-            transition: width 0.1s linear;
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: -3px;
+            width: 10px;
+            height: 100%;
+            padding: 5px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(147, 51, 234, 1);
         }
     </style>
 </head>
-<body class="min-h-screen pb-40">
-
-    <div class="bg-glow" style="top: -100px; left: -100px;"></div>
-    <div class="bg-glow" style="bottom: -100px; right: -100px; animation-delay: -10s;"></div>
+<body class="pb-48">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 px-6 py-6 flex items-center justify-between bg-[#030014]/60 backdrop-blur-md">
-        <div>
-            <h1 class="text-2xl font-extrabold bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent italic tracking-tighter">
-                UNCENSORED
-            </h1>
-            <p class="text-[10px] text-purple-500 font-bold tracking-[0.3em] uppercase opacity-80">Premium Sound</p>
+    <div class="px-5 pt-8 pb-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full border-2 border-purple-500 p-0.5">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-full h-full rounded-full bg-purple-900" alt="Avatar">
+            </div>
+            <h1 class="text-lg font-bold">Uncensored Music 🔥</h1>
         </div>
-        <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-            <i class="fa-solid fa-bolt-lightning text-purple-400"></i>
-        </div>
-    </header>
+        <button class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full">
+            <i class="fa-solid fa-ellipsis text-gray-400"></i>
+        </button>
+    </div>
 
-    <main class="px-6 space-y-8">
-        <!-- Search -->
-        <div class="relative group">
-            <div class="absolute inset-0 bg-purple-500/10 blur-xl group-focus-within:bg-purple-500/20 transition-all"></div>
-            <div class="relative flex items-center bg-white/5 border border-white/10 rounded-2xl px-4 py-1 focus-within:border-purple-500/50 transition-all">
-                <i class="fa-solid fa-magnifying-glass text-gray-500 text-sm"></i>
-                <input type="text" id="search-input" placeholder="Трек, артист или жанр..." 
-                    class="w-full bg-transparent py-4 px-3 text-sm outline-none placeholder:text-gray-600">
-            </div>
-        </div>
+    <!-- Tabs Top -->
+    <div class="flex justify-center gap-8 mb-6 text-sm font-semibold text-gray-500">
+        <button class="text-white border-b-2 border-purple-500 pb-1">Треки</button>
+        <button class="">Исполнители</button>
+    </div>
 
-        <!-- Genres -->
-        <div class="space-y-4">
-            <div class="flex items-center justify-between">
-                <h3 class="text-[11px] font-bold uppercase tracking-widest text-gray-500">Жанры</h3>
-            </div>
-            <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2" id="category-filters">
-                <button onclick="setFilter('')" id="cat-all" class="filter-btn active px-6 py-2.5 rounded-xl text-[11px] font-bold whitespace-nowrap bg-white/5 border border-white/5">Все</button>
-                <button onclick="setFilter('pop')" id="cat-pop" class="filter-btn px-6 py-2.5 rounded-xl text-[11px] font-bold whitespace-nowrap bg-white/5 border border-white/5 text-gray-400">Поп</button>
-                <button onclick="setFilter('rap')" id="cat-rap" class="filter-btn px-6 py-2.5 rounded-xl text-[11px] font-bold whitespace-nowrap bg-white/5 border border-white/5 text-gray-400">Рэп</button>
-                <button onclick="setFilter('punk')" id="cat-punk" class="filter-btn px-6 py-2.5 rounded-xl text-[11px] font-bold whitespace-nowrap bg-white/5 border border-white/5 text-gray-400">Панк</button>
-                <!-- Добавь сюда новые кнопки, если создашь новые жанры в БД -->
-            </div>
+    <!-- Search -->
+    <div class="px-5 mb-6">
+        <div class="search-box flex items-center px-4 py-3 rounded-2xl">
+            <i class="fa-solid fa-magnifying-glass text-gray-500 mr-3"></i>
+            <input type="text" id="search-input" placeholder="Поиск треков и исполнителей..." 
+                   class="bg-transparent w-full outline-none text-sm placeholder:text-gray-500">
         </div>
+    </div>
 
-        <!-- Track List -->
-        <section class="space-y-4">
-            <div class="flex items-end justify-between">
-                <h2 class="text-xl font-bold">Для тебя</h2>
-                <span id="track-count" class="text-[10px] text-gray-500 font-mono">0 TRACKS</span>
-            </div>
-            
-            <div class="grid gap-3" id="track-container">
-                <!-- Skeleton Loader -->
-                <div class="animate-pulse flex items-center gap-4 p-4 rounded-3xl bg-white/5">
-                    <div class="w-14 h-14 bg-white/10 rounded-2xl"></div>
-                    <div class="flex-1 space-y-2">
-                        <div class="h-3 bg-white/10 rounded w-1/2"></div>
-                        <div class="h-2 bg-white/10 rounded w-1/4"></div>
-                    </div>
+    <!-- Chips Filter -->
+    <div class="flex gap-3 overflow-x-auto no-scrollbar px-5 mb-8">
+        <button onclick="setFilter('')" id="cat-all" class="chip active px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🔥 Популярное</button>
+        <button onclick="setFilter('best')" id="cat-best" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">⭐ Лучшее</button>
+        <button onclick="setFilter('new')" id="cat-new" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🆕 Новинки</button>
+        <button onclick="setFilter('liked')" id="cat-liked" class="chip px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">💜 Мне нравится</button>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="px-5 mb-8">
+        <h2 class="text-md font-bold mb-4">Рекомендации</h2>
+        <div class="flex gap-4 overflow-x-auto no-scrollbar">
+            <!-- Card 1 -->
+            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-purple-600 to-indigo-900 shadow-xl">
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="absolute bottom-4 left-4">
+                    <p class="text-xl font-black leading-none">RAP<br>HITS</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <!-- Global Player -->
-    <div id="player-bar" class="fixed bottom-0 left-0 right-0 z-50 translate-y-full transition-transform duration-500 ease-in-out">
-        <div class="player-panel px-6 pt-4 pb-10">
-            <!-- Progress -->
-            <div class="px-2 mb-4">
-                <div id="p-progress-container" class="group relative w-full h-1 bg-white/10 rounded-full cursor-pointer">
-                    <div id="p-bar" class="progress-bar-fill absolute h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]" style="width: 0%"></div>
-                    <div class="absolute -top-2 -right-1 opacity-0 group-hover:opacity-100 transition-opacity w-4 h-4 bg-white rounded-full border-4 border-purple-600"></div>
-                </div>
-                <div class="flex justify-between text-[10px] font-bold text-gray-500 mt-2 uppercase tracking-tighter">
-                    <span id="current-time">0:00</span>
-                    <span id="total-time">0:00</span>
+            <!-- Card 2 -->
+            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0 bg-gradient-to-b from-pink-600 to-purple-900 shadow-xl">
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="absolute bottom-4 left-4">
+                    <p class="text-xl font-black leading-none">TOP<br>TRACKS</p>
                 </div>
             </div>
-
-            <!-- Controls -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4 w-2/3">
-                    <div class="relative flex-shrink-0">
-                        <img id="p-img" src="" class="w-14 h-14 rounded-2xl object-cover shadow-2xl ring-1 ring-white/10">
-                        <div id="p-visualizer" class="absolute inset-0 bg-black/40 hidden items-center justify-center rounded-2xl">
-                            <div class="wave-container">
-                                <div class="wave-bar animate-wave-1"></div>
-                                <div class="wave-bar animate-wave-2"></div>
-                                <div class="wave-bar animate-wave-3"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="overflow-hidden">
-                        <h4 id="p-title" class="font-bold text-sm truncate text-white uppercase tracking-tight">Название</h4>
-                        <p id="p-artist" class="text-[10px] text-purple-400 font-bold uppercase tracking-widest truncate">Артист</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <button id="p-play-btn" class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center shadow-lg active:scale-90 transition-transform">
-                        <i class="fa-solid fa-play text-lg ml-1"></i>
-                    </button>
+            <!-- Card 3 -->
+            <div class="promo-card relative rounded-3xl overflow-hidden flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=400&q=80" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute bottom-4 left-4">
+                    <p class="text-[10px] font-bold text-gray-300 uppercase">New Releases</p>
+                    <p class="text-lg font-black leading-tight">SUMMER<br>MIX</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Top Tracks -->
+    <div class="px-5">
+        <h2 class="text-md font-bold mb-4">Топ треков</h2>
+        <div id="track-container" class="space-y-3">
+            <!-- Треки будут здесь -->
+            <div class="flex items-center justify-center py-10 opacity-30">
+                <i class="fa-solid fa-circle-notch animate-spin text-2xl"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Player -->
+    <div id="player-bar" class="fixed bottom-20 left-0 right-0 z-50 translate-y-full transition-all duration-500">
+        <div class="mini-player mx-4 rounded-3xl p-4 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <img id="p-img" src="" class="w-12 h-12 rounded-xl object-cover">
+                    <div class="overflow-hidden">
+                        <h4 id="p-title" class="font-bold text-sm truncate">Название</h4>
+                        <p id="p-artist" class="text-[10px] text-gray-400 truncate">Артист</p>
+                        <p id="p-time-text" class="text-[10px] text-purple-400 font-mono mt-0.5">0:00 / 0:00</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="text-purple-500"><i class="fa-solid fa-heart"></i></button>
+                    <button id="p-play-btn" class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                        <i class="fa-solid fa-play ml-0.5"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Progress Bar -->
+            <div id="p-progress-container" class="progress-container w-full cursor-pointer">
+                <div id="p-bar" class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar fixed bottom-0 left-0 right-0 px-10 py-5 flex justify-between items-center z-[60]">
+        <button class="text-white text-xl"><i class="fa-solid fa-house"></i></button>
+        <div class="relative">
+            <button class="text-purple-500 text-2xl"><i class="fa-solid fa-heart"></i></button>
+            <span class="absolute -top-1 -right-2 bg-purple-600 text-[8px] px-1.5 py-0.5 rounded-full border border-[#0f0a1e]">9</span>
+        </div>
+        <button class="text-gray-600 text-xl"><i class="fa-solid fa-gear"></i></button>
+    </nav>
 
     <audio id="main-audio"></audio>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
-        tg.backgroundColor = '#030014';
-        tg.headerColor = '#030014';
+        tg.backgroundColor = '#0f0a1e';
 
         const SB_URL = "https://zzztlkyoyjvkokcvqqfd.supabase.co";
-        const SB_KEY = "sb_publishable_YOPX7PVk9K1d3gIH3kkQcw_HJlsk-OD"; // Используй свой ключ!
+        const SB_KEY = "sb_publishable_YOPX7PVk9K1d3gIH3kkQcw_HJlsk-OD";
         const supabase = window.supabase.createClient(SB_URL, SB_KEY);
 
         const audio = document.getElementById('main-audio');
@@ -225,18 +245,10 @@
         let playingId = null;
 
         async function loadData() {
-            try {
-                const { data, error } = await supabase
-                    .from('music')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-                
-                if (data) {
-                    dbMusic = data;
-                    render();
-                }
-            } catch (e) {
-                console.error("Ошибка загрузки:", e);
+            const { data, error } = await supabase.from('music').select('*').order('created_at', { ascending: false });
+            if (data) {
+                dbMusic = data;
+                render();
             }
         }
 
@@ -245,45 +257,45 @@
             const search = document.getElementById('search-input').value.toLowerCase();
             
             const filtered = dbMusic.filter(t => 
-                (t.title.toLowerCase().includes(search) || t.artist.toLowerCase().includes(search) || (t.genre && t.genre.includes(search))) &&
+                (t.title.toLowerCase().includes(search) || t.artist.toLowerCase().includes(search)) &&
                 (currentFilter === "" || t.genre === currentFilter)
             );
 
-            document.getElementById('track-count').innerText = `${filtered.length} TRACKS`;
-
-            container.innerHTML = filtered.map(t => {
+            container.innerHTML = filtered.map((t, index) => {
                 const isPlaying = playingId === t.id;
-                const isActuallyPlaying = isPlaying && !audio.paused;
+                const activePause = isPlaying && !audio.paused;
 
                 return `
-                    <div class="track-card flex items-center justify-between p-3 rounded-[24px] active:scale-[0.97] ${isPlaying ? 'active' : ''}" onclick="playTrack(${t.id})">
+                    <div class="track-item flex items-center justify-between p-3 ${isPlaying ? 'playing' : ''}" onclick="playTrack(${t.id})">
                         <div class="flex items-center gap-4 overflow-hidden">
-                            <div class="relative w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0">
-                                <img src="${t.cover || 'https://via.placeholder.com/150'}" class="w-full h-full object-cover">
-                                ${isActuallyPlaying ? `
-                                    <div class="absolute inset-0 bg-purple-600/40 backdrop-blur-[2px] flex items-center justify-center">
-                                        <div class="wave-container">
-                                            <div class="wave-bar bg-white animate-wave-1"></div>
-                                            <div class="wave-bar bg-white animate-wave-2"></div>
-                                            <div class="wave-bar bg-white animate-wave-3"></div>
+                            <div class="relative">
+                                <img src="${t.cover}" class="w-12 h-12 rounded-xl object-cover shadow-lg">
+                                ${activePause ? `
+                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
+                                        <div class="flex gap-0.5">
+                                            <div class="w-0.5 h-3 bg-white animate-pulse"></div>
+                                            <div class="w-0.5 h-4 bg-white animate-pulse" style="animation-delay: 0.2s"></div>
+                                            <div class="w-0.5 h-2 bg-white animate-pulse" style="animation-delay: 0.4s"></div>
                                         </div>
                                     </div>
                                 ` : ''}
                             </div>
-                            <div class="text-left overflow-hidden">
-                                <h4 class="font-bold text-[14px] truncate ${isPlaying ? 'text-white' : 'text-gray-200'}">${t.title}</h4>
-                                <p class="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">${t.artist}</p>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-sm truncate text-gray-100">${index + 1}. ${t.title}</h4>
+                                <p class="text-[10px] text-gray-500 font-medium">${t.artist}</p>
+                                ${isPlaying ? `
+                                    <div class="mt-1 h-[2px] w-20 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="h-full bg-purple-500" style="width: ${(audio.currentTime / audio.duration * 100) || 0}%"></div>
+                                    </div>
+                                ` : ''}
                             </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[9px] font-bold text-gray-600 uppercase bg-white/5 px-2 py-1 rounded-md">${t.genre || 'MIX'}</span>
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center ${isPlaying ? 'text-purple-400' : 'text-gray-600'}">
-                                <i class="fa-solid ${isActuallyPlaying ? 'fa-pause' : 'fa-play text-xs'}"></i>
-                            </div>
-                        </div>
+                        <button class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-purple-400 active:scale-90 transition-transform">
+                            <i class="fa-solid ${activePause ? 'fa-pause' : 'fa-play text-[10px] ml-0.5'}"></i>
+                        </button>
                     </div>
                 `;
-            }).join('') || '<div class="py-20 text-center text-gray-600 text-[11px] font-bold uppercase tracking-widest">Пусто</div>';
+            }).join('');
         }
 
         function playTrack(id) {
@@ -301,8 +313,7 @@
                 document.getElementById('p-img').src = track.cover;
                 document.getElementById('p-title').innerText = track.title;
                 document.getElementById('p-artist').innerText = track.artist;
-                document.getElementById('player-bar').style.transform = 'translateY(0)';
-                document.getElementById('p-visualizer').style.display = 'flex';
+                document.getElementById('player-bar').classList.remove('translate-y-full');
             }
             render();
             tg.HapticFeedback.impactOccurred('light');
@@ -310,14 +321,13 @@
 
         function setFilter(cat) {
             currentFilter = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
             const activeBtn = cat === '' ? document.getElementById('cat-all') : document.getElementById(`cat-${cat}`);
             if (activeBtn) activeBtn.classList.add('active');
             render();
             tg.HapticFeedback.selectionChanged();
         }
 
-        // Плеер события
         document.getElementById('p-play-btn').onclick = (e) => {
             e.stopPropagation();
             if (audio.paused) audio.play();
@@ -326,14 +336,11 @@
         };
 
         audio.onplay = () => {
-            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-pause text-lg"></i>';
-            document.getElementById('p-visualizer').style.display = 'flex';
+            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             render();
         };
-
         audio.onpause = () => {
-            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-play text-lg ml-1"></i>';
-            document.getElementById('p-visualizer').style.display = 'none';
+            document.getElementById('p-play-btn').innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
             render();
         };
 
@@ -347,13 +354,16 @@
                 const s = Math.floor(t % 60);
                 return `${m}:${s < 10 ? '0' : ''}${s}`;
             };
-            document.getElementById('current-time').innerText = fmt(audio.currentTime);
-            document.getElementById('total-time').innerText = fmt(audio.duration);
+            document.getElementById('p-time-text').innerText = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+            
+            // Также обновляем маленькую полоску в списке треков раз в секунду
+            if(Math.floor(audio.currentTime) % 2 === 0) render();
         };
 
         document.getElementById('p-progress-container').onclick = (e) => {
-            const x = e.clientX - e.currentTarget.getBoundingClientRect().left;
-            audio.currentTime = (x / e.currentTarget.offsetWidth) * audio.duration;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            audio.currentTime = (x / rect.width) * audio.duration;
         };
 
         document.getElementById('search-input').oninput = () => render();
