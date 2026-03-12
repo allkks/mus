@@ -11,26 +11,27 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         :root { --accent: #9333ea; --bg: #0b0714; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: white; -webkit-user-select: none; overflow-x: hidden; }
-        
         .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        
         .chip { padding: 10px 22px; border-radius: 16px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.05); white-space: nowrap; transition: 0.3s; }
         .chip.active { background: var(--accent); box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4); }
-
-        .track-card { background: rgba(255,255,255,0.03); border-radius: 24px; transition: 0.2s; }
-        .track-card.playing { background: rgba(147, 51, 234, 0.12); border: 1px solid rgba(147, 51, 234, 0.3); }
-
+        .track-card { background: rgba(255,255,255,0.03); border-radius: 24px; transition: 0.2s; border: 1px solid transparent; }
+        .track-card.playing { background: rgba(147, 51, 234, 0.12); border-color: rgba(147, 51, 234, 0.3); }
         #artist-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 80; transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
         #artist-page.active { transform: translateX(0); }
-
         #full-player { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 100; transform: translateY(100%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         #full-player.active { transform: translateY(0); }
-        
         .progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 10px; box-shadow: 0 0 15px var(--accent); }
+        .loader { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="pb-40">
+
+    <div id="loading-screen" class="fixed inset-0 z-[200] bg-[#0b0714] flex flex-col items-center justify-center">
+        <i class="fa-solid fa-circle-notch loader text-4xl text-purple-500 mb-4"></i>
+        <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Загрузка музыки...</p>
+    </div>
 
     <!-- HEADER -->
     <div class="px-6 pt-12 pb-6 flex items-center justify-between relative z-10">
@@ -42,44 +43,32 @@
 
     <!-- MAIN VIEW -->
     <div id="view-home">
-        <!-- Search -->
         <div class="px-6 mb-8">
             <div class="glass flex items-center px-4 py-3 rounded-2xl">
                 <i class="fa-solid fa-magnifying-glass text-gray-500 mr-3"></i>
-                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Трек, артист или жанр..." class="bg-transparent w-full outline-none text-sm">
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Поиск трека или артиста..." class="bg-transparent w-full outline-none text-sm text-white">
             </div>
         </div>
 
-        <!-- Genres -->
-        <div class="flex gap-3 overflow-x-auto no-scrollbar px-6 mb-10" id="genre-list">
-            <button onclick="filterGenre('All')" class="chip active">🔥 Все</button>
-            <button onclick="filterGenre('Rock')" class="chip">🎸 Рок</button>
-            <button onclick="filterGenre('Rap')" class="chip">🎤 Рэп</button>
-            <button onclick="filterGenre('Pop')" class="chip">✨ Поп</button>
-        </div>
-
-        <!-- Artists slider -->
         <div class="px-6 mb-10">
             <h3 class="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-5">Исполнители</h3>
             <div id="artist-slider" class="flex gap-6 overflow-x-auto no-scrollbar"></div>
         </div>
 
-        <!-- Tracks List -->
         <div class="px-6">
-            <h3 class="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-5">Рекомендации</h3>
+            <h3 class="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-5">Все треки</h3>
             <div id="tracks-list" class="space-y-4"></div>
         </div>
     </div>
 
     <!-- ARTIST PAGE -->
     <div id="artist-page" class="no-scrollbar">
-        <div class="relative h-[350px]">
+        <div class="relative h-[300px]">
             <img id="ap-img" src="" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0714]/60 to-[#0b0714]"></div>
             <button onclick="closeArtist()" class="absolute top-12 left-6 w-10 h-10 glass rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="absolute bottom-6 px-6">
-                <h2 id="ap-name" class="text-4xl font-black mb-2"></h2>
-                <p id="ap-desc" class="text-gray-400 text-xs"></p>
+                <h2 id="ap-name" class="text-4xl font-black mb-2 uppercase tracking-tighter"></h2>
             </div>
         </div>
         <div class="px-6 pt-6 pb-40">
@@ -106,9 +95,9 @@
     <div id="full-player" class="p-10 flex flex-col justify-between">
         <button onclick="closeFullPlayer()" class="w-12 h-12 glass rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></button>
         <div class="flex flex-col items-center">
-            <img id="f-img" src="" class="w-full aspect-square rounded-[60px] shadow-2xl object-cover bg-purple-900 mb-12">
-            <div class="w-full text-center text-white">
-                <h2 id="f-title" class="text-3xl font-black truncate px-4"></h2>
+            <img id="f-img" src="" class="w-full aspect-square rounded-[60px] shadow-2xl object-cover bg-purple-900 mb-12 shadow-purple-900/40">
+            <div class="w-full text-center">
+                <h2 id="f-title" class="text-3xl font-black truncate px-4 text-white"></h2>
                 <p id="f-artist" class="text-xl text-purple-500 font-bold mt-2 uppercase tracking-widest"></p>
             </div>
         </div>
@@ -136,124 +125,135 @@
         let filteredTracks = [];
         let currentPlaylist = [];
         let currentIdx = -1;
+        let selectedArtistId = null;
+
         const audio = document.getElementById('audio');
 
-        // Загрузка данных с защитой от кеширования
         async function init() {
             try {
-                const timestamp = new Date().getTime();
-                const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/main/${FILE_PATH}?t=${timestamp}`);
+                const timestamp = Date.now();
+                const url = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/main/${FILE_PATH}?v=${timestamp}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("Файл базы не найден");
                 database = await res.json();
-                filteredTracks = database.tracks;
+                filteredTracks = database.tracks || [];
+                
+                document.getElementById('loading-screen').style.display = 'none';
                 render();
-            } catch(e) { console.error("Ошибка загрузки базы данных"); }
+            } catch(e) {
+                document.querySelector('#loading-screen p').innerText = "Ошибка загрузки данных";
+                console.error(e);
+            }
         }
 
         function render() {
-            // Отрисовка артистов
             const artSlider = document.getElementById('artist-slider');
-            if (database.artists.length === 0) {
-                artSlider.innerHTML = '<p class="text-gray-600 text-xs">Пока здесь пусто...</p>';
-            } else {
-                artSlider.innerHTML = database.artists.map(a => `
-                    <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 flex-shrink-0 active:scale-90 transition-transform">
-                        <img src="${a.img || 'https://api.dicebear.com/7.x/initials/svg?seed=' + a.name}" class="w-24 h-24 rounded-full object-cover border-2 border-purple-500/20 shadow-xl bg-purple-900">
-                        <span class="text-[10px] font-black text-gray-500 uppercase text-center w-24 truncate tracking-tighter">${a.name}</span>
-                    </div>
-                `).join('');
-            }
+            artSlider.innerHTML = (database.artists || []).map(a => `
+                <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 flex-shrink-0 active:scale-90 transition-transform">
+                    <img src="${a.img || 'https://api.dicebear.com/7.x/initials/svg?seed=' + a.name}" class="w-24 h-24 rounded-full object-cover border-2 border-purple-500/20 shadow-xl bg-purple-900">
+                    <span class="text-[10px] font-black text-gray-500 uppercase text-center w-24 truncate tracking-tighter">${a.name}</span>
+                </div>
+            `).join('') || '<p class="text-gray-600 text-xs">Артисты не найдены</p>';
 
             renderTrackList('tracks-list', filteredTracks);
         }
 
         function renderTrackList(containerId, list) {
             const container = document.getElementById(containerId);
-            if (list.length === 0) {
-                container.innerHTML = '<p class="text-gray-600 text-xs py-10 text-center w-full">Нет подходящих треков</p>';
-                return;
-            }
             container.innerHTML = list.map((t, idx) => {
                 const isPlaying = currentIdx !== -1 && currentPlaylist[currentIdx]?.id === t.id;
-                const artist = database.artists.find(a => a.id === t.artistId) || { name: 'Неизвестен', img: '' };
+                const artist = database.artists.find(a => a.id === t.artistId) || { name: 'Unknown' };
                 return `
                     <div onclick="playFromList('${containerId}', ${idx})" class="track-card p-5 flex items-center justify-between ${isPlaying ? 'playing' : ''}">
                         <div class="flex items-center gap-5 overflow-hidden">
                             <img src="${t.cover || artist.img || 'https://api.dicebear.com/7.x/shapes/svg?seed=' + t.title}" class="w-14 h-14 rounded-2xl object-cover bg-purple-900 shadow-lg">
-                            <div class="overflow-hidden text-white">
-                                <h4 class="font-bold text-sm truncate mb-1">${t.title}</h4>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-sm truncate text-white mb-1">${t.title}</h4>
                                 <p class="text-[10px] text-purple-400 font-black uppercase tracking-widest">${artist.name}</p>
                             </div>
                         </div>
                         <i class="fa-solid ${isPlaying && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500 text-xs"></i>
                     </div>
                 `;
-            }).join('');
+            }).join('') || '<p class="text-gray-600 text-xs py-10 text-center w-full">Нет треков</p>';
         }
 
         function openArtist(id) {
+            selectedArtistId = id;
             const artist = database.artists.find(a => a.id === id);
-            const artistTracks = database.tracks.filter(t => t.artistId === id);
+            const artistTracks = (database.tracks || []).filter(t => t.artistId === id);
+            
             document.getElementById('ap-img').src = artist.img || '';
             document.getElementById('ap-name').innerText = artist.name;
-            document.getElementById('ap-desc').innerText = artist.desc || 'Информация об артисте';
             renderTrackList('ap-tracks', artistTracks);
             document.getElementById('artist-page').classList.add('active');
         }
 
-        function closeArtist() { document.getElementById('artist-page').classList.remove('active'); }
+        function closeArtist() {
+            document.getElementById('artist-page').classList.remove('active');
+            selectedArtistId = null;
+        }
 
         function handleSearch() {
             const query = document.getElementById('search-input').value.toLowerCase();
             filteredTracks = database.tracks.filter(t => {
-                const artistName = database.artists.find(a => a.id === t.artistId)?.name.toLowerCase() || "";
-                return t.title.toLowerCase().includes(query) || artistName.includes(query);
+                const artist = database.artists.find(a => a.id === t.artistId);
+                return t.title.toLowerCase().includes(query) || (artist && artist.name.toLowerCase().includes(query));
             });
-            render();
-        }
-
-        function filterGenre(g) {
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
-            filteredTracks = g === 'All' ? database.tracks : database.tracks.filter(t => t.genre === g);
-            render();
+            renderTrackList('tracks-list', filteredTracks);
         }
 
         function playFromList(containerId, idx) {
-            let targetList = (containerId === 'tracks-list') ? filteredTracks : 
-                             database.tracks.filter(t => t.artistId === database.artists.find(a => a.name === document.getElementById('ap-name').innerText).id);
+            let targetList = [];
+            if (containerId === 'tracks-list') {
+                targetList = filteredTracks;
+            } else {
+                targetList = database.tracks.filter(t => t.artistId === selectedArtistId);
+            }
 
-            if(currentPlaylist === targetList && currentIdx === idx) {
+            if (currentPlaylist === targetList && currentIdx === idx) {
                 togglePlay();
                 return;
             }
-            
+
             currentPlaylist = targetList;
             currentIdx = idx;
             const track = currentPlaylist[currentIdx];
+            
             audio.src = track.url;
-            audio.play();
+            audio.play().catch(e => alert("Ошибка воспроизведения. Проверьте ссылку на MP3."));
+            
             updateUI(track);
             document.getElementById('mini-player').classList.remove('translate-y-[200%]');
             render();
+            if (selectedArtistId) renderTrackList('ap-tracks', targetList);
+
             window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
         }
 
         function togglePlay() {
-            if(audio.paused) audio.play(); else audio.pause();
+            if (audio.paused) audio.play(); else audio.pause();
             updateUI(currentPlaylist[currentIdx]);
             render();
+            if (selectedArtistId) {
+                const targetList = database.tracks.filter(t => t.artistId === selectedArtistId);
+                renderTrackList('ap-tracks', targetList);
+            }
         }
 
         function updateUI(t) {
             const artist = database.artists.find(a => a.id === t.artistId) || { name: '...' };
             const icon = audio.paused ? 'fa-play' : 'fa-pause';
+            const img = t.cover || artist.img || '';
+
             document.getElementById('m-title').innerText = t.title;
             document.getElementById('m-artist').innerText = artist.name;
-            document.getElementById('m-img').src = t.cover || artist.img || '';
+            document.getElementById('m-img').src = img;
             document.getElementById('m-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+
             document.getElementById('f-title').innerText = t.title;
             document.getElementById('f-artist').innerText = artist.name;
-            document.getElementById('f-img').src = t.cover || artist.img || '';
+            document.getElementById('f-img').src = img;
             document.getElementById('f-play-btn').innerHTML = `<i class="fa-solid ${icon} ${audio.paused ? 'ml-1' : ''}"></i>`;
         }
 
@@ -262,17 +262,22 @@
         function openFullPlayer() { document.getElementById('full-player').classList.add('active'); }
         function closeFullPlayer() { document.getElementById('full-player').classList.remove('active'); }
         function seek(e) { audio.currentTime = (e.clientX - 40) / (window.innerWidth - 80) * audio.duration; }
-        
+
         audio.ontimeupdate = () => {
             const p = (audio.currentTime / audio.duration * 100) || 0;
             document.getElementById('f-progress').style.width = p + '%';
-            const fmt = t => Math.floor(t/60) + ":" + Math.floor(t%60).toString().padStart(2,'0');
+            const fmt = t => {
+                if (!t) return "0:00";
+                let m = Math.floor(t/60);
+                let s = Math.floor(t%60);
+                return m + ":" + (s < 10 ? "0"+s : s);
+            };
             document.getElementById('f-time-curr').innerText = fmt(audio.currentTime);
-            document.getElementById('f-time-total').innerText = fmt(audio.duration || 0);
+            document.getElementById('f-time-total').innerText = fmt(audio.duration);
         };
         audio.onended = () => nextTrack();
 
-        init();
+        window.onload = init;
     </script>
 </body>
 </html>
