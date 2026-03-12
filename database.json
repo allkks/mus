@@ -8,35 +8,43 @@
   ],
   "tracks": [
     {
-      "id": "t_гуф_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1).mp3",
+      "id": "t_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1).mp3",
       "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1)",
       "artistId": "гуф",
-      "genre": "Music",
+      "album": "Синглы",
       "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm%20%281%29.mp3",
-      "cover": ""
+      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/artist.jpg"
     },
     {
-      "id": "t_гуф_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (2).mp3",
+      "id": "t_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (2).mp3",
       "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (2)",
       "artistId": "гуф",
-      "genre": "Music",
+      "album": "Синглы",
       "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm%20%282%29.mp3",
-      "cover": ""
+      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/artist.jpg"
     },
     {
-      "id": "t_гуф_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm.mp3",
+      "id": "t_79061786277_in_79128719581_2025_09_18-12_24_20_3rqm.mp3",
       "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm",
       "artistId": "гуф",
-      "genre": "Music",
+      "album": "Синглы",
       "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm.mp3",
-      "cover": ""
+      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/artist.jpg"
     },
     {
-      "id": "t_гуф_korol-i-shut-prygnu-so-skaly.mp3",
+      "id": "t_korol-i-shut-prygnu-so-skaly.mp3",
       "title": "korol-i-shut-prygnu-so-skaly",
       "artistId": "гуф",
-      "genre": "Music",
+      "album": "Синглы",
       "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/korol-i-shut-prygnu-so-skaly.mp3",
+      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/artist.jpg"
+    },
+    {
+      "id": "t_www.mp3",
+      "title": "www",
+      "artistId": "гуф",
+      "album": "12",
+      "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/12/www.mp3",
       "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/%D0%93%D0%A3%D0%A4/artist.jpg"
     }
   ]
