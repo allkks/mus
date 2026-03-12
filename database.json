@@ -1,11 +1,4 @@
 {
-  "artists": [
-    {
-      "id": "гуф",
-      "name": "гуф",
-      "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg",
-      "desc": ""
-    }
-  ],
+  "artists": [],
   "tracks": []
 }
