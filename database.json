@@ -1,8 +1,22 @@
 {
   "artists": [
-    { "name": "Miyagi", "img": "https://avatars.mds.yandex.net/get-altay/1594162/2a0000016a282903333333333333/orig" }
+    {
+      "name": "Miyagi",
+      "img": "https://avatars.mds.yandex.net/get-altay/1594162/2a0000016a282903333333333333/orig"
+    }
   ],
   "tracks": [
-    { "title": "Minor", "artist": "Miyagi", "genre": "Rap", "url": "ССЫЛКА_НА_MP3" }
+    {
+      "title": "Minor",
+      "artist": "Miyagi",
+      "genre": "Rap",
+      "url": "ССЫЛКА_НА_MP3"
+    },
+    {
+      "title": "Лох",
+      "artist": "Авва",
+      "genre": "Rock",
+      "url": "В"
+    }
   ]
 }
