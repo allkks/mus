@@ -1,4 +1,16 @@
 {
-  "artists": [],
-  "tracks": []
+  "artists": [
+    {
+      "name": "ГУФ",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL9gCSr2C475kYABBMCeHA_51_hvBrb665XMQqlXukIGRqyzu0iE7r_faH2rh7z8G6z-b9w2vyQb50ZmFWqkrZfOAHk2FPiVEJeNCHN5I1MA&s=10"
+    }
+  ],
+  "tracks": [
+    {
+      "title": "ГУФ",
+      "artist": "ГУФ",
+      "genre": "Rock",
+      "url": "https://github.com/allkks/mus/blob/main/all%20music/Linkin%20Park/korol-i-shut-prygnu-so-skaly.mp3"
+    }
+  ]
 }
