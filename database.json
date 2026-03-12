@@ -7,14 +7,5 @@
       "desc": "Исполнитель Linkin Park"
     }
   ],
-  "tracks": [
-    {
-      "id": "t_linkin_park_0",
-      "title": "Король и Шут",
-      "artistId": "linkin_park",
-      "genre": "Music",
-      "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Linkin Park/Король и Шут.mp3",
-      "cover": "https://api.dicebear.com/7.x/avataaars/svg?seed=Linkin Park"
-    }
-  ]
+  "tracks": []
 }
