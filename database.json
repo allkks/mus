@@ -7,14 +7,5 @@
       "desc": ""
     }
   ],
-  "tracks": [
-    {
-      "id": "t_гуф_korol-i-shut-prygnu-so-skaly.mp3",
-      "title": "korol-i-shut-prygnu-so-skaly",
-      "artistId": "гуф",
-      "genre": "Music",
-      "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/korol-i-shut-prygnu-so-skaly.mp3",
-      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg"
-    }
-  ]
+  "tracks": []
 }
