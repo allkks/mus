@@ -8,17 +8,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         :root { --accent: #9333ea; --bg: #0b0714; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: white; -webkit-user-select: none; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .track-card { background: rgba(255,255,255,0.03); border-radius: 20px; transition: 0.2s; }
-        .track-card.playing { background: rgba(147, 51, 234, 0.2); border: 1px solid var(--accent); }
-        #artist-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 80; transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .track-card { background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid transparent; transition: 0.2s; }
+        .track-card.playing { background: rgba(147, 51, 234, 0.1); border-color: var(--accent); }
+        #artist-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 100; transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
         #artist-page.active { transform: translateX(0); }
-        #full-player { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 100; transform: translateY(100%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        #full-player.active { transform: translateY(0); }
-        .progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 10px; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 10px; box-shadow: 0 0 10px var(--accent); }
     </style>
 </head>
 <body class="pb-40">
@@ -27,47 +25,50 @@
         <h1 class="text-2xl font-black italic tracking-tighter text-white">UNCENSORED</h1>
     </div>
 
-    <div id="view-home">
+    <div id="home-view">
         <div class="px-6 mb-10">
-            <h3 class="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-5">Исполнители</h3>
-            <div id="artist-slider" class="flex gap-6 overflow-x-auto no-scrollbar"></div>
+            <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-5">Артисты</h3>
+            <div id="artist-list" class="flex gap-5 overflow-x-auto no-scrollbar"></div>
         </div>
         <div class="px-6">
-            <h3 class="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-5">Все треки</h3>
-            <div id="tracks-list" class="space-y-4"></div>
+            <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-5">Все релизы</h3>
+            <div id="track-list" class="space-y-3"></div>
         </div>
     </div>
 
-    <!-- Artist Page -->
-    <div id="artist-page">
-        <button onclick="closeArtist()" class="absolute top-12 left-6 z-10 w-10 h-10 glass rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
-        <div id="ap-header" class="h-[250px] bg-purple-900 flex items-end p-6">
-            <h2 id="ap-name" class="text-4xl font-black uppercase"></h2>
+    <!-- Artist View -->
+    <div id="artist-page" class="no-scrollbar">
+        <div id="ap-banner" class="h-[280px] relative bg-purple-900 flex items-end p-8">
+            <button onclick="closeArtist()" class="absolute top-10 left-6 w-10 h-10 glass rounded-full flex items-center justify-center z-20"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0714] to-transparent z-10"></div>
+            <h2 id="ap-name" class="text-4xl font-black uppercase relative z-20"></h2>
         </div>
-        <div id="ap-tracks" class="p-6 space-y-4"></div>
+        <div id="ap-tracks" class="p-6 space-y-3"></div>
     </div>
 
-    <!-- Mini Player -->
-    <div id="mini-player" class="fixed bottom-6 left-4 right-4 z-[90] translate-y-[200%] transition-transform duration-500">
-        <div class="glass rounded-[30px] p-3 flex items-center justify-between shadow-2xl" onclick="openFullPlayer()">
-            <div class="flex items-center gap-4 overflow-hidden">
-                <img id="m-img" src="" class="w-12 h-12 rounded-2xl object-cover bg-purple-900">
-                <div class="overflow-hidden"><h4 id="m-title" class="font-bold text-sm truncate"></h4></div>
+    <!-- Player -->
+    <div id="player-bar" class="fixed bottom-6 left-4 right-4 z-[150] translate-y-[200%] transition-transform duration-500">
+        <div class="glass rounded-3xl p-3 flex items-center justify-between" onclick="openFullPlayer()">
+            <div class="flex items-center gap-3 overflow-hidden">
+                <img id="p-img" src="" class="w-12 h-12 rounded-2xl object-cover bg-purple-900">
+                <div class="overflow-hidden"><h4 id="p-title" class="font-bold text-sm truncate"></h4></div>
             </div>
-            <button onclick="event.stopPropagation(); togglePlay();" id="m-play-btn" class="w-11 h-11 rounded-full bg-white text-black flex items-center justify-center"><i class="fa-solid fa-play"></i></button>
+            <button onclick="event.stopPropagation(); togglePlay();" id="p-play-btn" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center"><i class="fa-solid fa-play"></i></button>
         </div>
     </div>
 
-    <!-- Full Player -->
-    <div id="full-player" class="p-10 flex flex-col justify-between text-center">
-        <button onclick="closeFullPlayer()" class="w-12 h-12 glass rounded-full flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></button>
-        <img id="f-img" src="" class="w-full aspect-square rounded-[60px] shadow-2xl object-cover bg-purple-900 mb-6">
-        <h2 id="f-title" class="text-3xl font-black truncate"></h2>
+    <div id="full-player" class="fixed inset-0 bg-[#0b0714] z-[200] p-10 flex flex-col justify-between text-center hidden">
+        <button onclick="closeFullPlayer()" class="w-12 h-12 glass rounded-full self-start flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></button>
+        <div class="flex flex-col items-center">
+            <img id="f-img" src="" class="w-full aspect-square rounded-[50px] shadow-2xl object-cover bg-purple-900 mb-8">
+            <h2 id="f-title" class="text-2xl font-black text-white"></h2>
+            <p id="f-artist" class="text-purple-400 font-bold uppercase text-xs mt-2 tracking-widest"></p>
+        </div>
         <div class="w-full">
-            <div class="h-1.5 bg-white/10 rounded-full mb-8" onclick="seek(event)"><div id="f-progress" class="progress-fill"></div></div>
+            <div class="h-1 bg-white/10 rounded-full mb-8" onclick="seek(event)"><div id="f-progress" class="progress-fill"></div></div>
             <div class="flex justify-around items-center">
                 <button onclick="prevTrack()" class="text-3xl"><i class="fa-solid fa-backward-step"></i></button>
-                <button onclick="togglePlay()" id="f-play-btn" class="w-24 h-24 bg-white text-black rounded-full text-4xl flex items-center justify-center"><i class="fa-solid fa-play"></i></button>
+                <button onclick="togglePlay()" id="f-play-btn" class="w-20 h-20 bg-white text-black rounded-full text-3xl flex items-center justify-center shadow-xl"><i class="fa-solid fa-play"></i></button>
                 <button onclick="nextTrack()" class="text-3xl"><i class="fa-solid fa-forward-step"></i></button>
             </div>
         </div>
@@ -79,63 +80,65 @@
         const GITHUB_USER = 'allkks';
         const REPO_NAME = 'mus';
         
-        let database = { artists: [], tracks: [] };
-        let currentPlaylist = [];
+        let db = { artists: [], tracks: [] };
         let currentIdx = -1;
+        let playlist = [];
         const audio = document.getElementById('audio');
 
         async function init() {
             try {
-                const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/main/database.json?v=${Date.now()}`);
-                database = await res.json();
+                const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/main/database.json?t=${Date.now()}`);
+                db = await res.json();
                 render();
-            } catch(e) { alert("База данных пуста. Загрузите музыку через менеджер на ПК."); }
+            } catch(e) { console.log("DB Load Error"); }
         }
 
         function render() {
-            document.getElementById('artist-slider').innerHTML = database.artists.map(a => `
-                <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 flex-shrink-0 active:scale-90 transition-transform">
-                    <img src="${a.img || 'https://api.dicebear.com/7.x/initials/svg?seed=' + a.name}" class="w-24 h-24 rounded-full object-cover border-2 border-purple-500/20 bg-purple-900">
-                    <span class="text-[10px] font-black text-gray-500 uppercase">${a.name}</span>
+            // Render Artists
+            document.getElementById('artist-list').innerHTML = db.artists.map(a => `
+                <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 active:scale-90 transition-transform">
+                    <img src="${a.img || 'https://api.dicebear.com/7.x/initials/svg?seed='+a.name}" class="w-20 h-20 rounded-full object-cover border-2 border-purple-500/20 bg-purple-900 shadow-xl">
+                    <span class="text-[9px] font-black text-gray-500 uppercase tracking-tighter">${a.name}</span>
                 </div>
             `).join('');
 
-            renderTrackList('tracks-list', database.tracks);
+            // Render All Tracks
+            renderTracks('track-list', db.tracks);
         }
 
-        function renderTrackList(containerId, list) {
+        function renderTracks(containerId, list) {
             document.getElementById(containerId).innerHTML = list.map((t, idx) => `
-                <div onclick="playFromList('${containerId}', ${idx})" class="track-card p-5 flex items-center justify-between ${currentPlaylist[currentIdx]?.id === t.id ? 'playing' : ''}">
-                    <div class="flex items-center gap-5 overflow-hidden">
-                        <img src="${t.cover || 'https://api.dicebear.com/7.x/shapes/svg?seed=' + t.title}" class="w-14 h-14 rounded-2xl object-cover bg-purple-900">
-                        <div class="overflow-hidden text-left">
+                <div onclick="playTrack(${idx}, ${JSON.stringify(list).replace(/"/g, '&quot;')})" class="track-card p-4 flex items-center justify-between ${playlist[currentIdx]?.id === t.id ? 'playing' : ''}">
+                    <div class="flex items-center gap-4 overflow-hidden text-left">
+                        <img src="${t.cover || 'https://api.dicebear.com/7.x/shapes/svg?seed='+t.title}" class="w-12 h-12 rounded-xl object-cover bg-purple-900">
+                        <div class="overflow-hidden">
                             <h4 class="font-bold text-sm truncate text-white">${t.title}</h4>
-                            <p class="text-[10px] text-purple-400 font-black uppercase tracking-widest">${database.artists.find(a => a.id === t.artistId)?.name || 'Артист'}</p>
+                            <p class="text-[9px] text-purple-400 font-black uppercase">${db.artists.find(a => a.id === t.artistId)?.name || 'Артист'}</p>
                         </div>
                     </div>
-                    <i class="fa-solid ${currentPlaylist[currentIdx]?.id === t.id && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500"></i>
+                    <i class="fa-solid ${playlist[currentIdx]?.id === t.id && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500 text-xs"></i>
                 </div>
             `).join('');
         }
 
         function openArtist(id) {
-            const artist = database.artists.find(a => a.id === id);
-            const tracks = database.tracks.filter(t => t.artistId === id);
+            const artist = db.artists.find(a => a.id === id);
+            const tracks = db.tracks.filter(t => t.artistId === id);
             document.getElementById('ap-name').innerText = artist.name;
-            renderTrackList('ap-tracks', tracks);
+            document.getElementById('ap-banner').style.background = `url(${artist.img}) center/cover`;
+            renderTracks('ap-tracks', tracks);
             document.getElementById('artist-page').classList.add('active');
         }
 
         function closeArtist() { document.getElementById('artist-page').classList.remove('active'); }
 
-        function playFromList(containerId, idx) {
-            const list = (containerId === 'tracks-list') ? database.tracks : database.tracks.filter(t => t.artistId === database.artists.find(a => a.name === document.getElementById('ap-name').innerText).id);
-            if(currentPlaylist === list && currentIdx === idx) { togglePlay(); return; }
-            currentPlaylist = list; currentIdx = idx;
-            const t = currentPlaylist[currentIdx];
+        function playTrack(idx, list) {
+            if(playlist === list && currentIdx === idx) { togglePlay(); return; }
+            playlist = list; currentIdx = idx;
+            const t = playlist[currentIdx];
             audio.src = t.url; audio.play();
+            document.getElementById('player-bar').classList.remove('translate-y-[200%]');
             updateUI();
-            document.getElementById('mini-player').classList.remove('translate-y-[200%]');
         }
 
         function togglePlay() {
@@ -144,23 +147,31 @@
         }
 
         function updateUI() {
-            const t = currentPlaylist[currentIdx];
+            const t = playlist[currentIdx];
+            const artist = db.artists.find(a => a.id === t.artistId);
             const icon = audio.paused ? 'fa-play' : 'fa-pause';
-            document.getElementById('m-title').innerText = t.title;
-            document.getElementById('m-img').src = t.cover || '';
-            document.getElementById('m-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            
+            document.getElementById('p-title').innerText = t.title;
+            document.getElementById('p-img').src = t.cover || '';
+            document.getElementById('p-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            
             document.getElementById('f-title').innerText = t.title;
+            document.getElementById('f-artist').innerText = artist?.name || '';
             document.getElementById('f-img').src = t.cover || '';
             document.getElementById('f-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            
+            render(); // Refresh lists to show playing state
         }
 
-        function nextTrack() { if(currentIdx < currentPlaylist.length - 1) playFromList('', currentIdx + 1); }
-        function prevTrack() { if(currentIdx > 0) playFromList('', currentIdx - 1); }
-        function openFullPlayer() { document.getElementById('full-player').classList.add('active'); }
-        function closeFullPlayer() { document.getElementById('full-player').classList.remove('active'); }
+        function openFullPlayer() { document.getElementById('full-player').classList.remove('hidden'); }
+        function closeFullPlayer() { document.getElementById('full-player').classList.add('hidden'); }
         function seek(e) { audio.currentTime = (e.clientX - 40) / (window.innerWidth - 80) * audio.duration; }
+        
         audio.ontimeupdate = () => { document.getElementById('f-progress').style.width = (audio.currentTime / audio.duration * 100) + '%'; };
-        audio.onended = () => nextTrack();
+        audio.onended = () => { if(currentIdx < playlist.length - 1) playTrack(currentIdx + 1, playlist); };
+
+        function prevTrack() { if(currentIdx > 0) playTrack(currentIdx - 1, playlist); }
+        function nextTrack() { if(currentIdx < playlist.length - 1) playTrack(currentIdx + 1, playlist); }
 
         init();
     </script>
