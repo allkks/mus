@@ -3,9 +3,18 @@
     {
       "id": "123",
       "name": "123",
-      "img": "https://api.dicebear.com/7.x/avataaars/svg?seed=123",
+      "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/artist.jpg",
       "desc": ""
     }
   ],
-  "tracks": []
+  "tracks": [
+    {
+      "id": "t_123_korol-i-shut-prygnu-so-skaly.mp3",
+      "title": "korol-i-shut-prygnu-so-skaly",
+      "artistId": "123",
+      "genre": "Music",
+      "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/korol-i-shut-prygnu-so-skaly.mp3",
+      "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/artist.jpg"
+    }
+  ]
 }
