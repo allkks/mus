@@ -9,75 +9,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        
-        :root {
-            --accent: #a855f7;
-            --bg: #050505;
-            --card-bg: rgba(255, 255, 255, 0.05);
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: white;
-            -webkit-user-select: none;
-            overflow-x: hidden;
-        }
-
-        .glass {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .track-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .track-card.playing {
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-        }
-
-        #artist-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            z-index: 100;
-            transform: translateY(100%);
-            transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
-        }
-
+        :root { --accent: #a855f7; --bg: #050505; --card-bg: rgba(255, 255, 255, 0.05); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: white; -webkit-user-select: none; overflow-x: hidden; }
+        .glass { background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .track-card { background: var(--card-bg); border-radius: 16px; transition: all 0.2s ease; }
+        .track-card.playing { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); }
+        #artist-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1); }
         #artist-page.active { transform: translateY(0); }
-
-        .progress-container { height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; position: relative; }
         .progress-fill { height: 100%; background: var(--accent); box-shadow: 0 0 15px var(--accent); width: 0%; transition: width 0.1s linear; }
-
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .safe-top { padding-top: env(safe-area-inset-top); }
-        
-        /* Плавное появление плеера */
+        #player-bar { transform: translateY(150%); opacity: 0; transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1); pointer-events: none; }
         #player-bar.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        #player-bar { 
-            transform: translateY(150%); 
-            opacity: 0; 
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1); 
-            pointer-events: none;
-        }
     </style>
 </head>
 <body class="pb-32">
 
-    <!-- Header -->
-    <header class="px-6 pt-8 pb-4 safe-top flex justify-between items-center">
+    <!-- Индикатор обновления (чтобы мы знали, что код новый) -->
+    <div class="fixed top-2 right-2 text-[8px] opacity-20 z-[300]">BUILD V2.1</div>
+
+    <header class="px-6 pt-12 pb-4 flex justify-between items-center">
         <div>
-            <p class="text-[10px] font-bold text-purple-500 uppercase tracking-[0.3em]">Premium Access</p>
+            <p class="text-[10px] font-bold text-purple-500 uppercase tracking-[0.3em]">Premium</p>
             <h1 class="text-3xl font-extrabold tracking-tight">UNCENSORED</h1>
         </div>
         <div class="w-10 h-10 rounded-full glass flex items-center justify-center">
@@ -86,94 +38,63 @@
     </header>
 
     <main id="home-view">
-        <!-- Artists Section -->
         <section class="mt-4">
             <div class="px-6 flex justify-between items-end mb-4">
-                <h3 class="text-lg font-bold text-white/90">Твои кумиры</h3>
+                <h3 class="text-lg font-bold">Твои кумиры</h3>
             </div>
-            <div id="artist-list" class="flex gap-6 overflow-x-auto px-6 no-scrollbar snap-x">
-                <!-- Artists dynamic -->
-            </div>
+            <div id="artist-list" class="flex gap-6 overflow-x-auto px-6 no-scrollbar snap-x"></div>
         </section>
 
-        <!-- New Releases -->
         <section class="mt-10 px-6">
-            <h3 class="text-lg font-bold mb-4 text-white/90">Новинки недели</h3>
-            <div id="track-list" class="space-y-3">
-                <!-- Tracks dynamic -->
-            </div>
+            <h3 class="text-lg font-bold mb-4">Все релизы</h3>
+            <div id="track-list" class="space-y-3"></div>
         </section>
     </main>
 
-    <!-- Artist Page Overlay -->
+    <!-- Страница артиста -->
     <div id="artist-page" class="overflow-y-auto no-scrollbar">
-        <div id="ap-banner" class="h-[45vh] relative flex items-end p-8 bg-cover bg-center">
+        <div id="ap-banner" class="h-[40vh] relative flex items-end p-8 bg-cover bg-center">
             <button onclick="closeArtist()" class="fixed top-12 left-6 z-50 w-10 h-10 glass rounded-full flex items-center justify-center">
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
             <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10"></div>
-            <div class="relative z-20">
-                <p class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-1">Исполнитель</p>
-                <h2 id="ap-name" class="text-5xl font-extrabold tracking-tighter"></h2>
-            </div>
+            <h2 id="ap-name" class="text-5xl font-extrabold tracking-tighter relative z-20"></h2>
         </div>
-        
-        <div class="p-6 relative z-20 bg-[#050505]">
-            <div id="ap-content">
-                <!-- Albums and Tracks will be rendered here -->
-            </div>
-        </div>
+        <div id="ap-content" class="p-6 relative z-20 bg-[#050505]"></div>
         <div class="h-32"></div>
     </div>
 
-    <!-- Mini Player -->
+    <!-- Мини-плеер -->
     <div id="player-bar" class="fixed bottom-8 left-4 right-4 z-[150]">
         <div class="glass rounded-2xl p-2 flex items-center justify-between shadow-2xl" onclick="openFullPlayer()">
             <div class="flex items-center gap-3 min-w-0">
-                <img id="p-img" src="" class="w-12 h-12 rounded-xl object-cover bg-neutral-900 shadow-lg">
+                <img id="p-img" src="" class="w-12 h-12 rounded-xl object-cover bg-neutral-900">
                 <div class="min-w-0">
                     <h4 id="p-title" class="font-bold text-sm truncate pr-4"></h4>
                     <p id="p-subtitle" class="text-[10px] text-neutral-400 uppercase font-semibold"></p>
                 </div>
             </div>
-            <div class="px-2">
-                <button onclick="event.stopPropagation(); togglePlay();" id="p-play-btn" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center active:scale-90 transition-transform">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-            </div>
+            <button onclick="event.stopPropagation(); togglePlay();" id="p-play-btn" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center mr-2">
+                <i class="fa-solid fa-play"></i>
+            </button>
         </div>
     </div>
 
-    <!-- Full Player -->
-    <div id="full-player" class="fixed inset-0 bg-[#050505] z-[200] translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.32, 0.72, 0, 1)]">
+    <!-- Полный плеер -->
+    <div id="full-player" class="fixed inset-0 bg-[#050505] z-[200] translate-y-full transition-transform duration-500">
         <div class="h-full flex flex-col p-8 pt-12">
-            <button onclick="closeFullPlayer()" class="w-12 h-12 glass rounded-full flex items-center justify-center mb-8">
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            
-            <div class="flex-1 flex flex-col justify-center">
-                <img id="f-img" src="" class="w-full aspect-square rounded-3xl shadow-2xl object-cover bg-neutral-900 mb-10">
-                <div class="text-left">
-                    <h2 id="f-title" class="text-3xl font-black tracking-tight mb-2"></h2>
-                    <p id="f-artist" class="text-lg text-purple-400 font-semibold opacity-80"></p>
-                </div>
+            <button onclick="closeFullPlayer()" class="w-12 h-12 glass rounded-full flex items-center justify-center mb-8"><i class="fa-solid fa-chevron-down"></i></button>
+            <div class="flex-1 flex flex-col justify-center text-center">
+                <img id="f-img" src="" class="w-full aspect-square rounded-3xl shadow-2xl object-cover mb-10 bg-neutral-900">
+                <h2 id="f-title" class="text-3xl font-black truncate"></h2>
+                <p id="f-artist" class="text-lg text-purple-400 font-semibold mt-2"></p>
             </div>
-
-            <div class="w-full mt-auto pb-8">
-                <div class="flex justify-between text-[10px] font-bold text-neutral-500 mb-2 uppercase tracking-widest">
-                    <span id="f-current-time">0:00</span>
-                    <span id="f-duration">0:00</span>
-                </div>
-                <div class="progress-container mb-10" onclick="seek(event)">
-                    <div id="f-progress" class="progress-fill"></div>
-                </div>
-                
+            <div class="w-full pb-12">
+                <div class="h-1 bg-white/10 rounded-full mb-8 overflow-hidden" onclick="seek(event)"><div id="f-progress" class="progress-fill"></div></div>
                 <div class="flex justify-around items-center">
-                    <button onclick="prevTrack()" class="text-2xl opacity-60 active:opacity-100"><i class="fa-solid fa-backward-step"></i></button>
-                    <button onclick="togglePlay()" id="f-play-btn" class="w-24 h-24 bg-white text-black rounded-full text-4xl flex items-center justify-center shadow-xl active:scale-90 transition-transform">
-                        <i class="fa-solid fa-play ml-1"></i>
-                    </button>
-                    <button onclick="nextTrack()" class="text-2xl opacity-60 active:opacity-100"><i class="fa-solid fa-forward-step"></i></button>
+                    <button onclick="prevTrack()" class="text-2xl opacity-60"><i class="fa-solid fa-backward-step"></i></button>
+                    <button onclick="togglePlay()" id="f-play-btn" class="w-24 h-24 bg-white text-black rounded-full text-4xl flex items-center justify-center shadow-xl"><i class="fa-solid fa-play ml-1"></i></button>
+                    <button onclick="nextTrack()" class="text-2xl opacity-60"><i class="fa-solid fa-forward-step"></i></button>
                 </div>
             </div>
         </div>
@@ -188,45 +109,39 @@
 
         async function init() {
             try {
+                // Принудительный сброс кеша для JSON
                 const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/main/database.json?v=${Date.now()}`);
                 db = await res.json();
                 render();
-            } catch (e) { console.log("DB Error"); }
+            } catch (e) { console.log("Ошибка загрузки"); }
         }
 
         function render() {
-            // Artists slider
             document.getElementById('artist-list').innerHTML = db.artists.map(a => `
-                <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 active:scale-95 transition-transform snap-center min-w-[90px]">
-                    <img src="${a.img || 'https://api.dicebear.com/7.x/initials/svg?seed='+a.name}" class="w-20 h-20 rounded-full object-cover border-2 border-white/5 shadow-lg">
-                    <span class="text-[10px] font-extrabold text-neutral-400 uppercase tracking-tighter text-center leading-tight">${a.name}</span>
+                <div onclick="openArtist('${a.id}')" class="flex flex-col items-center gap-3 snap-center min-w-[90px]">
+                    <img src="${a.img}" class="w-20 h-20 rounded-full object-cover border-2 border-white/5">
+                    <span class="text-[10px] font-extrabold text-neutral-400 uppercase text-center">${a.name}</span>
                 </div>
             `).join('');
-
             renderTracks('track-list', db.tracks);
         }
 
         function renderTracks(containerId, list) {
             const container = document.getElementById(containerId);
-            if (!container) return;
+            if(!container) return;
             container.innerHTML = list.map((t, idx) => {
                 const isPlaying = currentList[currentIdx]?.url === t.url;
                 return `
                     <div onclick='playTrack(${idx}, ${JSON.stringify(list).replace(/'/g, "&apos;")})' 
                          class="track-card p-3 flex items-center justify-between ${isPlaying ? 'playing' : ''}">
                         <div class="flex items-center gap-4 overflow-hidden">
-                            <div class="relative w-12 h-12 flex-shrink-0">
-                                <img src="${t.cover || 'https://api.dicebear.com/7.x/shapes/svg?seed='+t.title}" class="w-full h-full rounded-xl object-cover">
-                                ${isPlaying && !audio.paused ? '<div class="absolute inset-0 bg-purple-600/40 rounded-xl flex items-center justify-center"><i class="fa-solid fa-volume-high text-[10px]"></i></div>' : ''}
-                            </div>
+                            <img src="${t.cover}" class="w-12 h-12 rounded-xl object-cover">
                             <div class="overflow-hidden">
-                                <h4 class="font-bold text-sm truncate text-white">${t.title}</h4>
-                                <p class="text-[10px] text-neutral-500 font-bold uppercase tracking-tight">${t.album || 'Single'}</p>
+                                <h4 class="font-bold text-sm truncate">${t.title}</h4>
+                                <p class="text-[10px] text-neutral-500 font-bold uppercase">${t.album}</p>
                             </div>
                         </div>
-                        <div class="text-xs px-2">
-                             <i class="fa-solid ${isPlaying && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500"></i>
-                        </div>
+                        <i class="fa-solid ${isPlaying && !audio.paused ? 'fa-pause' : 'fa-play'} text-purple-500 mr-2"></i>
                     </div>
                 `;
             }).join('');
@@ -235,32 +150,23 @@
         function openArtist(id) {
             const artist = db.artists.find(a => a.id === id);
             const tracks = db.tracks.filter(t => t.artistId === id);
-            
             document.getElementById('ap-name').innerText = artist.name;
             document.getElementById('ap-banner').style.backgroundImage = `url(${artist.img})`;
             
-            // Группировка по альбомам
-            const albums = [...new Set(tracks.map(t => t.album || 'Синглы'))];
+            const albums = [...new Set(tracks.map(t => t.album))];
             let html = "";
-            
             albums.forEach(al => {
                 const albumId = al.replace(/\s/g, '_');
-                html += `<div class="flex items-center gap-3 mb-4 mt-8">
-                            <h3 class="text-[10px] font-black text-purple-500 uppercase tracking-[0.3em]">${al}</h3>
-                            <div class="h-px flex-1 bg-white/10"></div>
-                         </div>`;
+                html += `<h3 class="text-[10px] font-black text-purple-500 uppercase tracking-[0.3em] mt-8 mb-4">${al}</h3>`;
                 html += `<div id="album-${albumId}" class="space-y-3"></div>`;
             });
-
             document.getElementById('ap-content').innerHTML = html;
             document.getElementById('artist-page').classList.add('active');
-
-            // Отрисовываем треки в альбомы
+            
             setTimeout(() => {
                 albums.forEach(al => {
-                    const albumId = al.replace(/\s/g, '_');
-                    const alTracks = tracks.filter(t => (t.album || 'Синглы') === al);
-                    renderTracks(`album-${albumId}`, alTracks);
+                    const alTracks = tracks.filter(t => t.album === al);
+                    renderTracks(`album-${al.replace(/\s/g, '_')}`, alTracks);
                 });
             }, 50);
         }
@@ -270,71 +176,36 @@
         function playTrack(idx, list) {
             if(currentList === list && currentIdx === idx) { togglePlay(); return; }
             currentList = list; currentIdx = idx;
-            const t = currentList[currentIdx];
-            audio.src = t.url; audio.play();
+            audio.src = currentList[currentIdx].url; audio.play();
             document.getElementById('player-bar').classList.add('visible');
             updateUI();
         }
 
-        function togglePlay() { 
-            audio.paused ? audio.play() : audio.pause(); 
-            updateUI(); 
-        }
+        function togglePlay() { audio.paused ? audio.play() : audio.pause(); updateUI(); }
 
         function updateUI() {
             const t = currentList[currentIdx];
-            if(!t) return;
             const icon = audio.paused ? 'fa-play' : 'fa-pause';
-            
             document.getElementById('p-title').innerText = t.title;
-            document.getElementById('p-subtitle').innerText = t.album || 'Single';
-            document.getElementById('p-img').src = t.cover || '';
+            document.getElementById('p-subtitle').innerText = t.album;
+            document.getElementById('p-img').src = t.cover;
             document.getElementById('p-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
-
             document.getElementById('f-title').innerText = t.title;
-            document.getElementById('f-artist').innerText = t.album || 'Single Release';
-            document.getElementById('f-img').src = t.cover || '';
+            document.getElementById('f-artist').innerText = t.album;
+            document.getElementById('f-img').src = t.cover;
             document.getElementById('f-play-btn').innerHTML = `<i class="fa-solid ${icon}"></i>`;
-
-            // Ре-рендер списков для обновления иконок play/pause
+            
             renderTracks('track-list', db.tracks);
-            const apContainer = document.getElementById('ap-content');
-            if (apContainer && document.getElementById('artist-page').classList.contains('active')) {
-                const tracks = db.tracks.filter(tr => tr.artistId === t.artistId);
-                const albums = [...new Set(tracks.map(tr => tr.album || 'Синглы'))];
-                albums.forEach(al => {
-                    const albumId = al.replace(/\s/g, '_');
-                    const alTracks = tracks.filter(tr => (tr.album || 'Синглы') === al);
-                    renderTracks(`album-${albumId}`, alTracks);
-                });
-            }
         }
 
         function openFullPlayer() { document.getElementById('full-player').style.transform = 'translateY(0)'; }
         function closeFullPlayer() { document.getElementById('full-player').style.transform = 'translateY(100%)'; }
         function seek(e) { audio.currentTime = (e.clientX - 32) / (window.innerWidth - 64) * audio.duration; }
-        
-        audio.ontimeupdate = () => {
-            const p = (audio.currentTime / audio.duration * 100) || 0;
-            document.getElementById('f-progress').style.width = p + '%';
-            const fmt = t => {
-                if(!t) return "0:00";
-                let m = Math.floor(t/60), s = Math.floor(t%60);
-                return m + ":" + (s < 10 ? "0"+s : s);
-            }
-            document.getElementById('f-current-time').innerText = fmt(audio.currentTime);
-            document.getElementById('f-duration').innerText = fmt(audio.duration);
-        };
+        audio.ontimeupdate = () => { document.getElementById('f-progress').style.width = (audio.currentTime / audio.duration * 100) + '%'; };
         audio.onended = () => { if(currentIdx < currentList.length - 1) playTrack(currentIdx+1, currentList); };
 
         function prevTrack() { if(currentIdx > 0) playTrack(currentIdx - 1, currentList); }
         function nextTrack() { if(currentIdx < currentList.length - 1) playTrack(currentIdx + 1, currentList); }
-
-        // Сброс кеша
-        if(!window.location.hash) {
-            window.location.hash = 'v3';
-            window.location.reload();
-        }
 
         init();
     </script>
