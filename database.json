@@ -1,22 +1,4 @@
 {
-  "artists": [
-    {
-      "name": "Miyagi",
-      "img": "https://avatars.mds.yandex.net/get-altay/1594162/2a0000016a282903333333333333/orig"
-    }
-  ],
-  "tracks": [
-    {
-      "title": "Minor",
-      "artist": "Miyagi",
-      "genre": "Rap",
-      "url": "ССЫЛКА_НА_MP3"
-    },
-    {
-      "title": "Батя ",
-      "artist": "Guf ",
-      "genre": "Rock",
-      "url": "https://t.me/c/3728605802/1689/1766"
-    }
-  ]
+  "artists": [],
+  "tracks": []
 }
