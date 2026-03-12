@@ -1,16 +1,8 @@
 {
   "artists": [
-    {
-      "name": "ГУФ",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL9gCSr2C475kYABBMCeHA_51_hvBrb665XMQqlXukIGRqyzu0iE7r_faH2rh7z8G6z-b9w2vyQb50ZmFWqkrZfOAHk2FPiVEJeNCHN5I1MA&s=10"
-    }
+    { "id": "guf", "name": "ГУФ", "img": "ссылка", "desc": "Легенда русского рэпа" }
   ],
   "tracks": [
-    {
-      "title": "Лох",
-      "artist": "ГУФ",
-      "genre": "Rock",
-      "url": "https://raw.githubusercontent.com/allkks/mus/main/all%20music/Linkin%20Park/korol-i-shut-prygnu-so-skaly.mp3 "
-    }
+    { "id": "t1", "title": "Ice Baby", "artistId": "guf", "genre": "Rap", "url": "ссылка.mp3", "cover": "ссылка.jpg" }
   ]
 }
