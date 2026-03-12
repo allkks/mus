@@ -1,11 +1,4 @@
 {
-  "artists": [
-    {
-      "id": "123",
-      "name": "123",
-      "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/artist.jpg",
-      "desc": ""
-    }
-  ],
+  "artists": [],
   "tracks": []
 }
