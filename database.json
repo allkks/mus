@@ -1,8 +1,20 @@
 {
   "artists": [
-    { "id": "guf", "name": "ГУФ", "img": "ссылка", "desc": "Легенда русского рэпа" }
+    {
+      "id": "linkin_park",
+      "name": "Linkin Park",
+      "img": "https://api.dicebear.com/7.x/avataaars/svg?seed=Linkin Park",
+      "desc": "Исполнитель Linkin Park"
+    }
   ],
   "tracks": [
-    { "id": "t1", "title": "Ice Baby", "artistId": "guf", "genre": "Rap", "url": "ссылка.mp3", "cover": "ссылка.jpg" }
+    {
+      "id": "t_linkin_park_0",
+      "title": "korol-i-shut-prygnu-so-skaly",
+      "artistId": "linkin_park",
+      "genre": "Music",
+      "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Linkin Park/korol-i-shut-prygnu-so-skaly.mp3",
+      "cover": "https://api.dicebear.com/7.x/avataaars/svg?seed=Linkin Park"
+    }
   ]
 }
