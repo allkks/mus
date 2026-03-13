@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MUS.LIB — Premium</title>
+    <title>MUS.LIB — Ultra Premium</title>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -47,9 +47,8 @@
                 <i data-lucide="search" class="w-4 h-4 text-dim"></i>
                 <input id="search-input" type="text" placeholder="Поиск музыки" class="bg-transparent outline-none w-full text-sm text-white" oninput="handleSearch()">
             </div>
-            <div id="user-avatar" class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 overflow-hidden">
-                <!-- Сюда вставится фото юзера -->
-                <i data-lucide="user" class="w-5 h-5 text-accent"></i>
+            <div id="user-avatar" class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 overflow-hidden text-accent">
+                <i data-lucide="user" class="w-5 h-5"></i>
             </div>
         </div>
 
@@ -57,7 +56,7 @@
         <section id="page-home" class="page p-4">
             <div onclick="playRandom()" class="relative h-52 rounded-[2.5rem] overflow-hidden mb-10 yandex-gradient shadow-2xl p-8 flex flex-col justify-end transform active:scale-95 transition-transform cursor-pointer">
                 <div class="absolute top-4 right-8 opacity-20"><i data-lucide="waves" class="w-32 h-32 text-white"></i></div>
-                <h2 class="text-4xl font-black italic tracking-tighter leading-none text-white">Моя<br>залупа</h2>
+                <h2 class="text-4xl font-black italic tracking-tighter leading-none text-white">Моя<br>Волна</h2>
                 <div class="absolute bottom-8 right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl"><i data-lucide="play" class="fill-black text-black ml-1"></i></div>
             </div>
 
@@ -71,7 +70,7 @@
 
             <div id="fav-section" class="hidden mb-10">
                 <h2 onclick="navTo('full-list', 'Мне нравится')" class="text-xl font-bold mb-4 px-2 flex items-center justify-between text-heart cursor-pointer">
-                    <span>Мне нравится</span><i data-lucide="chevron-right" class="w-5 h-5 text-dim"></i>
+                    <span>Мне нравится</span><i data-lucide="chevron-right" class="w-5 h-5"></i>
                 </h2>
                 <div id="favorites-list" class="h-scroll no-scrollbar px-2"></div>
             </div>
@@ -94,8 +93,11 @@
                 </div>
             </div>
             <div class="p-4 mt-4">
-                <h2 class="text-xl font-bold mb-4 flex items-center justify-between">Треки <i data-lucide="chevron-right" class="text-dim"></i></h2>
+                <h2 onclick="openFullList('Все треки', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer">
+                    <span>Треки</span><i data-lucide="chevron-right" class="text-dim"></i>
+                </h2>
                 <div id="artist-view-tracks" class="h-scroll no-scrollbar"></div>
+                
                 <h2 class="text-xl font-bold mb-4 mt-8">Альбомы</h2>
                 <div id="artist-view-albums" class="h-scroll no-scrollbar"></div>
             </div>
@@ -142,7 +144,7 @@
         <div class="flex-1 flex items-center justify-center mb-10"><img id="f-img" class="w-full aspect-square max-w-[320px] rounded-[3rem] object-cover shadow-2xl border border-white/5"></div>
         <div class="flex items-center justify-between mb-8"><div class="flex-1 min-w-0 pr-4"><h2 id="f-title" class="text-3xl font-black italic text-white mb-1 truncate">...</h2><p id="f-artist" class="text-lg text-dim truncate">...</p></div><button onclick="toggleFavorite(currentTrackId)" class="p-2"><i id="f-heart" data-lucide="heart" class="w-8 h-8"></i></button></div>
         <div class="mb-10"><div class="relative h-1 bg-white/10 rounded-full mb-4 cursor-pointer" id="seek-bar" onclick="seek(event)"><div id="f-progress" class="absolute top-0 left-0 h-full bg-white rounded-full"></div><div id="f-handle" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full" style="left: 0%"></div></div><div class="flex justify-between text-[10px] font-mono text-dim"><span id="f-current-time">0:00</span><span id="f-total-time">0:00</span></div></div>
-        <div class="flex items-center justify-around mb-12"><button class="opacity-20 text-white"><i data-lucide="shuffle"></i></button><button onclick="prevTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-back" class="w-10 h-10 fill-white"></i></button><button onclick="togglePlay()" class="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center shadow-2xl active:scale-95 transition-all"><i id="f-play-icon" data-lucide="play" class="fill-black w-10 h-10 ml-1"></i></button><button onclick="nextTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-forward" class="w-10 h-10 fill-white"></i></button><button class="opacity-20 text-white"><i data-lucide="repeat"></i></button></div>
+        <div class="flex items-center justify-around mb-12"><button class="opacity-20 text-white"><i data-lucide="shuffle"></i></button><button onclick="prevTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-back" class="w-10 h-10 fill-white text-white"></i></button><button onclick="togglePlay()" class="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center shadow-95 transition-all"><i id="f-play-icon" data-lucide="play" class="fill-black w-10 h-10 ml-1"></i></button><button onclick="nextTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-forward" class="w-10 h-10 fill-white text-white"></i></button><button class="opacity-20 text-white"><i data-lucide="repeat"></i></button></div>
     </div>
 
     <!-- NAVBAR -->
@@ -184,13 +186,8 @@
 
         window.onload = async () => {
             lucide.createIcons();
-            
-            // Ставим аватарку юзера
-            if (user.photo_url) {
-                document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
-            }
+            if (user.photo_url) document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
 
-            // Загрузка базы
             rtdb.ref('/').on('value', (snap) => {
                 const data = snap.val();
                 const source = data.music_data || data;
@@ -198,9 +195,11 @@
                     db.tracks = source.tracks;
                     db.artists = source.artists;
                     renderHome();
-                    // Если страница 'Мне нравится' открыта, обновляем её
-                    const fullListTitle = document.getElementById('full-list-content')?.querySelector('h1')?.innerText;
-                    if (fullListTitle === 'Мне нравится') openFullList('Мне нравится', getFavorites());
+                    refreshChartsManually(); 
+
+                    const currentFullListTitle = document.getElementById('full-list-content')?.querySelector('h1')?.innerText;
+                    if (currentFullListTitle === 'Мне нравится') openFullList('Мне нравится', getFavorites());
+                    if (currentFullListTitle === 'Мировой чарт') openFullList('Мировой чарт', currentGlobalTracks);
                 }
             });
 
@@ -208,15 +207,27 @@
             listenGlobalCharts();
         };
 
+        function refreshChartsManually() {
+            rtdb.ref('global_charts').once('value', (snap) => {
+                const data = snap.val();
+                if (!data || !db.tracks || !db.tracks.length) return;
+                const sortedIds = Object.keys(data).sort((a, b) => data[b] - data[a]);
+                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 100);
+                
+                document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks.slice(0,12)).map(group => `
+                    <div class="track-column">${group.map(t => renderTrackItem(t, 'db.tracks')).join('')}</div>
+                `).join('');
+                lucide.createIcons();
+            });
+        }
+
         function navTo(p, title = '') {
             document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
             document.getElementById('page-' + p).classList.remove('hidden');
-            
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-brandY', 'text-dim/40'));
 
-            if(p === 'home') {
-                document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
-            } else if(title === 'Мне нравится') {
+            if(p === 'home') document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
+            else if(title === 'Мне нравится') {
                 document.getElementById('nav-fav').classList.replace('text-dim/40', 'text-brandY');
                 openFullList(title, getFavorites());
             }
@@ -239,7 +250,7 @@
             const favs = getFavorites();
             if(favs.length) {
                 document.getElementById('fav-section').classList.remove('hidden');
-                document.getElementById('favorites-list').innerHTML = groupTracks(favs).map(group => `
+                document.getElementById('favorites-list').innerHTML = groupTracks(favs.slice(0,12)).map(group => `
                     <div class="track-column">${group.map(t => renderTrackItem(t, 'db.tracks')).join('')}</div>
                 `).join('');
             } else document.getElementById('fav-section').classList.add('hidden');
@@ -249,21 +260,22 @@
         function listenGlobalCharts() {
             rtdb.ref('global_charts').on('value', (snap) => {
                 const data = snap.val();
-                if (!data || !db.tracks.length) return;
+                if (!data || !db.tracks || !db.tracks.length) return;
                 const sortedIds = Object.keys(data).sort((a, b) => data[b] - data[a]);
-                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 12);
+                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 100);
                 
-                document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks).map(group => `
+                document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks.slice(0,12)).map(group => `
                     <div class="track-column">${group.map(t => renderTrackItem(t, 'db.tracks')).join('')}</div>
                 `).join('');
                 lucide.createIcons();
             });
         }
 
-        function renderTrackItem(t, src) {
+        function renderTrackItem(t, src, rank = null) {
             const isFav = favorites.includes(t.id);
             return `
                 <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${src})">
+                    ${rank ? `<span class="w-5 text-sm font-black italic opacity-40">${rank}</span>` : ''}
                     <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
                     <div class="flex-1 min-w-0">
                         <div class="font-bold text-sm text-white truncate">${t.title}</div>
@@ -302,6 +314,18 @@
             document.getElementById('album-view-title').innerText = albumTitle;
             document.getElementById('album-view-artist').innerText = artistName;
             document.getElementById('album-tracks-list').innerHTML = albumTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+            lucide.createIcons();
+        }
+
+        function openFullList(title, list) {
+            if (!list) return;
+            navTo('full-list', title);
+            const isChart = title === 'Мировой чарт';
+            document.getElementById('full-list-content').innerHTML = `
+                <h1 class="text-3xl font-black mb-8 text-white">${title}</h1>
+                <div class="space-y-1">
+                    ${list.map((t, i) => renderTrackItem(t, 'db.tracks', isChart ? i + 1 : null)).join('')}
+                </div>`;
             lucide.createIcons();
         }
 
@@ -395,16 +419,6 @@
         function imgBust(u) { return u ? `${u}${u.includes('?') ? '&' : '?'}v=${globalBust}` : ''; }
         function formatTime(s) { const m = Math.floor(s/60); const sec = Math.floor(s%60); return `${m}:${sec < 10 ? '0' : ''}${sec}`; }
         function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
-        
-        function openFullList(title, list) {
-            navTo('full-list', title);
-            document.getElementById('full-list-content').innerHTML = `
-                <h1 class="text-3xl font-black mb-8 text-white">${title}</h1>
-                <div class="space-y-1">
-                    ${list.map(t => renderTrackItem(t, 'db.tracks')).join('')}
-                </div>`;
-            lucide.createIcons();
-        }
 
         function playRandom() { if(db.tracks.length) playTrack(db.tracks[Math.floor(Math.random()*db.tracks.length)].id, db.tracks); }
         function playArtistTracks() { 
