@@ -1,24 +1,44 @@
 {
-    "artists": [
-        {
-            "id": "ca954e",
-            "name": "333",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/333/artist.jpg"
-        },
-        {
-            "id": "5accb1",
-            "name": "гуф",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg"
+    "artists": {
+        "1234": {
+            "name": "1234",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/artist.jpg",
+            "tracks": [
+                {
+                    "id": 0,
+                    "title": "korol-i-shut-prygnu-so-skaly",
+                    "artist": "1234",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/singles/korol-i-shut-prygnu-so-skaly.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/artist.jpg",
+                    "plays": 0
+                },
+                {
+                    "id": 1,
+                    "title": "www",
+                    "artist": "1234",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/singles/www.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/artist.jpg",
+                    "plays": 0
+                }
+            ],
+            "plays": 0
         }
-    ],
-    "albums": [],
+    },
     "tracks": [
         {
-            "id": "b484d3",
+            "id": 0,
             "title": "korol-i-shut-prygnu-so-skaly",
-            "artist": "гуф",
-            "album": "Сингл",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/singles/korol-i-shut-prygnu-so-skaly.mp3",
+            "artist": "1234",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/singles/korol-i-shut-prygnu-so-skaly.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/artist.jpg",
+            "plays": 0
+        },
+        {
+            "id": 1,
+            "title": "www",
+            "artist": "1234",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/singles/www.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1234/artist.jpg",
             "plays": 0
         }
     ]
