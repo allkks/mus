@@ -140,17 +140,31 @@
 
         async function loadDatabase() {
             try {
-                // Прямой запрос к GitHub API для получения свежего содержимого файла
-                const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/database.json?t=${Date.now()}`);
+                // Используем заголовок cache: 'no-store' для полной победы над кэшем
+                const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/database.json?t=${Date.now()}`, {
+                    cache: 'no-store',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'If-None-Match': '' // Сбрасываем ETag кэш
+                    }
+                });
+                
+                if (!res.ok) throw new Error("Database not found");
+                
                 const data = await res.json();
-                // Декодируем base64 (стандарт ответа API)
-                const decodedContent = decodeURIComponent(escape(atob(data.content)));
-                db = JSON.parse(decodedContent);
+                // Декодируем base64 с поддержкой кириллицы (UTF-8)
+                const content = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+                db = JSON.parse(content);
+                
+                console.log("База успешно загружена:", db);
                 renderHome();
                 document.getElementById('main-loader').classList.add('hidden');
             } catch (e) {
-                console.error("API error, trying RAW", e);
-                const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${Date.now()}`);
+                console.error("API error, trying RAW fallback", e);
+                // Запасной вариант если API лимит исчерпан
+                const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${Date.now()}`, {
+                    cache: 'no-store'
+                });
                 db = await res.json();
                 renderHome();
                 document.getElementById('main-loader').classList.add('hidden');
@@ -295,3 +309,4 @@
     </script>
 </body>
 </html>
+
