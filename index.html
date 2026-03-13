@@ -56,7 +56,7 @@
         <section id="page-home" class="page p-4">
             <div onclick="playRandom()" class="relative h-52 rounded-[2.5rem] overflow-hidden mb-10 yandex-gradient shadow-2xl p-8 flex flex-col justify-end transform active:scale-95 transition-transform cursor-pointer">
                 <div class="absolute top-4 right-8 opacity-20"><i data-lucide="waves" class="w-32 h-32 text-white"></i></div>
-                <h2 class="text-4xl font-black italic tracking-tighter">Моя 123</h2>
+                <h2 class="text-4xl font-black italic tracking-tighter">Моя волна</h2>
                 <p class="text-white/70 text-sm">Персональный поток</p>
                 <div class="absolute bottom-8 right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl"><i data-lucide="play" class="fill-black text-black ml-1"></i></div>
             </div>
@@ -108,8 +108,10 @@
             </div>
         </section>
 
+        <!-- PAGE: SEARCH -->
         <section id="page-search" class="page hidden p-6"><div id="search-results" class="space-y-2"></div></section>
 
+        <!-- PAGE: ALBUM -->
         <section id="page-album" class="page hidden">
             <div class="relative h-[55vh] w-full flex flex-col justify-end overflow-hidden">
                 <img id="album-view-img" class="absolute inset-0 w-full h-full object-cover">
@@ -127,6 +129,7 @@
             <div class="px-4"><div id="album-tracks-list" class="space-y-1"></div></div>
         </section>
 
+        <!-- PAGE: FULL LIST -->
         <section id="page-full-list" class="page hidden p-6">
             <button onclick="navTo('home')" class="flex items-center gap-2 text-dim mb-8"><i data-lucide="chevron-left"></i> Назад</button>
             <h1 id="full-list-title" class="text-4xl font-black mb-8 text-white"></h1>
@@ -182,61 +185,54 @@
     let currentPlaylist = [];
     let currentAlbumTracks = [];
     let currentArtistName = '';
+    let globalBust = Date.now(); // Ключ для кеша, обновляется только при изменении данных
     const audio = document.getElementById('audio-engine');
 
     window.onload = async () => { 
         lucide.createIcons(); 
         await loadDatabase();
-        // Проверка каждые 15 секунд для еще большей скорости
         setInterval(loadDatabase, 15000); 
     };
 
     async function loadDatabase() {
-        // Каждый запрос имеет уникальный ID, чтобы GitHub не смел отдавать старый файл
         const bust = Date.now();
         try {
             const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/database.json?v=${bust}`, {
                 cache: "no-store",
-                headers: { 'If-None-Match': '' } 
+                headers: { 'Accept': 'application/vnd.github.v3.raw' } // Важно: получаем чистый JSON
             });
             const newData = await res.json();
             
-            // Если данные хоть чем-то отличаются — перерисовываем всё немедленно
             if (JSON.stringify(db) !== JSON.stringify(newData)) {
                 db = newData;
-                refreshCurrentView(); // Умное обновление текущего экрана
-                console.log("Контент обновлен мгновенно");
+                globalBust = Date.now(); // Данные изменились — разрешаем картинкам обновиться
+                refreshCurrentView();
+                console.log("База данных синхронизирована");
             }
         } catch (e) {
             const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${bust}`, { cache: "no-store" });
             db = await res.json();
+            globalBust = Date.now();
             refreshCurrentView();
         }
     }
 
-    // Функция, которая понимает, на какой странице сидит юзер и обновляет её
     function refreshCurrentView() {
-        renderHome(); // Главную обновляем всегда в фоне
-        
+        renderHome();
         const artistPage = document.getElementById('page-artist');
         const albumPage = document.getElementById('page-album');
         const searchPage = document.getElementById('page-search');
 
-        if (!artistPage.classList.contains('hidden') && currentArtistName) {
-            openArtistPage(currentArtistName);
-        }
-        if (!albumPage.classList.contains('hidden') && currentAlbumTracks.length) {
+        if (!artistPage.classList.contains('hidden') && currentArtistName) openArtistPage(currentArtistName);
+        if (!albumPage.classList.contains('hidden')) {
             const albTitle = document.getElementById('album-view-title').innerText;
-            openAlbumPage(currentArtistName, albTitle);
+            if (albTitle && currentArtistName) openAlbumPage(currentArtistName, albTitle);
         }
-        if (!searchPage.classList.contains('hidden')) {
-            handleSearch();
-        }
+        if (!searchPage.classList.contains('hidden')) handleSearch();
     }
 
-    // Добавляем ?v= к картинкам, чтобы они не кешировались при изменениях
     function imgBust(url) {
-        return url ? `${url}${url.includes('?') ? '&' : '?'}v=${Date.now()}` : '';
+        return url ? `${url}${url.includes('?') ? '&' : '?'}v=${globalBust}` : '';
     }
 
     function renderHome() {
@@ -253,8 +249,9 @@
 
     function renderTrackItem(t, source) {
         const isFav = favorites.includes(t.id);
+        const listName = Array.isArray(source) ? 'currentPlaylist' : source; 
         return `
-            <div class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${source})">
+            <div class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${listName})">
                 <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
                 <div class="flex-1 min-w-0">
                     <div class="font-bold text-sm truncate text-white">${t.title}</div>
@@ -266,11 +263,12 @@
 
     function handleSearch() {
         const q = document.getElementById('search-input').value.toLowerCase().trim();
-        if (!q) return;
+        if (!q) { navTo('home'); return; }
         navTo('search');
         const container = document.getElementById('search-results');
+        
         const foundArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
-        const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q));
+        const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q)); // Поиск ТОЛЬКО по названию
 
         let html = '';
         if (foundArtists.length > 0) {
@@ -289,16 +287,6 @@
         }
         container.innerHTML = html || `<div class="py-20 text-center text-dim opacity-40">Ничего не найдено</div>`;
         lucide.createIcons();
-    }
-
-    // Все остальные функции (playTrack, next, formatTime и т.д.) просто скопируй из своего кода ниже
-    // Главное — везде, где выводится <img>, используй src="${imgBust(t.img)}"
-
-    function formatTime(s) {
-        if (!s || isNaN(s)) return '0:00';
-        const m = Math.floor(s / 60);
-        const sec = Math.floor(s % 60);
-        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
     }
 
     function openArtistPage(name) {
@@ -330,29 +318,13 @@
     function openAlbumPage(artistName, albumTitle) {
         const artist = db.artists[artistName];
         currentAlbumTracks = artist.tracks.filter(t => t.album === albumTitle);
+        if(!currentAlbumTracks.length) return;
         document.getElementById('album-view-img').src = imgBust(currentAlbumTracks[0].img);
         document.getElementById('album-view-title').innerText = albumTitle;
         document.getElementById('album-view-artist').innerText = artistName;
         document.getElementById('album-year').innerText = '2025';
         document.getElementById('album-tracks-list').innerHTML = currentAlbumTracks.map(t => renderTrackItem(t, 'currentAlbumTracks')).join('');
         navTo('album'); lucide.createIcons();
-    }
-
-    function renderFavorites() {
-        const favs = db.tracks.filter(t => favorites.includes(t.id));
-        const container = document.getElementById('favorites-list');
-        if(favs.length) {
-            document.getElementById('fav-section').classList.remove('hidden');
-            container.innerHTML = favs.map(t => renderTrackItem(t, 'db.tracks')).join('');
-        } else { document.getElementById('fav-section').classList.add('hidden'); }
-    }
-
-    function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
-    function playCurrentAlbum() { if(currentAlbumTracks.length) playTrack(currentAlbumTracks[0].id, currentAlbumTracks); }
-    function openFullList(title, tracks) {
-        document.getElementById('full-list-title').innerText = title;
-        document.getElementById('full-list-content').innerHTML = tracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
-        navTo('full-list'); lucide.createIcons();
     }
 
     function playTrack(id, list) {
@@ -369,6 +341,27 @@
         lucide.createIcons(); updateHeartIcons();
     }
 
+    function formatTime(s) {
+        if (!s || isNaN(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+    function renderFavorites() {
+        const favs = db.tracks.filter(t => favorites.includes(t.id));
+        const container = document.getElementById('favorites-list');
+        if(favs.length) {
+            document.getElementById('fav-section').classList.remove('hidden');
+            container.innerHTML = favs.map(t => renderTrackItem(t, 'db.tracks')).join('');
+        } else { document.getElementById('fav-section').classList.add('hidden'); }
+    }
+    function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
+    function playCurrentAlbum() { if(currentAlbumTracks.length) playTrack(currentAlbumTracks[0].id, currentAlbumTracks); }
+    function openFullList(title, tracks) {
+        document.getElementById('full-list-title').innerText = title;
+        document.getElementById('full-list-content').innerHTML = tracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+        navTo('full-list'); lucide.createIcons();
+    }
     function prevTrack() {
         if(!currentPlaylist.length) return;
         let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
@@ -420,6 +413,6 @@
         }
     };
     audio.onended = () => nextTrack();
-</script>
+    </script>
 </body>
 </html>
