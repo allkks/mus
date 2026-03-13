@@ -4,9 +4,65 @@
             "name": "ГУФ",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/artist.jpg",
             "bio": "",
-            "tracks": [],
-            "albums": []
+            "tracks": [
+                {
+                    "id": 0,
+                    "title": "01 Интро",
+                    "artist": "ГУФ",
+                    "album": "Город дорог",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/01 Интро.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+                },
+                {
+                    "id": 1,
+                    "title": "02 Кто как играет",
+                    "artist": "ГУФ",
+                    "album": "Город дорог",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/02 Кто как играет.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+                },
+                {
+                    "id": 2,
+                    "title": "03 Сплетни",
+                    "artist": "ГУФ",
+                    "album": "Город дорог",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/03 Сплетни.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+                }
+            ],
+            "albums": [
+                {
+                    "title": "Город дорог",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg",
+                    "year": "2007"
+                }
+            ]
         }
     },
-    "tracks": []
+    "tracks": [
+        {
+            "id": 0,
+            "title": "01 Интро",
+            "artist": "ГУФ",
+            "album": "Город дорог",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/01 Интро.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+        },
+        {
+            "id": 1,
+            "title": "02 Кто как играет",
+            "artist": "ГУФ",
+            "album": "Город дорог",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/02 Кто как играет.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+        },
+        {
+            "id": 2,
+            "title": "03 Сплетни",
+            "artist": "ГУФ",
+            "album": "Город дорог",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/03 Сплетни.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+        }
+    ]
 }
