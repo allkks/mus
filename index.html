@@ -14,68 +14,52 @@
         body { background-color: #000; color: #fff; -webkit-tap-highlight-color: transparent; overflow: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .glass-nav { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom) + 10rem); }
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
-        input[type=range]::-webkit-slider-runnable-track { background: #333; height: 4px; border-radius: 2px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: #ffcc00; margin-top: -4px; border: 2px solid #000; }
+        .pb-safe { padding-bottom: 12rem; }
     </style>
 </head>
 <body>
     <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-safe">
         
-        <!-- ГЛАВНАЯ -->
         <section id="page-home" class="page p-6 pt-24">
             <h1 class="text-5xl font-black italic mb-10 tracking-tighter">Главная</h1>
             <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="w-1 h-6 bg-brand rounded-full"></span> Артисты</h2>
             <div id="home-artists" class="grid grid-cols-3 md:grid-cols-6 gap-6 mb-12"></div>
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="w-1 h-6 bg-brand rounded-full"></span> Треки</h2>
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span class="w-1 h-6 bg-brand rounded-full"></span> Чарт</h2>
             <div id="home-tracks" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
         </section>
 
-        <!-- АРТИСТ (ЯНДЕКС СТИЛЬ) -->
         <section id="page-artist" class="page hidden">
             <!-- БОЛЬШОЕ ФОТО -->
-            <div class="relative h-[50vh] w-full">
+            <div class="relative h-[55vh] w-full">
                 <img id="artist-view-img" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                 <button onclick="navTo('home')" class="absolute top-8 left-6 bg-black/50 p-3 rounded-full backdrop-blur-md"><i data-lucide="arrow-left"></i></button>
                 <div class="absolute bottom-10 left-6">
-                    <h1 id="artist-view-name" class="text-6xl md:text-9xl font-black tracking-tighter italic"></h1>
+                    <h1 id="artist-view-name" class="text-6xl md:text-9xl font-black tracking-tighter italic drop-shadow-lg"></h1>
                 </div>
             </div>
-            
             <div class="p-6">
-                <!-- ТРЕКИ -->
-                <h2 class="text-2xl font-bold mb-6">Популярные треки</h2>
+                <h2 class="text-2xl font-bold mb-6 italic">Треки</h2>
                 <div id="artist-view-tracks" class="space-y-2 mb-12"></div>
-                
-                <!-- АЛЬБОМЫ -->
-                <h2 class="text-2xl font-bold mb-6">Альбомы</h2>
+                <h2 class="text-2xl font-bold mb-6 italic">Альбомы</h2>
                 <div id="artist-view-albums" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
         </section>
-
     </main>
 
     <!-- ПЛЕЕР -->
     <div id="player" class="fixed bottom-0 left-0 right-0 glass-nav p-4 pb-12 z-50">
         <div class="flex items-center gap-4">
             <img id="p-img" class="w-14 h-14 rounded-xl object-cover bg-accent">
-            <div class="flex-1 overflow-hidden">
-                <div id="p-title" class="font-bold truncate">Выберите трек</div>
-                <div id="p-artist" class="text-xs text-gray-500 truncate">---</div>
-            </div>
+            <div class="flex-1 truncate"><div id="p-title" class="font-bold truncate">---</div><div id="p-artist" class="text-xs text-gray-500 truncate">---</div></div>
             <div class="flex items-center gap-4">
-                <button onclick="togglePlay()" class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-lg"><i id="p-play-icon" data-lucide="play" class="fill-current"></i></button>
+                <button onclick="togglePlay()" class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center"><i id="p-play-icon" data-lucide="play" class="fill-current"></i></button>
                 <button onclick="nextTrack()"><i data-lucide="skip-forward"></i></button>
             </div>
         </div>
-        <div class="mt-4 h-1 bg-white/10 rounded-full overflow-hidden">
-            <div id="player-progress" class="h-full bg-brand w-0"></div>
-        </div>
+        <div class="mt-4 h-1 bg-white/10 rounded-full overflow-hidden"><div id="player-progress" class="h-full bg-brand w-0"></div></div>
     </div>
 
-    <!-- LOADER -->
     <div id="main-loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
         <div class="w-10 h-10 border-4 border-brand border-t-transparent animate-spin rounded-full"></div>
     </div>
@@ -89,53 +73,34 @@
         let currentIndex = -1;
         const audio = document.getElementById('audio-engine');
 
-        window.onload = async () => {
-            lucide.createIcons();
-            await loadApp();
-        };
+        window.onload = async () => { lucide.createIcons(); await loadApp(); };
 
         async function loadApp() {
             try {
                 const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/database.json?v=${Date.now()}`);
                 db = await res.json();
                 renderHome();
-                document.getElementById('main-loader').classList.add('hidden');
+                document.getElementById('main-loader').style.display = 'none';
             } catch (e) { console.error(e); }
         }
 
         function renderHome() {
-            const artistContainer = document.getElementById('home-artists');
-            artistContainer.innerHTML = Object.values(db.artists).map(a => `
-                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="text-center cursor-pointer group">
-                    <div class="aspect-square rounded-full overflow-hidden mb-2 border-2 border-transparent group-hover:border-brand transition-all">
-                        <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff'" class="w-full h-full object-cover">
-                    </div>
-                    <p class="text-[10px] font-bold uppercase truncate tracking-tighter">${a.name}</p>
-                </div>
-            `).join('');
-
-            document.getElementById('home-tracks').innerHTML = db.tracks.slice(0, 10).map(t => createTrackItem(t, db.tracks)).join('');
+            document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
+                <div onclick="openArtist('${a.name}')" class="text-center cursor-pointer group">
+                    <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff'" class="aspect-square rounded-full object-cover mb-2 transition-transform group-hover:scale-105 border-2 border-transparent group-hover:border-brand">
+                    <p class="text-[10px] font-bold uppercase truncate">${a.name}</p>
+                </div>`).join('');
+            document.getElementById('home-tracks').innerHTML = db.tracks.slice(0, 15).map(t => createTrackItem(t, db.tracks)).join('');
             lucide.createIcons();
         }
 
         function createTrackItem(t, playlist) {
             const playlistStr = JSON.stringify(playlist).replace(/"/g, '&quot;');
-            return `
-                <div onclick="playTrack(${t.id}, ${playlistStr})" class="flex items-center gap-4 p-3 bg-accent/30 rounded-2xl hover:bg-accent/60 cursor-pointer group">
-                    <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover bg-surface">
-                    <div class="flex-1 truncate">
-                        <div class="font-bold text-sm truncate group-hover:text-brand transition-colors">${t.title}</div>
-                        <div class="text-[10px] text-gray-500 font-bold uppercase">${t.artist}</div>
-                    </div>
-                    <i data-lucide="play" class="w-4 h-4 text-brand fill-current opacity-0 group-hover:opacity-100"></i>
-                </div>
-            `;
-        }
-
-        function navTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-            document.getElementById(`page-${page}`).classList.remove('hidden');
-            document.getElementById('scroll-container').scrollTo(0, 0);
+            return `<div onclick="playTrack(${t.id}, ${playlistStr})" class="flex items-center gap-4 p-3 bg-accent/30 rounded-2xl hover:bg-accent/60 cursor-pointer group transition-all">
+                <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover">
+                <div class="flex-1 truncate"><div class="font-bold text-sm truncate group-hover:text-brand transition-colors">${t.title}</div><div class="text-[10px] text-gray-500 font-bold uppercase">${t.artist}</div></div>
+                <i data-lucide="play" class="w-4 h-4 text-brand fill-current opacity-0 group-hover:opacity-100"></i>
+            </div>`;
         }
 
         function openArtist(name) {
@@ -143,50 +108,29 @@
             document.getElementById('artist-view-name').innerText = artist.name;
             document.getElementById('artist-view-img').src = artist.img;
             document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map(t => createTrackItem(t, artist.tracks)).join('');
-            
             document.getElementById('artist-view-albums').innerHTML = (artist.albums || []).map(alb => `
-                <div class="bg-accent/30 p-4 rounded-3xl text-center hover:bg-accent/60 cursor-pointer transition-colors">
+                <div class="bg-accent/30 p-4 rounded-3xl text-center hover:bg-accent/60 transition-colors">
                     <img src="${alb.cover}" onerror="this.src='https://ui-avatars.com/api/?name=A&background=333&color=fff'" class="aspect-square rounded-2xl object-cover mb-2">
                     <div class="text-xs font-bold truncate">${alb.title}</div>
-                </div>
-            `).join('');
-
-            navTo('artist');
-            lucide.createIcons();
+                </div>`).join('');
+            navTo('artist'); lucide.createIcons();
         }
 
         function playTrack(id, playlist) {
             currentPlaylist = playlist;
             currentIndex = currentPlaylist.findIndex(t => t.id === id);
-            const track = currentPlaylist[currentIndex];
-            document.getElementById('p-title').innerText = track.title;
-            document.getElementById('p-artist').innerText = track.artist;
-            document.getElementById('p-img').src = track.img;
-            audio.src = track.url;
-            audio.play();
-            updateUI(true);
+            const t = currentPlaylist[currentIndex];
+            document.getElementById('p-title').innerText = t.title;
+            document.getElementById('p-artist').innerText = t.artist;
+            document.getElementById('p-img').src = t.img;
+            audio.src = t.url; audio.play(); updateUI(true);
         }
 
-        function togglePlay() {
-            if (!audio.src) return;
-            if (audio.paused) { audio.play(); updateUI(true); } 
-            else { audio.pause(); updateUI(false); }
-        }
-
-        function updateUI(playing) {
-            const icon = document.getElementById('p-play-icon');
-            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
-            lucide.createIcons();
-        }
-
-        function nextTrack() {
-            if (currentIndex < currentPlaylist.length - 1) playTrack(currentPlaylist[currentIndex + 1].id, currentPlaylist);
-        }
-
-        audio.ontimeupdate = () => {
-            const pct = (audio.currentTime / audio.duration) * 100 || 0;
-            document.getElementById('player-progress').style.width = pct + "%";
-        };
+        function togglePlay() { if (audio.paused) { audio.play(); updateUI(true); } else { audio.pause(); updateUI(false); } }
+        function updateUI(p) { document.getElementById('p-play-icon').setAttribute('data-lucide', p ? 'pause' : 'play'); lucide.createIcons(); }
+        function nextTrack() { if (currentIndex < currentPlaylist.length - 1) playTrack(currentPlaylist[currentIndex+1].id, currentPlaylist); }
+        function navTo(p) { document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden')); document.getElementById('page-'+p).classList.remove('hidden'); document.getElementById('scroll-container').scrollTo(0,0); }
+        audio.ontimeupdate = () => { document.getElementById('player-progress').style.width = (audio.currentTime/audio.duration)*100+"%"; };
         audio.onended = nextTrack;
     </script>
 </body>
