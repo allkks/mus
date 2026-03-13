@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MUS.LIB — Premium Player</title>
+    <!-- ЗАЩИТА ОТ КЭША -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     
+    <title>MUS.LIB — Cloud Live</title>
+    
+    <!-- МОБИЛЬНАЯ КОНСОЛЬ (ДЛЯ ОТЛАДКИ) -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
     <!-- SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -182,41 +191,29 @@
         tg.ready();
         const user = tg.initDataUnsafe?.user || { id: "guest", first_name: "Слушатель" };
 
-        const USER_GH = "allkks";
-        const REPO_GH = "mus";
         let db = { tracks: [], artists: {} };
         let favorites = [];
         let currentTrackId = null;
         let currentPlaylist = [];
-        let globalBust = Date.now();
         const audio = document.getElementById('audio-engine');
 
         window.onload = async () => {
             lucide.createIcons();
             if(user.photo_url) document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
-            await loadDatabase();
+            
+            // Загружаем музыку прямо из Firebase (Мгновенно!)
+            rtdb.ref('/').on('value', (snap) => {
+                const data = snap.val();
+                if(data && data.tracks) {
+                    db = data;
+                    renderHome();
+                    console.log("База музыки обновлена из Firebase");
+                }
+            });
+
             initCloudSync();
             listenGlobalCharts();
-            setInterval(loadDatabase, 30000);
         };
-
-        async function loadDatabase() {
-            const b = Date.now();
-            try {
-                const res = await fetch(`https://api.github.com/repos/${USER_GH}/${REPO_GH}/contents/database.json?v=${b}`, {
-                    cache: "no-store", headers: { 'Accept': 'application/vnd.github.v3.raw' }
-                });
-                const newData = await res.json();
-                if (JSON.stringify(db) !== JSON.stringify(newData)) {
-                    db = newData; globalBust = Date.now();
-                    renderHome();
-                }
-            } catch (e) {
-                const res = await fetch(`https://raw.githubusercontent.com/${USER_GH}/${REPO_GH}/main/database.json?v=${b}`, { cache: "no-store" });
-                db = await res.json();
-                renderHome();
-            }
-        }
 
         function initCloudSync() {
             rtdb.ref('users/' + user.id + '/profile').update({ name: user.first_name, username: user.username || "" });
@@ -239,7 +236,7 @@
                     return `
                         <div onclick="playTrack(${t.id}, db.tracks)" class="flex items-center gap-4 p-3 active:bg-white/5 transition-all cursor-pointer">
                             <span class="text-lg font-black italic opacity-20 w-6">${i+1}</span>
-                            <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
+                            <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover">
                             <div class="flex-1 truncate">
                                 <div class="font-bold text-sm text-white">${t.title}</div>
                                 <div class="text-[10px] text-dim uppercase tracking-wider">${t.artist}</div>
@@ -249,12 +246,11 @@
             });
         }
 
-        function imgBust(u) { return u ? `${u}${u.includes('?') ? '&' : '?'}v=${globalBust}` : ''; }
-
         function renderHome() {
+            if(!db.artists) return;
             document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
                 <div onclick="openArtistPage('${a.name}')" class="w-32 text-center transform active:scale-90 transition-transform cursor-pointer">
-                    <img src="${imgBust(a.img)}" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 shadow-2xl border border-white/5">
+                    <img src="${a.img}" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 shadow-2xl border border-white/5">
                     <div class="text-[10px] font-bold uppercase tracking-widest truncate text-white">${a.name}</div>
                 </div>`).join('');
             
@@ -271,7 +267,7 @@
             const list = Array.isArray(src) ? 'currentPlaylist' : src;
             return `
                 <div class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${list})">
-                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
+                    <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover">
                     <div class="flex-1 min-w-0">
                         <div class="font-bold text-sm truncate text-white">${t.title}</div>
                         <div class="text-[10px] text-dim font-bold uppercase tracking-widest">${t.artist}</div>
@@ -290,10 +286,10 @@
             
             document.getElementById('m-title').innerText = t.title;
             document.getElementById('m-artist').innerText = t.artist;
-            document.getElementById('m-img').src = imgBust(t.img);
+            document.getElementById('m-img').src = t.img;
             document.getElementById('f-title').innerText = t.title;
             document.getElementById('f-artist').innerText = t.artist;
-            document.getElementById('f-img').src = imgBust(t.img);
+            document.getElementById('f-img').src = t.img;
             
             audio.src = t.url; audio.play();
             document.getElementById('mini-player').classList.remove('translate-y-[200px]');
@@ -370,7 +366,7 @@
             let h = '';
             if(foundArtists.length) {
                 h += `<div class="text-[10px] text-dim uppercase mb-4 tracking-widest">Исполнители</div>`;
-                foundArtists.forEach(a => h += `<div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 mb-4 cursor-pointer"><img src="${imgBust(a.img)}" class="w-12 h-12 rounded-full object-cover shadow-lg"><div class="font-bold">${a.name}</div></div>`);
+                foundArtists.forEach(a => h += `<div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 mb-4 cursor-pointer"><img src="${a.img}" class="w-12 h-12 rounded-full object-cover shadow-lg"><div class="font-bold">${a.name}</div></div>`);
             }
             if(foundTracks.length) {
                 h += `<div class="text-[10px] text-dim uppercase mb-4 tracking-widest">Треки</div>`;
@@ -382,7 +378,7 @@
 
         function openArtistPage(name) {
             const a = db.artists[name]; if(!a) return;
-            document.getElementById('artist-view-img').src = imgBust(a.img);
+            document.getElementById('artist-view-img').src = a.img;
             document.getElementById('artist-view-name').innerText = a.name;
             document.getElementById('artist-view-tracks').innerHTML = a.tracks.map(t => renderTrackItem(t, `db.artists['${name}'].tracks`)).join('');
             navTo('artist'); lucide.createIcons();
