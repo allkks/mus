@@ -1,1 +1,11 @@
-
+{
+    "artists": {
+        "324": {
+            "name": "324",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/artist.jpg",
+            "tracks": [],
+            "plays": 0
+        }
+    },
+    "tracks": []
+}
