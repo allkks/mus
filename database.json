@@ -1,7 +1,12 @@
 {
     "artists": [
         {
-            "id": "63bffd28",
+            "id": "d642d657",
+            "name": "123",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/artist.jpg"
+        },
+        {
+            "id": "8c8f6e60",
             "name": "гуф",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg"
         }
