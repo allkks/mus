@@ -28,6 +28,22 @@
                     "album": "Город дорог",
                     "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/03 Сплетни.flac",
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+                },
+                {
+                    "id": 3,
+                    "title": "01 Интро",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/01 Интро.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 4,
+                    "title": "02 Больше стаффа",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/02 Больше стаффа.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 }
             ],
             "albums": [
@@ -35,6 +51,11 @@
                     "title": "Город дорог",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg",
                     "year": "2007"
+                },
+                {
+                    "title": "Дома",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg",
+                    "year": "2009"
                 }
             ]
         }
@@ -63,6 +84,22 @@
             "album": "Город дорог",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/03 Сплетни.flac",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
+        },
+        {
+            "id": 3,
+            "title": "01 Интро",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/01 Интро.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 4,
+            "title": "02 Больше стаффа",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/02 Больше стаффа.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         }
     ]
 }
