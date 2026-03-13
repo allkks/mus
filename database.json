@@ -3,9 +3,27 @@
         "324": {
             "name": "324",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/artist.jpg",
-            "tracks": [],
+            "tracks": [
+                {
+                    "id": 0,
+                    "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1)",
+                    "artist": "324",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/albums/23/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1).mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/albums/23/cover.jpg",
+                    "plays": 0
+                }
+            ],
             "plays": 0
         }
     },
-    "tracks": []
+    "tracks": [
+        {
+            "id": 0,
+            "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1)",
+            "artist": "324",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/albums/23/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1).mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/324/albums/23/cover.jpg",
+            "plays": 0
+        }
+    ]
 }
