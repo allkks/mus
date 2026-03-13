@@ -21,6 +21,28 @@
                     "year": "2025"
                 }
             ]
+        },
+        "цф": {
+            "name": "цф",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/artist.jpg",
+            "bio": "",
+            "tracks": [
+                {
+                    "id": 1,
+                    "title": "www",
+                    "artist": "цф",
+                    "album": "333",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/www.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg"
+                }
+            ],
+            "albums": [
+                {
+                    "title": "333",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg",
+                    "year": "2025"
+                }
+            ]
         }
     },
     "tracks": [
@@ -31,6 +53,14 @@
             "album": "лох2",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/korol-i-shut-prygnu-so-skaly.mp3",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
+        },
+        {
+            "id": 1,
+            "title": "www",
+            "artist": "цф",
+            "album": "333",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/www.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg"
         }
     ]
 }
