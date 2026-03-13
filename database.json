@@ -328,22 +328,6 @@
                     "year": "2009"
                 }
             ]
-        },
-        "гном": {
-            "name": "гном",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гном/artist.jpg",
-            "bio": "",
-            "tracks": [
-                {
-                    "id": 37,
-                    "title": "01 Интро",
-                    "artist": "гном",
-                    "album": "Single",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гном/singles/01 Интро.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гном/artist.jpg"
-                }
-            ],
-            "albums": []
         }
     },
     "tracks": [
@@ -642,14 +626,6 @@
             "album": "Дома",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/17 Аутро.flac",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
-        },
-        {
-            "id": 37,
-            "title": "01 Интро",
-            "artist": "гном",
-            "album": "Single",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гном/singles/01 Интро.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гном/artist.jpg"
         }
     ]
 }
