@@ -3,6 +3,7 @@
         "лох": {
             "name": "лох",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/artist.jpg",
+            "bio": "",
             "tracks": [
                 {
                     "id": 0,
@@ -10,14 +11,14 @@
                     "artist": "лох",
                     "album": "лох2",
                     "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/korol-i-shut-prygnu-so-skaly.mp3",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg",
-                    "plays": 0
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
                 }
             ],
             "albums": [
                 {
                     "title": "лох2",
-                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg",
+                    "year": "2025"
                 }
             ]
         }
@@ -29,8 +30,7 @@
             "artist": "лох",
             "album": "лох2",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/korol-i-shut-prygnu-so-skaly.mp3",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg",
-            "plays": 0
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
         }
     ]
 }
