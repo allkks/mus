@@ -1,34 +1,12 @@
 {
     "artists": {
-        "лох": {
-            "name": "лох",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/artist.jpg",
-            "bio": "",
-            "tracks": [
-                {
-                    "id": 0,
-                    "title": "korol-i-shut-prygnu-so-skaly",
-                    "artist": "лох",
-                    "album": "лох2",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/korol-i-shut-prygnu-so-skaly.mp3",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
-                }
-            ],
-            "albums": [
-                {
-                    "title": "лох2",
-                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg",
-                    "year": "2025"
-                }
-            ]
-        },
         "цф": {
             "name": "цф",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/artist.jpg",
             "bio": "",
             "tracks": [
                 {
-                    "id": 1,
+                    "id": 0,
                     "title": "www",
                     "artist": "цф",
                     "album": "333",
@@ -48,14 +26,6 @@
     "tracks": [
         {
             "id": 0,
-            "title": "korol-i-shut-prygnu-so-skaly",
-            "artist": "лох",
-            "album": "лох2",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/korol-i-shut-prygnu-so-skaly.mp3",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/лох/albums/лох2/cover.jpg"
-        },
-        {
-            "id": 1,
             "title": "www",
             "artist": "цф",
             "album": "333",
