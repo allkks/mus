@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MUS.LIB — Premium Player</title>
+    <title>MUS.LIB — Твоя музыка</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,53 +11,54 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { bg: '#050505', accent: '#ffcc00', surface: '#121212', text: '#f0f0f0', dim: '#aaaaaa' },
+                    colors: { 
+                        bg: '#0A090C', 
+                        accent: '#8A2BE2', // Фиолетовый акцент
+                        surface: '#16141A', 
+                        text: '#FFFFFF', 
+                        dim: '#94A3B8' 
+                    },
                     fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #050505; color: #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
+        body { background-color: #0A090C; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .glass { background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.08); }
-        .hero-bg { background: linear-gradient(180deg, transparent 20%, rgba(5,5,5,1) 90%); }
+        .glass { background: rgba(22, 20, 26, 0.8); backdrop-filter: blur(40px); border-top: 1px solid rgba(138, 43, 226, 0.2); }
+        .hero-bg { background: linear-gradient(180deg, transparent 20%, rgba(10, 9, 12, 1) 95%); }
         .story-card { transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
-        .story-card:hover { transform: scale(1.05) translateY(-5px); }
-        .track-hover:hover { background-color: #1a1a1a; transform: translateX(5px); }
+        .story-card:hover { transform: scale(1.05) translateY(-5px); border-color: #8A2BE2; }
+        .track-hover:hover { background-color: #1e1b24; transform: translateX(5px); }
         .hero-name { font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; letter-spacing: -4px; line-height: 0.9; }
-        #player-progress { box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); }
+        #player-progress { box-shadow: 0 0 15px rgba(138, 43, 226, 0.6); }
         .modal-active { transform: translateY(0) !important; }
     </style>
 </head>
 <body>
     <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-32">
         
-        <!-- HOME PAGE -->
         <section id="page-home" class="page p-6 pt-20">
-            <!-- BANNER -->
             <div onclick="playRandom()" class="relative h-72 rounded-[2.5rem] overflow-hidden mb-12 cursor-pointer group shadow-2xl">
-                <div class="absolute inset-0 bg-gradient-to-br from-accent via-orange-500 to-red-600 opacity-90 transition-all group-hover:scale-105"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-accent via-purple-900 to-indigo-900 opacity-90 transition-all group-hover:scale-105"></div>
                 <div class="absolute inset-0 flex flex-col justify-end p-10 z-10">
-                    <div class="bg-black/20 backdrop-blur-md w-fit px-4 py-1 rounded-full text-[10px] font-black tracking-widest mb-4">MY WAVE</div>
-                    <h2 class="text-5xl font-black italic tracking-tighter text-black leading-none">Твой поток</h2>
-                    <p class="text-black/60 font-bold mt-2 text-lg">Бесконечная музыка на основе твоих вкусов</p>
+                    <div class="bg-white/10 backdrop-blur-md w-fit px-4 py-1 rounded-full text-[10px] font-black tracking-widest mb-4">МОЯ ВОЛНА</div>
+                    <h2 class="text-5xl font-black italic tracking-tighter text-white leading-none">Слушай лучшее</h2>
+                    <p class="text-white/70 font-bold mt-2 text-lg">Персональный поток музыки специально для тебя</p>
                 </div>
                 <div class="absolute bottom-10 right-10 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
                     <i data-lucide="play" class="fill-black text-black ml-1"></i>
                 </div>
             </div>
 
-            <!-- ARTISTS STORIES -->
-            <h2 class="text-xl font-black mb-6 uppercase tracking-widest text-dim">Артисты</h2>
+            <h2 class="text-xl font-black mb-6 uppercase tracking-widest text-dim">Твои артисты</h2>
             <div id="home-artists" class="flex gap-5 overflow-x-auto pb-6 no-scrollbar snap-x"></div>
 
-            <!-- TRENDING -->
-            <h2 class="text-xl font-black mb-6 mt-10 uppercase tracking-widest text-dim">В тренде</h2>
+            <h2 class="text-xl font-black mb-6 mt-10 uppercase tracking-widest text-dim">Сейчас в тренде</h2>
             <div id="home-trending" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
         </section>
 
-        <!-- ARTIST PAGE -->
         <section id="page-artist" class="page hidden">
             <div class="relative h-[65vh] w-full">
                 <img id="artist-view-img" class="w-full h-full object-cover">
@@ -74,19 +75,18 @@
                 <h2 class="text-3xl font-black mb-8 italic tracking-tight">Популярные треки</h2>
                 <div id="artist-view-tracks" class="space-y-2 mb-16"></div>
 
-                <h2 class="text-3xl font-black mb-8 italic tracking-tight">Релизы</h2>
+                <h2 class="text-3xl font-black mb-8 italic tracking-tight">Все релизы</h2>
                 <div id="artist-view-albums" class="flex gap-8 overflow-x-auto pb-10 no-scrollbar"></div>
             </div>
         </section>
     </main>
 
-    <!-- MINI PLAYER -->
     <div id="player" onclick="openImmersivePlayer()" class="glass fixed bottom-4 left-4 right-4 rounded-[2rem] p-4 z-[100] cursor-pointer shadow-2xl border border-white/5">
         <div class="flex items-center gap-4">
             <img id="p-img" class="w-14 h-14 rounded-2xl object-cover">
             <div class="flex-1 overflow-hidden">
-                <div id="p-title" class="font-bold truncate text-sm">---</div>
-                <div id="p-artist" class="text-dim text-[11px] font-bold uppercase tracking-widest">---</div>
+                <div id="p-title" class="font-bold truncate text-sm">Выберите трек</div>
+                <div id="p-artist" class="text-dim text-[11px] font-bold uppercase tracking-widest">MUS.LIB</div>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="event.stopImmediatePropagation(); togglePlay()" class="w-12 h-12 bg-white text-black rounded-2xl flex items-center justify-center"><i id="p-play-icon" data-lucide="play" class="fill-current"></i></button>
@@ -98,12 +98,11 @@
         </div>
     </div>
 
-    <!-- IMMERSIVE PLAYER (iOS Style) -->
     <div id="immersive-player" class="fixed inset-0 bg-bg z-[200] transition-transform duration-500 translate-y-full flex flex-col p-8 pt-20">
         <button onclick="closeImmersivePlayer()" class="absolute top-8 left-8 text-dim"><i data-lucide="chevron-down" class="w-10 h-10"></i></button>
         <div class="flex-1 flex flex-col items-center justify-center">
-            <img id="imm-img" class="w-full max-w-sm aspect-square rounded-[3rem] shadow-[0_40px_80px_rgba(0,0,0,0.8)] object-cover mb-12">
-            <div class="w-full max-w-sm">
+            <img id="imm-img" class="w-full max-w-sm aspect-square rounded-[3rem] shadow-[0_40px_80px_rgba(138,43,226,0.3)] object-cover mb-12 border border-white/10">
+            <div class="w-full max-w-sm text-center">
                 <h1 id="imm-title" class="text-3xl font-black tracking-tighter mb-2">---</h1>
                 <p id="imm-artist" class="text-accent text-xl font-bold italic">---</p>
             </div>
@@ -117,11 +116,10 @@
         </div>
     </div>
 
-    <!-- LOADER -->
     <div id="main-loader" class="fixed inset-0 z-[300] bg-bg flex items-center justify-center">
         <div class="text-center">
             <div class="w-12 h-12 border-4 border-accent border-t-transparent animate-spin rounded-full mb-4 mx-auto"></div>
-            <div class="text-[10px] font-black tracking-[0.5em] text-accent uppercase">MUS.LIB</div>
+            <div class="text-[10px] font-black tracking-[0.5em] text-accent uppercase">Загрузка медиатеки</div>
         </div>
     </div>
 
@@ -181,7 +179,7 @@
                 <div onclick='playTrack(${t.id}, db.artists["${name}"].tracks)' class="track-hover flex items-center gap-6 p-4 rounded-[1.5rem] cursor-pointer">
                     <div class="text-dim opacity-30 font-black font-mono">${i+1}</div>
                     <div class="flex-1 font-bold text-lg">${t.title}</div>
-                    <i data-lucide="play" class="w-5 h-5 text-accent opacity-0 group-hover:opacity-100"></i>
+                    <i data-lucide="play" class="w-5 h-5 text-accent opacity-100"></i>
                 </div>`).join('');
 
             document.getElementById('artist-view-albums').innerHTML = (artist.albums || []).map(alb => `
@@ -190,7 +188,7 @@
                         <img src="${alb.cover}" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center font-black text-lg italic tracking-tighter truncate">${alb.title}</div>
-                    <div class="text-center text-[10px] text-dim font-bold">${alb.year || '2025'}</div>
+                    <div class="text-center text-[10px] text-dim font-bold">${alb.year || '2026'}</div>
                 </div>`).join('');
             
             navTo('artist'); lucide.createIcons();
