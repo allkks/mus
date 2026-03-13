@@ -1,41 +1,24 @@
 {
     "artists": [
         {
-            "id": "4f56775c",
-            "name": "None",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/None/artist.jpg"
+            "id": "ca954e",
+            "name": "333",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/333/artist.jpg"
         },
         {
-            "id": "64577c56",
+            "id": "5accb1",
             "name": "гуф",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg"
         }
     ],
-    "albums": [
-        {
-            "id": "b578eeec",
-            "artist": "None",
-            "title": "1234",
-            "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/None/albums/1234/cover.jpg"
-        }
-    ],
+    "albums": [],
     "tracks": [
         {
-            "id": "fe3fd7fc",
+            "id": "b484d3",
             "title": "korol-i-shut-prygnu-so-skaly",
-            "artist": "None",
-            "artistId": "4f56775c",
-            "album": "Single",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/None/singles/korol-i-shut-prygnu-so-skaly.mp3",
-            "plays": 0
-        },
-        {
-            "id": "4ea1fa16",
-            "title": "79061786277_in_79128719581_2025_09_18-12_24_20_3rqm (1)",
-            "artist": "None",
-            "artistId": "4f56775c",
-            "album": "1234",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/None/albums/1234/79061786277_in_79128719581_2025_09_18-12_24_20_3rqm%20(1).mp3",
+            "artist": "гуф",
+            "album": "Сингл",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/singles/korol-i-shut-prygnu-so-skaly.mp3",
             "plays": 0
         }
     ]
