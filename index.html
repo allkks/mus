@@ -11,681 +11,248 @@
         tailwind.config = { 
             theme: { 
                 extend: { 
-                    colors: { 
-                        brand: '#ffcc00', 
-                        surface: '#121212', 
-                        accent: '#1e1e1e',
-                        'glass': 'rgba(255, 255, 255, 0.05)'
-                    }, 
-                    fontFamily: { 
-                        sans: ['Plus Jakarta Sans', 'sans-serif'] 
-                    } 
+                    colors: { brand: '#ffcc00', surface: '#121212', accent: '#1e1e1e' }, 
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } 
                 } 
             } 
         }
     </script>
     <style>
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            -webkit-tap-highlight-color: transparent; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        body { background-color: #000; color: #fff; -webkit-tap-highlight-color: transparent; font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .glass-nav { 
-            background: rgba(10, 10, 10, 0.85); 
-            backdrop-filter: blur(32px); 
-            -webkit-backdrop-filter: blur(32px); 
-            border-top: 1px solid rgba(255, 255, 255, 0.08); 
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-        }
-        .hero-gradient {
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 70%);
-        }
-        .track-item {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .track-item:hover {
-            transform: translateX(8px);
-            background-color: rgba(255, 204, 0, 0.1) !important;
-        }
-        .album-card {
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-        .album-card:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-        .tab-active {
-            color: #ffcc00;
-            border-bottom: 3px solid #ffcc00;
-        }
-        .wave-bg {
-            background: linear-gradient(135deg, #ffcc00, #f97316);
-        }
-        .progress-glow {
-            box-shadow: 0 0 20px #ffcc00;
-        }
+        .glass-nav { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+        .hero-gradient { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%); }
+        .track-item:hover { transform: translateX(8px); background-color: rgba(255, 204, 0, 0.1) !important; }
+        .pb-safe { padding-bottom: 12rem; }
+        .progress-glow { box-shadow: 0 0 15px #ffcc00; }
     </style>
 </head>
 <body class="overflow-hidden">
-    <!-- MAIN SCROLL CONTAINER -->
-    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-32">
+
+    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-safe">
         
         <!-- HOME PAGE -->
-        <section id="page-home" class="page min-h-screen p-6 pt-20 pb-24">
-            <!-- MY WAVE BANNER -->
-            <div id="wave-banner" onclick="playWave()" 
-                 class="relative h-80 rounded-3xl overflow-hidden mb-10 cursor-pointer group">
-                <div class="absolute inset-0 bg-gradient-to-br from-brand via-orange-500 to-purple-600 opacity-90"></div>
-                <img id="wave-img" src="https://picsum.photos/id/1015/800/600" 
-                     class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 group-hover:opacity-60 transition-all">
-                <div class="absolute inset-0 flex flex-col justify-end p-8 hero-gradient">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-white rounded-2xl flex items-center justify-center">
-                            <i data-lucide="waves" class="w-5 h-5 text-black"></i>
-                        </div>
-                        <span class="text-xs font-bold tracking-[3px] uppercase text-white/80">МУЗЫКА ДЛЯ ТЕБЯ</span>
-                    </div>
-                    <h2 class="text-5xl font-black italic tracking-tighter leading-none mb-2">Моя волна</h2>
-                    <p class="text-xl text-white/70 font-medium">Идеальный микс для твоего настроения</p>
-                    <button onclick="event.stopImmediatePropagation(); playWave()" 
-                            class="mt-6 bg-white text-black font-bold text-lg px-10 py-4 rounded-3xl flex items-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95">
-                        <i data-lucide="play" class="w-6 h-6"></i>
-                        Слушать сейчас
-                    </button>
+        <section id="page-home" class="page p-6 pt-20">
+            <!-- BANNER -->
+            <div onclick="playWave()" class="relative h-64 rounded-3xl overflow-hidden mb-10 cursor-pointer group shadow-2xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-brand to-orange-600 opacity-90"></div>
+                <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
+                    <h2 class="text-4xl font-black italic tracking-tighter mb-1 text-black">Моя волна</h2>
+                    <p class="text-black/70 font-bold">Слушай лучшее из своей библиотеки</p>
                 </div>
             </div>
 
-            <!-- POPULAR ARTISTS -->
+            <!-- ARTISTS -->
             <div class="mb-12">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold flex items-center gap-3">
-                        <span class="inline-block w-2 h-6 bg-brand rounded"></span>
-                        Артисты
-                    </h2>
-                    <button onclick="navTo('library')" 
-                            class="text-brand text-sm font-semibold flex items-center gap-1 hover:underline">
-                        Все <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                    </button>
-                </div>
+                <h2 class="text-2xl font-bold mb-6">Артисты</h2>
                 <div id="home-artists" class="grid grid-cols-3 md:grid-cols-6 gap-6"></div>
             </div>
 
-            <!-- CHART / NEW RELEASES -->
+            <!-- NEW TRACKS -->
             <div>
-                <h2 class="text-2xl font-bold flex items-center gap-3 mb-6">
-                    <span class="inline-block w-2 h-6 bg-brand rounded"></span>
-                    Новинки
-                </h2>
-                <div id="home-tracks" class="space-y-3"></div>
+                <h2 class="text-2xl font-bold mb-6">Недавние треки</h2>
+                <div id="home-tracks" class="space-y-2"></div>
             </div>
-        </section>
-
-        <!-- SEARCH PAGE -->
-        <section id="page-search" class="page hidden min-h-screen p-6 pt-20 pb-24">
-            <div class="sticky top-0 z-30 bg-black/90 backdrop-blur-xl py-4 -mx-6 px-6 border-b border-white/10">
-                <div class="relative">
-                    <div class="absolute left-4 top-3 text-gray-400">
-                        <i data-lucide="search" class="w-5 h-5"></i>
-                    </div>
-                    <input id="search-input" 
-                           onkeyup="handleSearch(this.value)"
-                           type="text" 
-                           placeholder="Поиск по трекам и артистам..." 
-                           class="w-full bg-white/5 border border-white/10 rounded-3xl py-4 pl-12 pr-6 text-lg focus:outline-none focus:border-brand transition-colors placeholder:text-gray-400">
-                </div>
-            </div>
-            
-            <div id="search-results" class="mt-8 space-y-12"></div>
-        </section>
-
-        <!-- LIBRARY PAGE (All Artists) -->
-        <section id="page-library" class="page hidden min-h-screen p-6 pt-20 pb-24">
-            <h1 class="text-4xl font-black italic mb-10">Библиотека</h1>
-            <div id="library-artists" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
         </section>
 
         <!-- ARTIST PAGE -->
         <section id="page-artist" class="page hidden">
-            <!-- HERO -->
-            <div class="relative h-[58vh] w-full overflow-hidden">
-                <img id="artist-view-img" 
-                     class="absolute inset-0 w-full h-full object-cover scale-110">
+            <div class="relative h-[50vh] w-full">
+                <img id="artist-view-img" class="w-full h-full object-cover">
                 <div class="absolute inset-0 hero-gradient"></div>
-                
-                <!-- BACK BUTTON -->
-                <button onclick="navTo('home')" 
-                        class="absolute top-6 left-6 w-11 h-11 bg-black/60 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/10 hover:bg-white/10 transition-all active:scale-95 z-10">
-                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                <button onclick="navTo('home')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-md border border-white/10">
+                    <i data-lucide="arrow-left"></i>
                 </button>
-                
-                <!-- ARTIST INFO OVERLAY -->
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <div class="flex items-end gap-6">
-                        <div id="artist-avatar" 
-                             class="w-28 h-28 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl flex-shrink-0">
-                            <!-- Dynamic in JS -->
-                        </div>
-                        <div class="flex-1 pb-2">
-                            <div class="uppercase text-[10px] tracking-[2px] font-bold text-brand mb-1">АРТИСТ</div>
-                            <h1 id="artist-view-name" 
-                                class="text-6xl md:text-7xl font-black italic tracking-[-2px] leading-none drop-shadow-2xl"></h1>
-                        </div>
-                    </div>
+                <div class="absolute bottom-10 left-8">
+                    <h1 id="artist-view-name" class="text-6xl md:text-8xl font-black italic tracking-tighter"></h1>
                 </div>
             </div>
 
-            <!-- CONTENT -->
-            <div class="p-6 -mt-8 relative z-10">
-                <!-- PLAY ALL BUTTON -->
-                <button onclick="playArtistAll()" 
-                        class="w-full bg-brand hover:bg-amber-400 active:scale-[0.98] text-black font-bold text-xl py-6 rounded-3xl flex items-center justify-center gap-4 shadow-xl transition-all mb-12">
-                    <i data-lucide="play" class="w-7 h-7"></i>
-                    СЛУШАТЬ ВСЁ
+            <div class="p-8">
+                <button onclick="playArtistAll()" class="w-full bg-brand text-black font-black py-5 rounded-2xl mb-12 flex items-center justify-center gap-3 active:scale-95 transition-transform">
+                    <i data-lucide="play" class="fill-current"></i> СЛУШАТЬ ВСЁ
                 </button>
 
-                <!-- TRACKS -->
-                <div class="mb-14">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-bold flex items-center gap-2">
-                            <span class="text-brand">★</span> Популярные треки
-                        </h2>
-                        <div class="text-xs font-mono text-gray-400">• • •</div>
-                    </div>
-                    <div id="artist-view-tracks" class="space-y-3"></div>
-                </div>
+                <h2 class="text-2xl font-bold mb-6 italic">★ Треки</h2>
+                <div id="artist-view-tracks" class="space-y-2 mb-14"></div>
 
-                <!-- ALBUMS -->
-                <div>
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-bold flex items-center gap-2">
-                            <span class="text-brand">📀</span> Альбомы
-                        </h2>
-                    </div>
-                    <div id="artist-view-albums" 
-                         class="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar">
-                        <!-- Populated in JS -->
-                    </div>
-                </div>
+                <h2 class="text-2xl font-bold mb-6 italic">📀 Альбомы</h2>
+                <div id="artist-view-albums" class="flex gap-6 overflow-x-auto no-scrollbar pb-4"></div>
             </div>
         </section>
     </main>
 
-    <!-- BOTTOM PLAYER -->
-    <div id="player" class="fixed bottom-0 left-0 right-0 glass-nav z-50 px-4 pt-3 pb-6">
-        <!-- PROGRESS BAR (ABOVE) -->
-        <div class="h-0.5 bg-white/10 rounded-full overflow-hidden mb-4 mx-1">
-            <div id="player-progress" 
-                 class="h-full bg-gradient-to-r from-brand to-amber-300 w-0 transition-all duration-150 progress-glow"></div>
+    <!-- PLAYER -->
+    <div class="fixed bottom-0 left-0 right-0 glass-nav z-50 p-4 pb-10">
+        <div class="h-1 bg-white/5 rounded-full overflow-hidden mb-4 mx-2">
+            <div id="player-progress" class="h-full bg-brand progress-glow w-0"></div>
         </div>
-        
-        <div class="flex items-center gap-4">
-            <!-- COVER -->
-            <div onclick="showCurrentArtist()" 
-                 class="w-14 h-14 bg-accent rounded-2xl overflow-hidden cursor-pointer ring-1 ring-white/10 flex-shrink-0">
-                <img id="p-img" class="w-full h-full object-cover" src="">
+        <div class="flex items-center justify-between gap-4 px-2">
+            <div class="flex items-center gap-3 flex-1 truncate">
+                <img id="p-img" class="w-14 h-14 rounded-xl object-cover bg-accent shadow-lg">
+                <div class="truncate">
+                    <div id="p-title" class="font-bold text-base truncate">Музыка</div>
+                    <div id="p-artist" class="text-xs text-gray-400 truncate">Выберите трек</div>
+                </div>
             </div>
-            
-            <!-- INFO -->
-            <div class="flex-1 min-w-0">
-                <div id="p-title" onclick="showCurrentArtist()" 
-                     class="font-bold text-base leading-tight truncate cursor-pointer hover:text-brand transition-colors"></div>
-                <div id="p-artist" onclick="showCurrentArtist()" 
-                     class="text-xs text-gray-400 truncate cursor-pointer hover:text-white/80"></div>
-            </div>
-            
-            <!-- CONTROLS -->
-            <div class="flex items-center gap-1">
-                <button onclick="prevTrack()" 
-                        class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors">
-                    <i data-lucide="skip-back" class="w-6 h-6"></i>
+            <div class="flex items-center gap-6">
+                <button onclick="togglePlay()" class="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center active:scale-90 transition-transform">
+                    <i id="p-play-icon" data-lucide="play" class="fill-current w-8 h-8 ml-1"></i>
                 </button>
-                
-                <button onclick="togglePlay()" 
-                        id="play-btn"
-                        class="w-14 h-14 bg-white text-black rounded-3xl flex items-center justify-center shadow-xl active:scale-95 transition-all">
-                    <i id="p-play-icon" data-lucide="play" class="w-7 h-7"></i>
-                </button>
-                
-                <button onclick="nextTrack()" 
-                        class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors">
-                    <i data-lucide="skip-forward" class="w-6 h-6"></i>
-                </button>
+                <button onclick="nextTrack()" class="text-white/80 hover:text-white"><i data-lucide="skip-forward"></i></button>
             </div>
         </div>
-    </div>
-
-    <!-- BOTTOM TAB BAR -->
-    <div class="fixed bottom-0 left-0 right-0 h-16 glass-nav border-t border-white/10 z-40 flex items-center justify-around text-xs font-medium">
-        <button onclick="navTo('home')" id="tab-home"
-                class="flex flex-col items-center gap-1 text-white/70 hover:text-white tab-active">
-            <i data-lucide="home" class="w-6 h-6"></i>
-            <span>Главная</span>
-        </button>
-        <button onclick="navTo('search')" id="tab-search"
-                class="flex flex-col items-center gap-1 text-white/70 hover:text-white">
-            <i data-lucide="search" class="w-6 h-6"></i>
-            <span>Поиск</span>
-        </button>
-        <button onclick="navTo('library')" id="tab-library"
-                class="flex flex-col items-center gap-1 text-white/70 hover:text-white">
-            <i data-lucide="library" class="w-6 h-6"></i>
-            <span>Библиотека</span>
-        </button>
     </div>
 
     <!-- LOADER -->
-    <div id="main-loader" class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center">
-        <div class="flex flex-col items-center">
-            <div class="w-14 h-14 border-4 border-brand border-t-transparent animate-spin rounded-full mb-6"></div>
-            <div class="text-brand text-sm font-mono tracking-widest">ЗАГРУЗКА БИБЛИОТЕКИ</div>
-        </div>
+    <div id="main-loader" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center">
+        <div class="w-12 h-12 border-4 border-brand border-t-transparent animate-spin rounded-full mb-4"></div>
+        <div class="text-brand font-black tracking-widest text-xs uppercase italic">MUS.LIB LOADING</div>
     </div>
 
-    <audio id="audio-engine" class="hidden"></audio>
+    <audio id="audio-engine"></audio>
 
     <script>
-        // === CONFIG ===
         const REPO = "allkks/mus";
         let db = { tracks: [], artists: {} };
         let currentPlaylist = [];
         let currentIndex = -1;
-        let currentArtistName = null;
-        let isPlaying = false;
+        let activeArtist = null;
         const audio = document.getElementById('audio-engine');
 
-        // === INIT ===
-        window.onload = async () => {
-            lucide.createIcons();
-            await loadApp();
-        };
+        window.onload = async () => { lucide.createIcons(); await loadApp(); };
 
         async function loadApp() {
             try {
                 const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/database.json?v=${Date.now()}`);
-                if (!res.ok) throw new Error('DB not found');
                 db = await res.json();
-                
-                // Ensure tracks have unique IDs if needed
-                db.tracks.forEach((t, i) => t.id = i);
-                
                 renderHome();
-                renderLibrary();
                 document.getElementById('main-loader').style.display = 'none';
-            } catch (e) {
-                console.error('Failed to load DB:', e);
-                document.getElementById('main-loader').innerHTML = `
-                    <div class="text-red-400 text-center">
-                        <div class="text-6xl mb-4">⚠️</div>
-                        <div>Ошибка загрузки библиотеки</div>
-                        <div class="text-xs mt-2 opacity-60">Проверьте подключение</div>
-                    </div>
-                `;
-            }
+            } catch (e) { console.error(e); }
         }
 
-        // === RENDER HOME ===
         function renderHome() {
-            // Wave banner - use most popular artist
-            const popularArtist = Object.values(db.artists)
-                .sort((a, b) => b.tracks.length - a.tracks.length)[0];
-            if (popularArtist) {
-                document.getElementById('wave-img').src = popularArtist.img || 
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(popularArtist.name)}&background=111&color=fff&size=512`;
-            }
-
-            // Artists
-            const sortedArtists = Object.values(db.artists)
-                .sort((a, b) => b.tracks.length - a.tracks.length)
-                .slice(0, 12);
-            
-            document.getElementById('home-artists').innerHTML = sortedArtists.map(a => `
-                <div onclick="openArtist('${a.name}')" 
-                     class="group cursor-pointer">
-                    <div class="aspect-square rounded-full overflow-hidden border-4 border-transparent group-hover:border-brand transition-all relative">
-                        <img src="${a.img}" 
-                             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=222&color=fff&size=300'" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+            const artists = Object.values(db.artists);
+            document.getElementById('home-artists').innerHTML = artists.map(a => `
+                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="text-center cursor-pointer group">
+                    <div class="aspect-square rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-brand transition-all shadow-xl">
+                        <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff'" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
                     </div>
-                    <p class="text-xs font-bold uppercase tracking-wider text-center mt-3 text-white/80 group-hover:text-white">${a.name}</p>
+                    <p class="text-[10px] font-bold uppercase truncate">${a.name}</p>
                 </div>
             `).join('');
 
-            // New tracks (recent by ID)
-            const recentTracks = [...db.tracks]
-                .sort((a, b) => b.id - a.id)
-                .slice(0, 12);
-            
-            document.getElementById('home-tracks').innerHTML = recentTracks.map(t => createTrackItem(t, db.tracks)).join('');
-            
+            document.getElementById('home-tracks').innerHTML = db.tracks.slice(0, 15).map(t => createTrackItem(t, db.tracks)).join('');
             lucide.createIcons();
         }
 
-        function renderLibrary() {
-            const artists = Object.values(db.artists)
-                .sort((a, b) => a.name.localeCompare(b.name));
-            
-            document.getElementById('library-artists').innerHTML = artists.map(a => `
-                <div onclick="openArtist('${a.name}')" 
-                     class="group bg-white/5 rounded-3xl overflow-hidden cursor-pointer">
-                    <div class="relative">
-                        <img src="${a.img}" 
-                             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=111&color=fff'" 
-                             class="w-full aspect-[4/3] object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/90 to-transparent"></div>
-                    </div>
-                    <div class="p-4">
-                        <div class="font-bold text-lg">${a.name}</div>
-                        <div class="text-xs text-gray-400">${a.tracks.length} треков</div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // === TRACK ITEM ===
         function createTrackItem(t, playlist) {
-            const playlistStr = JSON.stringify(playlist).replace(/"/g, '&quot;');
+            // Чтобы не передавать огромный JSON в атрибут onclick, мы просто передаем ID и имя артиста (если нужно)
             return `
-                <div onclick="playTrack(${t.id}, ${playlistStr})" 
-                     class="track-item flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-3xl cursor-pointer group">
-                    <div class="relative w-14 h-14 flex-shrink-0">
-                        <img src="${t.img}" 
-                             onerror="this.src='https://picsum.photos/id/${t.id % 100 + 10}/300/300'" 
-                             class="w-full h-full object-cover rounded-2xl">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all rounded-2xl">
-                            <i data-lucide="play" class="w-6 h-6 text-white"></i>
+                <div onclick='playFromPlaylist(${t.id}, "${t.artist.replace(/'/g, "\\'")}")' class="track-item flex items-center justify-between p-3 bg-white/5 rounded-2xl hover:bg-white/10 cursor-pointer transition-all group">
+                    <div class="flex items-center gap-4 overflow-hidden">
+                        <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover shadow-lg">
+                        <div class="truncate">
+                            <div class="font-bold text-sm truncate group-hover:text-brand transition-colors">${t.title}</div>
+                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${t.artist} • ${t.album || 'Single'}</div>
                         </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="font-semibold text-base leading-tight truncate group-hover:text-brand">${t.title}</div>
-                        <div class="text-sm text-gray-400 truncate">${t.artist}</div>
-                    </div>
-                    <div class="text-xs font-mono text-gray-400">${t.album}</div>
+                    <i data-lucide="play" class="w-4 h-4 text-brand fill-current opacity-0 group-hover:opacity-100 transition-all"></i>
                 </div>
             `;
         }
 
-        // === SEARCH ===
-        let searchTimeout;
-        function handleSearch(query) {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                renderSearch(query.trim());
-            }, 180);
-        }
-
-        function renderSearch(query) {
-            const container = document.getElementById('search-results');
-            if (!query) {
-                container.innerHTML = `
-                    <div class="text-center py-20 text-gray-400">
-                        <i data-lucide="search" class="w-16 h-16 mx-auto mb-6 opacity-30"></i>
-                        <div class="text-xl">Начните поиск</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            const q = query.toLowerCase();
-            
-            // Artists
-            const artists = Object.values(db.artists).filter(a => 
-                a.name.toLowerCase().includes(q)
-            );
-            
-            // Tracks
-            const tracks = db.tracks.filter(t => 
-                t.title.toLowerCase().includes(q) || 
-                t.artist.toLowerCase().includes(q)
-            );
-            
-            let html = '';
-            
-            if (artists.length) {
-                html += `
-                    <div>
-                        <div class="uppercase text-xs font-bold tracking-widest text-gray-400 mb-4">АРТИСТЫ</div>
-                        <div class="grid grid-cols-2 gap-4">
-                            ${artists.map(a => `
-                                <div onclick="openArtist('${a.name}'); navTo('artist')" 
-                                     class="glass-card p-3 rounded-3xl flex items-center gap-4 cursor-pointer hover:ring-2 hover:ring-brand/50">
-                                    <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=222&color=fff'" 
-                                         class="w-14 h-14 rounded-2xl object-cover">
-                                    <div>
-                                        <div class="font-semibold">${a.name}</div>
-                                        <div class="text-xs text-gray-400">${a.tracks.length} треков</div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            if (tracks.length) {
-                html += `
-                    <div class="mt-12">
-                        <div class="uppercase text-xs font-bold tracking-widest text-gray-400 mb-4">ТРЕКИ</div>
-                        <div class="space-y-2">
-                            ${tracks.map(t => createTrackItem(t, db.tracks)).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            if (!html) {
-                html = `<div class="text-center py-24 text-gray-400">Ничего не найдено по запросу «${query}»</div>`;
-            }
-            
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
-        // === OPEN ARTIST ===
         function openArtist(name) {
-            currentArtistName = name;
             const artist = db.artists[name];
             if (!artist) return;
-            
-            // Hero image
+            activeArtist = artist;
+
+            document.getElementById('artist-view-name').innerText = artist.name;
             document.getElementById('artist-view-img').src = artist.img;
             
-            // Name
-            document.getElementById('artist-view-name').innerText = artist.name;
+            // Рендер треков
+            document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map(t => createTrackItem(t, artist.tracks)).join('');
             
-            // Avatar in hero
-            const avatarHTML = `
-                <img src="${artist.img}" 
-                     onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(artist.name)}&background=111&color=fff'" 
-                     class="w-full h-full object-cover">
-            `;
-            document.getElementById('artist-avatar').innerHTML = avatarHTML;
-            
-            // Tracks
-            document.getElementById('artist-view-tracks').innerHTML = 
-                artist.tracks.map(t => createTrackItem(t, artist.tracks)).join('');
-            
-            // Albums - HORIZONTAL SCROLL
-            const albumsHTML = (artist.albums || []).map(alb => {
-                const albumTracks = artist.tracks.filter(t => t.album === alb.title);
-                if (!albumTracks.length) return '';
-                
-                return `
-                    <div onclick="playAlbum('${alb.title}')" 
-                         class="album-card flex-shrink-0 w-40 cursor-pointer snap-center">
-                        <div class="relative">
-                            <img src="${alb.cover}" 
-                                 onerror="this.src='https://picsum.photos/id/870/400/400'" 
-                                 class="w-full aspect-square object-cover rounded-3xl shadow-xl">
-                            <div class="absolute bottom-3 right-3 bg-black/70 text-[10px] font-mono px-2.5 py-1 rounded-full">
-                                ${albumTracks.length}
-                            </div>
+            // Рендер альбомов
+            const albContainer = document.getElementById('artist-view-albums');
+            if (artist.albums && artist.albums.length > 0) {
+                albContainer.innerHTML = artist.albums.map(alb => `
+                    <div onclick="playAlbum('${artist.name.replace(/'/g, "\\'")}', '${alb.title.replace(/'/g, "\\'")}')" class="flex-shrink-0 w-40 group cursor-pointer">
+                        <div class="aspect-square rounded-3xl overflow-hidden mb-3 border border-white/10 group-hover:border-brand transition-all shadow-xl">
+                            <img src="${alb.cover}" onerror="this.src='https://ui-avatars.com/api/?name=A&background=222&color=fff'" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
                         </div>
-                        <div class="mt-3 font-semibold text-sm leading-tight">${alb.title}</div>
+                        <p class="font-bold text-sm truncate group-hover:text-brand transition-colors">${alb.title}</p>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Альбом</p>
                     </div>
-                `;
-            }).join('');
-            
-            document.getElementById('artist-view-albums').innerHTML = albumsHTML || `
-                <div class="text-gray-400 text-sm italic">Альбомов пока нет</div>
-            `;
-            
+                `).join('');
+            } else {
+                albContainer.innerHTML = `<p class="text-gray-500 text-sm italic ml-2">Альбомов пока нет</p>`;
+            }
+
             navTo('artist');
             lucide.createIcons();
         }
 
-        // === PLAY ALBUM ===
-        function playAlbum(albumTitle) {
-            const artist = db.artists[currentArtistName];
-            if (!artist) return;
-            
+        function playFromPlaylist(trackId, artistName) {
+            // Если артист передан, берем его плейлист, иначе общий чарт
+            const playlist = artistName && db.artists[artistName] ? db.artists[artistName].tracks : db.tracks;
+            playTrack(trackId, playlist);
+        }
+
+        function playAlbum(artistName, albumTitle) {
+            const artist = db.artists[artistName];
             const albumTracks = artist.tracks.filter(t => t.album === albumTitle);
-            if (albumTracks.length === 0) return;
-            
-            currentPlaylist = albumTracks;
-            currentIndex = 0;
-            playTrack(albumTracks[0].id, albumTracks);
+            if(albumTracks.length > 0) playTrack(albumTracks[0].id, albumTracks);
         }
 
-        // === PLAY ALL ARTIST ===
         function playArtistAll() {
-            const artist = db.artists[currentArtistName];
-            if (!artist || !artist.tracks.length) return;
-            
-            currentPlaylist = artist.tracks;
-            currentIndex = 0;
-            playTrack(artist.tracks[0].id, artist.tracks);
+            if (activeArtist && activeArtist.tracks.length > 0) playTrack(activeArtist.tracks[0].id, activeArtist.tracks);
         }
 
-        // === PLAY TRACK ===
         function playTrack(id, playlist) {
-            currentPlaylist = playlist || db.tracks;
+            currentPlaylist = playlist;
             currentIndex = currentPlaylist.findIndex(t => t.id === id);
-            if (currentIndex === -1) return;
-            
             const t = currentPlaylist[currentIndex];
-            
-            // Update player UI
+            if (!t) return;
+
             document.getElementById('p-title').innerText = t.title;
             document.getElementById('p-artist').innerText = t.artist;
-            document.getElementById('p-img').src = t.img || 
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(t.title)}&background=111&color=fff`;
-            
-            // Load and play
-            audio.src = t.url;
-            audio.play().catch(() => {});
-            updatePlayState(true);
-            
-            // Save current for later
-            window.currentTrack = t;
+            document.getElementById('p-img').src = t.img;
+            audio.src = t.url; audio.play(); updateUI(true);
         }
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                updatePlayState(true);
-            } else {
-                audio.pause();
-                updatePlayState(false);
-            }
+        function togglePlay() { 
+            if (!audio.src) return;
+            if (audio.paused) { audio.play(); updateUI(true); } else { audio.pause(); updateUI(false); } 
         }
 
-        function updatePlayState(playing) {
-            isPlaying = playing;
-            const icon = document.getElementById('p-play-icon');
-            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
-            lucide.createIcons();
+        function updateUI(p) { 
+            document.getElementById('p-play-icon').setAttribute('data-lucide', p ? 'pause' : 'play'); 
+            lucide.createIcons(); 
         }
 
-        function nextTrack() {
+        function nextTrack() { 
             if (currentIndex < currentPlaylist.length - 1) {
                 currentIndex++;
-                const t = currentPlaylist[currentIndex];
-                playTrack(t.id, currentPlaylist);
-            } else {
-                // Loop playlist
-                currentIndex = 0;
-                playTrack(currentPlaylist[0].id, currentPlaylist);
+                playTrack(currentPlaylist[currentIndex].id, currentPlaylist);
             }
         }
 
-        function prevTrack() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                const t = currentPlaylist[currentIndex];
-                playTrack(t.id, currentPlaylist);
-            }
-        }
-
-        // === NAVIGATION ===
-        function navTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-            document.getElementById(`page-${page}`).classList.remove('hidden');
-            
-            // Reset scroll
-            document.getElementById('scroll-container').scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Update tabs
-            document.querySelectorAll('[id^="tab-"]').forEach(tab => tab.classList.remove('tab-active'));
-            const activeTab = document.getElementById(`tab-${page}`);
-            if (activeTab) activeTab.classList.add('tab-active');
-        }
-
-        // === SHOW CURRENT ARTIST FROM PLAYER ===
-        function showCurrentArtist() {
-            if (!window.currentTrack) return;
-            openArtist(window.currentTrack.artist);
-        }
-
-        // === WAVE PLAY ===
         function playWave() {
-            if (!db.tracks.length) return;
-            const randomIdx = Math.floor(Math.random() * db.tracks.length);
-            const t = db.tracks[randomIdx];
-            playTrack(t.id, db.tracks);
+            if (db.tracks.length > 0) {
+                const randomIdx = Math.floor(Math.random() * db.tracks.length);
+                playTrack(db.tracks[randomIdx].id, db.tracks);
+            }
         }
 
-        // === AUDIO EVENTS ===
-        audio.ontimeupdate = () => {
-            if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                document.getElementById('player-progress').style.width = `${percent}%`;
-            }
-        };
+        function navTo(p) { 
+            document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden')); 
+            document.getElementById('page-'+p).classList.remove('hidden'); 
+            document.getElementById('scroll-container').scrollTo(0,0);
+        }
 
-        audio.onended = () => {
-            nextTrack();
-        };
-
-        audio.onplay = () => updatePlayState(true);
-        audio.onpause = () => updatePlayState(false);
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', e => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                togglePlay();
-            }
-            if (e.code === 'ArrowRight') nextTrack();
-            if (e.code === 'ArrowLeft') prevTrack();
-        });
-
-        // Expose some functions to window for onclick
-        window.navTo = navTo;
-        window.openArtist = openArtist;
-        window.playTrack = playTrack;
-        window.playWave = playWave;
-        window.playAlbum = playAlbum;
-        window.playArtistAll = playArtistAll;
-        window.togglePlay = togglePlay;
-        window.nextTrack = nextTrack;
-        window.prevTrack = prevTrack;
-        window.handleSearch = handleSearch;
-        window.showCurrentArtist = showCurrentArtist;
+        audio.ontimeupdate = () => { document.getElementById('player-progress').style.width = (audio.currentTime/audio.duration)*100+"%"; };
+        audio.onended = nextTrack;
     </script>
 </body>
 </html>
