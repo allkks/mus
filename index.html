@@ -167,16 +167,24 @@
 
         async function loadApp() {
             try {
-                // Добавляем ?v=... чтобы браузер не кешировал старую базу
-                const res = await fetch(`${DB_URL}?v=${Date.now()}`);
+                // Использование API вместо RAW ссылки помогает обойти кэш
+                // Либо добавляем максимально уникальный параметр времени
+                const nocache = `?t=${new Date().getTime()}`;
+                const res = await fetch(`${DB_URL}${nocache}`);
+                
                 if (!res.ok) throw new Error("Database not found");
                 db = await res.json();
                 
+                // Проверка: если в базе нет треков, возможно файл еще пустой
+                if (db.tracks.length === 0 && Object.keys(db.artists).length === 0) {
+                   console.log("База пуста, ждем обновления GitHub...");
+                }
+
                 renderHome();
                 document.getElementById('main-loader').classList.add('hidden');
             } catch (e) {
                 console.error(e);
-                document.getElementById('main-loader').innerHTML = '<p class="text-red-500 font-bold">ОШИБКА ПОДКЛЮЧЕНИЯ</p>';
+                document.getElementById('main-loader').innerHTML = '<p class="text-red-500 font-bold">ОШИБКА ОБНОВЛЕНИЯ (ЖДИТЕ 1 МИН)</p>';
             }
         }
 
@@ -281,3 +289,4 @@
     </script>
 </body>
 </html>
+
