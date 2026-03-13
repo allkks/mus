@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="p-4 mt-4">
-                <h2 onclick="openFullList('Все треки', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer">
+                <h2 onclick="openFullList('Треки артиста', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer">
                     <span>Треки</span><i data-lucide="chevron-right" class="text-dim"></i>
                 </h2>
                 <div id="artist-view-tracks" class="h-scroll no-scrollbar"></div>
@@ -120,6 +120,7 @@
 
         <section id="page-search" class="page hidden p-6"><div id="search-results" class="space-y-2"></div></section>
         
+        <!-- PAGE: FULL LIST -->
         <section id="page-full-list" class="page hidden p-6">
             <button onclick="navTo('home')" class="flex items-center gap-2 text-dim mb-6"><i data-lucide="chevron-left"></i> Назад</button>
             <div id="full-list-content" class="space-y-1"></div>
@@ -197,9 +198,10 @@
                     renderHome();
                     refreshChartsManually(); 
 
-                    const currentFullListTitle = document.getElementById('full-list-content')?.querySelector('h1')?.innerText;
-                    if (currentFullListTitle === 'Мне нравится') openFullList('Мне нравится', getFavorites());
-                    if (currentFullListTitle === 'Мировой чарт') openFullList('Мировой чарт', currentGlobalTracks);
+                    // Если юзер сейчас в разделе "МОЁ", обновляем список песен на лету
+                    const container = document.getElementById('full-list-content');
+                    const isFavPage = container?.querySelector('h1')?.innerText === 'Мне нравится';
+                    if (isFavPage) openFullList('Мне нравится', getFavorites());
                 }
             });
 
@@ -224,12 +226,19 @@
         function navTo(p, title = '') {
             document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
             document.getElementById('page-' + p).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-brandY', 'text-dim/40'));
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brandY');
+                btn.classList.add('text-dim/40');
+            });
 
-            if(p === 'home') document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
-            else if(title === 'Мне нравится') {
-                document.getElementById('nav-fav').classList.replace('text-dim/40', 'text-brandY');
-                openFullList(title, getFavorites());
+            if(p === 'home') {
+                document.getElementById('nav-home').classList.add('text-brandY');
+                document.getElementById('nav-home').classList.remove('text-dim/40');
+            } else if(title === 'Мне нравится' || p === 'full-list' && title === 'Мне нравится') {
+                document.getElementById('nav-fav').classList.add('text-brandY');
+                document.getElementById('nav-fav').classList.remove('text-dim/40');
+                openFullList('Мне нравится', getFavorites());
             }
         }
 
