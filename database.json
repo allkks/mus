@@ -1,16 +1,26 @@
 {
     "artists": [
         {
-            "id": "d642d657",
+            "id": "2083bfba",
             "name": "123",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/artist.jpg"
         },
         {
-            "id": "8c8f6e60",
+            "id": "645df786",
             "name": "гуф",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/гуф/artist.jpg"
         }
     ],
     "albums": [],
-    "tracks": []
+    "tracks": [
+        {
+            "id": "aaee8870",
+            "title": "korol-i-shut-prygnu-so-skaly",
+            "artist": "123",
+            "artistId": "2083bfba",
+            "album": "Single",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/123/singles/korol-i-shut-prygnu-so-skaly.mp3",
+            "plays": 0
+        }
+    ]
 }
