@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MUS.LIB — Музыка здесь</title>
+    <title>MUS.LIB — Твоя музыка</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -16,7 +16,8 @@
                         accent: '#8a2be2', 
                         surface: '#1a1225', 
                         text: '#ffffff', 
-                        dim: '#b3a9c0' 
+                        dim: '#b3a9c0',
+                        heart: '#ff2d55'
                     },
                     fontFamily: { sans: ['Manrope', 'sans-serif'] }
                 }
@@ -27,183 +28,197 @@
         body { background-color: #0a0510; color: #ffffff; font-family: 'Manrope', sans-serif; overflow: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Эффект матового стекла для плеера */
         .glass-player { 
-            background: rgba(26, 18, 37, 0.85); 
-            backdrop-filter: blur(25px); 
-            border-top: 1px solid rgba(138, 43, 226, 0.3);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+            background: rgba(26, 18, 37, 0.9); 
+            backdrop-filter: blur(30px); 
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
         }
 
-        /* Градиент в стиле Яндекс Музыки */
         .yandex-gradient {
             background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
         }
 
         .hero-bg { background: linear-gradient(180deg, transparent 0%, rgba(10, 5, 16, 1) 95%); }
-
-        /* Анимация появления */
-        .fade-in { animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Кастомный прогресс-бар */
-        #player-progress { 
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.8); 
-            transition: width 0.2s linear;
-        }
-
-        .track-item:hover { background-color: rgba(138, 43, 226, 0.15); }
         
-        .artist-card img { transition: transform 0.3s ease; }
-        .artist-card:hover img { transform: scale(1.08); }
+        .tab-active { color: #ffffff; position: relative; }
+        .tab-active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 2px; background: #8a2be2; box-shadow: 0 0 10px #8a2be2; }
+
+        .track-item:active { transform: scale(0.98); }
+        #player-progress-container:hover #player-progress-dot { opacity: 1; }
+        
+        .search-focus:focus-within { border-color: #8a2be2; background: rgba(138, 43, 226, 0.1); }
+        
+        @keyframes pulse-purple {
+            0% { box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(138, 43, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(138, 43, 226, 0); }
+        }
+        .wave-pulse { animation: pulse-purple 2s infinite; }
     </style>
 </head>
 <body>
-    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-40">
+    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-44">
         
-        <!-- ГЛАВНЫЙ ЭКРАН -->
-        <section id="page-home" class="page p-6 pt-16">
-            <header class="flex justify-between items-center mb-8">
-                <h1 class="text-3xl font-extrabold tracking-tight">Главное</h1>
-                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                    <i data-lucide="user" class="w-5 h-5"></i>
-                </div>
-            </header>
+        <!-- ПОИСК (ШАПКА) -->
+        <div class="p-6 pt-10 sticky top-0 bg-bg/80 backdrop-blur-md z-50">
+            <div class="search-focus flex items-center gap-3 bg-surface border border-white/5 rounded-2xl px-5 py-4 transition-all duration-300">
+                <i data-lucide="search" class="w-5 h-5 text-dim"></i>
+                <input id="search-input" type="text" placeholder="Треки, артисты..." class="bg-transparent border-none outline-none w-full text-sm font-medium placeholder:text-dim" oninput="handleSearch()">
+            </div>
+        </div>
 
-            <!-- БОЛЬШАЯ КАРТОЧКА (МОЯ ВОЛНА) -->
-            <div onclick="playRandom()" class="relative h-64 rounded-[2rem] overflow-hidden mb-12 cursor-pointer group yandex-gradient shadow-2xl">
+        <!-- ГЛАВНАЯ -->
+        <section id="page-home" class="page p-6 pt-2">
+            <!-- МОЯ ВОЛНА -->
+            <div onclick="playRandom()" class="relative h-60 rounded-[2.5rem] overflow-hidden mb-12 cursor-pointer group yandex-gradient wave-pulse">
                 <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
                 <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                    <span class="bg-white/20 backdrop-blur-md w-fit px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3">Персонально</span>
+                    <span class="bg-white/20 backdrop-blur-md w-fit px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2">Музыка под настроение</span>
                     <h2 class="text-4xl font-black italic tracking-tighter">Моя волна</h2>
-                    <p class="text-white/80 font-medium mt-1">Поток музыки, который понимает тебя</p>
+                    <p class="text-white/70 text-sm font-medium mt-1">Включи и просто слушай</p>
                 </div>
                 <div class="absolute bottom-8 right-8 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-2xl transform transition-transform group-hover:scale-110">
                     <i data-lucide="play" class="fill-black text-black ml-1 w-6 h-6"></i>
                 </div>
             </div>
 
-            <!-- РАЗДЕЛ: АРТИСТЫ -->
-            <div class="mb-10">
-                <div class="flex justify-between items-end mb-6">
-                    <h2 class="text-2xl font-bold">Интересно сейчас</h2>
-                    <span class="text-accent text-sm font-bold">ВСЁ</span>
-                </div>
-                <div id="home-artists" class="flex gap-4 overflow-x-auto pb-4 no-scrollbar snap-x">
-                    <!-- Артисты подгрузятся сюда -->
-                </div>
+            <!-- ИЗБРАННОЕ -->
+            <div id="fav-section" class="hidden mb-10">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i data-lucide="heart" class="fill-heart text-heart w-6 h-6"></i> Любимое
+                </h2>
+                <div id="favorites-list" class="space-y-1"></div>
             </div>
 
-            <!-- РАЗДЕЛ: ТРЕКИ -->
+            <!-- ЛУЧШИЕ ИСПОЛНИТЕЛИ -->
             <div class="mb-10">
-                <h2 class="text-2xl font-bold mb-6">Часто слушаете</h2>
-                <div id="home-trending" class="space-y-1">
-                    <!-- Треки подгрузятся сюда -->
-                </div>
+                <h2 class="text-2xl font-bold mb-6">Твои любимые артисты</h2>
+                <div id="home-artists" class="flex gap-5 overflow-x-auto pb-4 no-scrollbar snap-x"></div>
+            </div>
+
+            <!-- ПОПУЛЯРНОЕ -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-6">Популярно сейчас</h2>
+                <div id="home-trending" class="space-y-1"></div>
             </div>
         </section>
 
+        <!-- РЕЗУЛЬТАТЫ ПОИСКА -->
+        <section id="page-search" class="page hidden p-6">
+            <h2 class="text-2xl font-bold mb-6">Результаты поиска</h2>
+            <div id="search-results" class="space-y-2"></div>
+        </section>
+
         <!-- СТРАНИЦА АРТИСТА -->
-        <section id="page-artist" class="page hidden fade-in">
-            <div class="relative h-[55vh] w-full">
+        <section id="page-artist" class="page hidden animate-in fade-in duration-500">
+            <div class="relative h-[50vh] w-full">
                 <img id="artist-view-img" class="w-full h-full object-cover">
                 <div class="absolute inset-0 hero-bg"></div>
                 <button onclick="navTo('home')" class="absolute top-6 left-6 bg-black/30 p-3 rounded-full backdrop-blur-xl border border-white/10">
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
                 </button>
                 <div class="absolute bottom-10 left-6">
-                    <h1 id="artist-view-name" class="text-6xl font-black italic tracking-tighter drop-shadow-lg"></h1>
-                    <div id="artist-stats" class="text-white/60 text-sm mt-2 font-bold uppercase tracking-widest">Слушают сейчас: 124 502</div>
+                    <h1 id="artist-view-name" class="text-6xl font-black italic tracking-tighter drop-shadow-2xl"></h1>
+                    <div class="flex items-center gap-2 mt-2 text-white/60 font-bold uppercase text-[11px] tracking-widest">
+                        <i data-lucide="users" class="w-4 h-4 text-accent"></i>
+                        <span>Подтвержденный артист</span>
+                    </div>
                 </div>
             </div>
 
             <div class="p-6">
-                <div id="artist-bio" class="text-dim text-md leading-relaxed mb-10 italic opacity-90 border-l-4 border-accent pl-5"></div>
+                <div id="artist-bio" class="text-dim text-md leading-relaxed mb-10 italic opacity-80 border-l-4 border-accent pl-5"></div>
                 
-                <div class="flex items-center gap-4 mb-8">
-                    <button onclick="playRandom()" class="px-8 py-4 bg-accent rounded-full font-bold shadow-lg shadow-purple-900/40">СЛУШАТЬ</button>
-                    <button class="p-4 bg-surface rounded-full border border-white/5"><i data-lucide="heart" class="w-6 h-6"></i></button>
+                <div class="flex items-center gap-4 mb-10">
+                    <button onclick="playRandom()" class="px-10 py-4 bg-accent rounded-full font-extrabold shadow-lg shadow-purple-900/40 transform active:scale-95 transition-all">СЛУШАТЬ</button>
+                    <button class="p-4 bg-surface rounded-full border border-white/5"><i data-lucide="share" class="w-6 h-6"></i></button>
                 </div>
 
-                <h2 class="text-xl font-bold mb-6">Популярные треки</h2>
+                <h2 class="text-2xl font-bold mb-6">Популярные треки</h2>
                 <div id="artist-view-tracks" class="space-y-1 mb-12"></div>
 
-                <h2 class="text-xl font-bold mb-6">Релизы</h2>
-                <div id="artist-view-albums" class="flex gap-6 overflow-x-auto pb-8 no-scrollbar"></div>
+                <h2 class="text-2xl font-bold mb-6">Альбомы</h2>
+                <div id="artist-view-albums" class="flex gap-6 overflow-x-auto pb-10 no-scrollbar"></div>
             </div>
         </section>
     </main>
 
-    <!-- ПЛЕЕР (НИЖНЯЯ ПАНЕЛЬ) -->
-    <div id="player" onclick="openImmersivePlayer()" class="glass-player fixed bottom-6 left-4 right-4 rounded-3xl p-4 z-[100] cursor-pointer border border-white/5 shadow-2xl">
+    <!-- ПЛЕЕР -->
+    <div id="player" class="glass-player fixed bottom-8 left-4 right-4 rounded-3xl p-4 z-[100] border border-white/10 shadow-2xl transition-transform duration-300 translate-y-40">
+        <div id="player-progress-container" class="absolute -top-[1px] left-8 right-8 h-[2px] bg-white/5 cursor-pointer" onclick="seek(event)">
+            <div id="player-progress" class="h-full bg-accent relative transition-all duration-150">
+                <div id="player-progress-dot" class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_#fff] opacity-0 transition-opacity"></div>
+            </div>
+        </div>
+
         <div class="flex items-center gap-4">
-            <div class="relative w-12 h-12 flex-shrink-0">
-                <img id="p-img" class="w-full h-full rounded-xl object-cover shadow-lg">
-                <div id="p-visualizer" class="absolute inset-0 bg-black/20 hidden items-center justify-center">
-                    <div class="flex gap-1">
-                        <div class="w-1 h-3 bg-white rounded-full animate-bounce"></div>
-                        <div class="w-1 h-4 bg-white rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                        <div class="w-1 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                    </div>
-                </div>
+            <div onclick="openImmersivePlayer()" class="relative w-14 h-14 flex-shrink-0 cursor-pointer">
+                <img id="p-img" class="w-full h-full rounded-2xl object-cover shadow-lg border border-white/5">
             </div>
             <div class="flex-1 overflow-hidden">
                 <div id="p-title" class="font-bold truncate text-sm">Не выбрано</div>
-                <div id="p-artist" class="text-dim text-[11px] font-bold uppercase tracking-wider">MUS.LIB</div>
+                <div id="p-artist-container" class="flex items-center gap-1 overflow-hidden">
+                    <div id="p-artist" class="text-dim text-[11px] font-bold uppercase tracking-widest truncate cursor-pointer hover:text-accent transition-colors" onclick="navToArtistByTag(this.innerText)">MUS.LIB</div>
+                </div>
             </div>
             <div class="flex items-center gap-4">
-                <button onclick="event.stopImmediatePropagation(); togglePlay()" class="w-10 h-10 flex items-center justify-center">
-                    <i id="p-play-icon" data-lucide="play" class="fill-current w-7 h-7"></i>
+                <button onclick="toggleFavorite(currentTrackId)" class="p-2">
+                    <i id="p-heart" data-lucide="heart" class="w-6 h-6"></i>
                 </button>
-                <button onclick="event.stopImmediatePropagation(); nextTrack()" class="text-dim">
+                <button onclick="togglePlay()" class="w-12 h-12 flex items-center justify-center bg-white text-black rounded-2xl active:scale-90 transition-transform">
+                    <i id="p-play-icon" data-lucide="play" class="fill-current w-6 h-6 ml-0.5"></i>
+                </button>
+                <button onclick="nextTrack()" class="text-dim pr-2">
                     <i data-lucide="skip-forward" class="w-6 h-6"></i>
                 </button>
             </div>
-        </div>
-        <!-- Мини-прогресс -->
-        <div class="absolute bottom-0 left-6 right-6 h-[2px] bg-white/5">
-            <div id="player-progress" class="h-full bg-accent w-0"></div>
         </div>
     </div>
 
     <!-- ПОЛНОЭКРАННЫЙ ПЛЕЕР -->
     <div id="immersive-player" class="fixed inset-0 bg-[#0a0510] z-[200] transition-transform duration-500 translate-y-full flex flex-col p-8 pt-16">
-        <button onclick="closeImmersivePlayer()" class="absolute top-8 left-8 text-dim"><i data-lucide="chevron-down" class="w-8 h-8"></i></button>
+        <div class="absolute inset-0 bg-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <button onclick="closeImmersivePlayer()" class="absolute top-8 left-8 text-dim"><i data-lucide="chevron-down" class="w-10 h-10"></i></button>
         
         <div class="flex-1 flex flex-col items-center justify-center">
-            <div class="relative w-full max-w-xs mb-12 group">
-                <img id="imm-img" class="w-full aspect-square rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.8)] object-cover border border-white/10">
-                <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center border-4 border-bg">
-                    <i data-lucide="music" class="w-5 h-5"></i>
-                </div>
+            <div class="relative w-full max-w-sm mb-12 group">
+                <img id="imm-img" class="w-full aspect-square rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.9)] object-cover border border-white/5 transition-transform duration-700 group-hover:scale-[1.02]">
             </div>
-            <div class="w-full text-center">
-                <h1 id="imm-title" class="text-3xl font-extrabold tracking-tight mb-3">---</h1>
-                <p id="imm-artist" class="text-accent text-xl font-bold italic opacity-80 uppercase tracking-widest">---</p>
+            <div class="w-full text-center px-4">
+                <h1 id="imm-title" class="text-4xl font-black tracking-tighter mb-4">---</h1>
+                <p id="imm-artist" class="text-accent text-2xl font-black italic opacity-90 uppercase tracking-[0.2em] cursor-pointer inline-block" onclick="navToArtistByTag(this.innerText); closeImmersivePlayer()">---</p>
             </div>
         </div>
 
-        <div class="w-full max-w-sm mx-auto pb-20">
-            <!-- Большая полоса прогресса -->
-            <div class="w-full h-1.5 bg-white/10 rounded-full mb-10 relative cursor-pointer" onclick="seek(event)">
+        <div class="w-full max-w-sm mx-auto pb-16">
+            <div class="w-full h-1.5 bg-white/10 rounded-full mb-4 relative cursor-pointer" onclick="seek(event)">
                 <div id="imm-progress" class="absolute h-full bg-accent rounded-full transition-all"></div>
             </div>
+            <div class="flex justify-between text-[11px] font-bold text-dim/50 uppercase tracking-widest mb-10 px-1">
+                <span id="cur-time">0:00</span>
+                <span id="dur-time">0:00</span>
+            </div>
 
-            <div class="flex justify-between items-center px-4">
-                <button onclick="prevTrack()" class="text-white/40 hover:text-white"><i data-lucide="skip-back" class="w-8 h-8 fill-current"></i></button>
-                <button onclick="togglePlay()" class="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center shadow-xl transform active:scale-90 transition-transform">
-                    <i id="imm-play-icon" data-lucide="play" class="w-10 h-10 fill-current ml-1"></i>
-                </button>
-                <button onclick="nextTrack()" class="text-white/40 hover:text-white"><i data-lucide="skip-forward" class="w-8 h-8 fill-current"></i></button>
+            <div class="flex justify-between items-center px-2">
+                <button onclick="toggleFavorite(currentTrackId)" class="text-dim"><i id="imm-heart" data-lucide="heart" class="w-8 h-8"></i></button>
+                <div class="flex items-center gap-8">
+                    <button onclick="prevTrack()" class="text-white"><i data-lucide="skip-back" class="w-10 h-10 fill-current"></i></button>
+                    <button onclick="togglePlay()" class="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center shadow-2xl transform active:scale-95 transition-transform">
+                        <i id="imm-play-icon" data-lucide="play" class="w-10 h-10 fill-current ml-1"></i>
+                    </button>
+                    <button onclick="nextTrack()" class="text-white"><i data-lucide="skip-forward" class="w-10 h-10 fill-current"></i></button>
+                </div>
+                <button class="text-dim"><i data-lucide="repeat" class="w-6 h-6"></i></button>
             </div>
         </div>
     </div>
 
     <!-- ЗАГРУЗКА -->
-    <div id="main-loader" class="fixed inset-0 z-[300] bg-[#0a0510] flex items-center justify-center">
+    <div id="main-loader" class="fixed inset-0 z-[300] bg-bg flex items-center justify-center transition-opacity duration-700">
         <div class="text-center">
             <div class="w-16 h-16 border-4 border-accent border-t-transparent animate-spin rounded-full mb-6 mx-auto"></div>
-            <div class="text-[10px] font-black tracking-[0.6em] text-accent uppercase opacity-50">Настраиваем волну</div>
+            <div class="text-[10px] font-black tracking-[1em] text-accent uppercase opacity-50 ml-4">MUS.LIB</div>
         </div>
     </div>
 
@@ -215,6 +230,8 @@
         let db = { tracks: [], artists: {} };
         let currentPlaylist = [];
         let currentIndex = -1;
+        let currentTrackId = null;
+        let favorites = JSON.parse(localStorage.getItem('fav_tracks') || '[]');
         const audio = document.getElementById('audio-engine');
 
         window.onload = async () => { 
@@ -224,39 +241,77 @@
 
         async function loadApp() {
             try {
-                // Пытаемся получить данные
                 const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${Date.now()}`);
                 db = await res.json();
                 renderHome();
+                renderFavorites();
                 document.getElementById('main-loader').style.opacity = '0';
-                setTimeout(() => document.getElementById('main-loader').style.display = 'none', 500);
+                setTimeout(() => document.getElementById('main-loader').style.display = 'none', 700);
             } catch (e) {
-                console.error("Ошибка загрузки БД", e);
+                console.error("Ошибка сети", e);
             }
         }
 
         function renderHome() {
-            // Рендер артистов (крупные карточки)
+            // Артисты
             document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
-                <div onclick="openArtist('${a.name}')" class="artist-card flex-shrink-0 w-40 cursor-pointer snap-center">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-3 border border-white/5 shadow-xl">
-                        <img src="${a.img}" class="w-full h-full object-cover">
+                <div onclick="openArtist('${a.name}')" class="flex-shrink-0 w-44 cursor-pointer snap-center group">
+                    <div class="aspect-square rounded-[2.5rem] overflow-hidden mb-4 border border-white/5 shadow-2xl relative">
+                        <img src="${a.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="text-center font-bold text-sm tracking-tight truncate px-2">${a.name}</div>
+                    <div class="text-center font-bold text-md tracking-tight truncate px-2 italic">${a.name}</div>
                 </div>`).join('');
 
-            // Рендер списка треков
-            document.getElementById('home-trending').innerHTML = db.tracks.slice(0, 15).map((t, i) => `
-                <div onclick='playTrack(${t.id}, db.tracks)' class="track-item flex items-center gap-4 p-3 rounded-2xl cursor-pointer transition-colors group">
-                    <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover shadow-md">
-                    <div class="flex-1 truncate">
+            // Треки
+            document.getElementById('home-trending').innerHTML = db.tracks.slice(0, 10).map((t, i) => renderTrackRow(t)).join('');
+            lucide.createIcons();
+        }
+
+        function renderTrackRow(t) {
+            const isFav = favorites.includes(t.id);
+            return `
+                <div class="track-item flex items-center gap-4 p-3 rounded-2xl cursor-pointer group hover:bg-surface/50 transition-all">
+                    <div class="relative w-12 h-12 flex-shrink-0" onclick='playTrack(${t.id}, db.tracks)'>
+                        <img src="${t.img}" class="w-full h-full rounded-xl object-cover shadow-lg border border-white/5">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity">
+                            <i data-lucide="play" class="w-5 h-5 fill-white text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 truncate" onclick='playTrack(${t.id}, db.tracks)'>
                         <div class="font-bold text-sm truncate">${t.title}</div>
-                        <div class="text-[11px] text-dim font-bold uppercase tracking-wider">${t.artist}</div>
+                        <div class="text-[11px] text-dim font-bold uppercase tracking-wider hover:text-accent inline-block" onclick="event.stopPropagation(); openArtist('${t.artist}')">${t.artist}</div>
                     </div>
-                    <div class="opacity-0 group-hover:opacity-100 transition-opacity pr-2">
-                        <i data-lucide="play" class="w-4 h-4 text-accent"></i>
-                    </div>
-                </div>`).join('');
+                    <button onclick="toggleFavorite(${t.id})" class="p-2">
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/40'}"></i>
+                    </button>
+                </div>`;
+        }
+
+        function handleSearch() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            const resultsDiv = document.getElementById('search-results');
+            if(!q) { navTo('home'); return; }
+            
+            navTo('search');
+            const filteredTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+            const filteredArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
+
+            let html = "";
+            if(filteredArtists.length) {
+                html += `<div class="mb-6"><h3 class="text-dim text-xs font-bold uppercase tracking-widest mb-4">Артисты</h3><div class="flex gap-4 overflow-x-auto no-scrollbar">`;
+                html += filteredArtists.map(a => `
+                    <div onclick="openArtist('${a.name}')" class="flex-shrink-0 w-28 text-center">
+                        <img src="${a.img}" class="w-20 h-20 rounded-full mx-auto object-cover border border-white/10 mb-2">
+                        <div class="text-[11px] font-bold truncate">${a.name}</div>
+                    </div>`).join('');
+                html += `</div></div>`;
+            }
+
+            html += `<h3 class="text-dim text-xs font-bold uppercase tracking-widest mb-4">Треки</h3>`;
+            html += filteredTracks.length ? filteredTracks.map(t => renderTrackRow(t)).join('') : `<div class="text-dim text-sm italic">Ничего не найдено</div>`;
+            
+            resultsDiv.innerHTML = html;
             lucide.createIcons();
         }
 
@@ -265,22 +320,16 @@
             if (!artist) return;
             document.getElementById('artist-view-name').innerText = artist.name.toUpperCase();
             document.getElementById('artist-view-img').src = artist.img;
-            document.getElementById('artist-bio').innerText = artist.bio || "Описание артиста скоро появится. Слушайте лучшие треки прямо сейчас.";
+            document.getElementById('artist-bio').innerText = artist.bio || "Популярный исполнитель в твоем MUS.LIB. Каждая песня — история.";
 
-            document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map((t, i) => `
-                <div onclick='playTrack(${t.id}, db.artists["${name}"].tracks)' class="track-item flex items-center gap-5 p-4 rounded-2xl cursor-pointer">
-                    <div class="text-dim/30 font-black italic w-4">${i+1}</div>
-                    <div class="flex-1 font-bold text-md">${t.title}</div>
-                    <i data-lucide="play" class="w-5 h-5 text-accent"></i>
-                </div>`).join('');
-
+            document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map((t, i) => renderTrackRow(t)).join('');
             document.getElementById('artist-view-albums').innerHTML = (artist.albums || []).map(alb => `
                 <div class="flex-shrink-0 w-48 cursor-pointer group">
-                    <div class="relative aspect-square rounded-[2rem] overflow-hidden mb-3 border border-white/5 shadow-2xl transition-transform group-hover:scale-105">
+                    <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-4 border border-white/5 shadow-2xl transition-transform duration-500 group-hover:scale-105">
                         <img src="${alb.cover}" class="w-full h-full object-cover">
                     </div>
-                    <div class="font-bold text-md truncate">${alb.title}</div>
-                    <div class="text-[10px] text-dim font-bold">${alb.year || '2026'}</div>
+                    <div class="font-bold text-md tracking-tight truncate italic">${alb.title}</div>
+                    <div class="text-[11px] text-dim font-bold mt-1 uppercase">${alb.year || '2026'}</div>
                 </div>`).join('');
             
             navTo('artist'); 
@@ -292,8 +341,8 @@
             currentIndex = currentPlaylist.findIndex(t => t.id === id);
             const t = currentPlaylist[currentIndex];
             if(!t) return;
+            currentTrackId = id;
 
-            // Обновляем UI
             document.getElementById('p-title').innerText = document.getElementById('imm-title').innerText = t.title;
             document.getElementById('p-artist').innerText = document.getElementById('imm-artist').innerText = t.artist;
             document.getElementById('p-img').src = document.getElementById('imm-img').src = t.img;
@@ -301,30 +350,54 @@
             audio.src = t.url; 
             audio.play(); 
             updateUI(true);
+            updateHeartUI(id);
             
-            // Если плеер был скрыт, показываем (опционально)
-            document.getElementById('player').style.transform = 'translateY(0)';
+            document.getElementById('player').classList.remove('translate-y-40');
         }
 
-        function togglePlay() { 
-            if(audio.paused) {
-                audio.play();
-                updateUI(true);
-            } else {
-                audio.pause();
-                updateUI(false);
-            }
-        }
+        function togglePlay() { audio.paused ? (audio.play(), updateUI(true)) : (audio.pause(), updateUI(false)); }
 
         function updateUI(playing) { 
-            const icons = ['p-play-icon', 'imm-play-icon'];
-            icons.forEach(id => {
-                const el = document.getElementById(id);
-                if(el) {
-                    el.setAttribute('data-lucide', playing ? 'pause' : 'play');
-                }
-            });
-            document.getElementById('p-visualizer').style.display = playing ? 'flex' : 'none';
+            const pIcon = document.getElementById('p-play-icon');
+            const iIcon = document.getElementById('imm-play-icon');
+            if(pIcon) pIcon.setAttribute('data-lucide', playing ? 'pause' : 'play');
+            if(iIcon) iIcon.setAttribute('data-lucide', playing ? 'pause' : 'play');
+            lucide.createIcons();
+        }
+
+        function toggleFavorite(id) {
+            if(!id) return;
+            const idx = favorites.indexOf(id);
+            if(idx > -1) favorites.splice(idx, 1);
+            else favorites.push(id);
+            localStorage.setItem('fav_tracks', JSON.stringify(favorites));
+            updateHeartUI(id);
+            renderFavorites();
+            // Также обновляем список треков на текущей странице, чтобы сердечко покрасилось
+            const activePage = document.querySelector('.page:not(.hidden)');
+            if(activePage.id === 'page-home') renderHome();
+            else if(activePage.id === 'page-artist') openArtist(db.tracks.find(t=>t.id===id).artist);
+        }
+
+        function updateHeartUI(id) {
+            const isFav = favorites.includes(id);
+            const pHeart = document.getElementById('p-heart');
+            const immHeart = document.getElementById('imm-heart');
+            if(pHeart) { pHeart.className = `w-6 h-6 ${isFav ? 'fill-heart text-heart' : 'text-dim'}`; }
+            if(immHeart) { immHeart.className = `w-8 h-8 ${isFav ? 'fill-heart text-heart' : 'text-dim'}`; }
+            lucide.createIcons();
+        }
+
+        function renderFavorites() {
+            const favTracks = db.tracks.filter(t => favorites.includes(t.id));
+            const list = document.getElementById('favorites-list');
+            const section = document.getElementById('fav-section');
+            if(favTracks.length > 0) {
+                section.classList.remove('hidden');
+                list.innerHTML = favTracks.map(t => renderTrackRow(t)).join('');
+            } else {
+                section.classList.add('hidden');
+            }
             lucide.createIcons();
         }
 
@@ -336,15 +409,28 @@
             document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden')); 
             document.getElementById('page-'+p).classList.remove('hidden'); 
             document.getElementById('scroll-container').scrollTo(0,0); 
+            if(p !== 'search') document.getElementById('search-input').value = "";
         }
+
+        function navToArtistByTag(name) { openArtist(name.trim()); }
 
         function openImmersivePlayer() { document.getElementById('immersive-player').classList.remove('translate-y-full'); }
         function closeImmersivePlayer() { document.getElementById('immersive-player').classList.add('translate-y-full'); }
 
+        function formatTime(s) {
+            if(!s) return "0:00";
+            const min = Math.floor(s/60);
+            const sec = Math.floor(s%60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
         audio.ontimeupdate = () => { 
+            if(!audio.duration) return;
             const p = (audio.currentTime / audio.duration) * 100;
             document.getElementById('player-progress').style.width = p + "%"; 
             document.getElementById('imm-progress').style.width = p + "%"; 
+            document.getElementById('cur-time').innerText = formatTime(audio.currentTime);
+            document.getElementById('dur-time').innerText = formatTime(audio.duration);
         };
 
         function seek(e) {
