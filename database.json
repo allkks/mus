@@ -1,36 +1,4 @@
 {
-    "artists": {
-        "цф": {
-            "name": "цф",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/artist.jpg",
-            "bio": "",
-            "tracks": [
-                {
-                    "id": 0,
-                    "title": "www",
-                    "artist": "цф",
-                    "album": "333",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/www.mp3",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg"
-                }
-            ],
-            "albums": [
-                {
-                    "title": "333",
-                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg",
-                    "year": "2025"
-                }
-            ]
-        }
-    },
-    "tracks": [
-        {
-            "id": 0,
-            "title": "www",
-            "artist": "цф",
-            "album": "333",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/www.mp3",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/цф/albums/333/cover.jpg"
-        }
-    ]
+    "artists": {},
+    "tracks": []
 }
