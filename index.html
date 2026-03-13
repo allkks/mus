@@ -2,388 +2,293 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUS.LIB — Музыкальный плеер</title>
-    <!-- Telegram WebApp SDK -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MUS.LIB — Premium Player</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: '#ffcc00', 
-                        brandHover: '#e6b800',
-                        bgDark: '#0a0a0a',
-                        bgPanel: '#121212',
-                        bgHover: '#2a2a2a',
-                        textDim: '#a3a3a3'
+                        brand: '#ffcc00',
+                        surface: '#121212',
+                        accent: '#1e1e1e'
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
                 }
             }
         }
     </script>
 
     <style>
-        body { background-color: #0a0a0a; color: white; overflow: hidden; font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        body { background-color: #000; color: #fff; -webkit-tap-highlight-color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        .glass-player {
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(24px);
+        /* Glass Effect */
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .nav-active { color: #ffcc00 !important; background: rgba(255, 204, 0, 0.1); }
-        
-        input[type=range] { -webkit-appearance: none; background: transparent; cursor: pointer; }
-        input[type=range]::-webkit-slider-runnable-track { background: #404040; height: 4px; border-radius: 2px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: #ffcc00; margin-top: -4px; }
+        /* Safe Area for Mobile */
+        .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom) + 5rem); }
 
-        .artist-card:hover img { transform: scale(1.05); }
-        .page-transition { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Animation */
+        .active-tab { color: #ffcc00; transform: translateY(-2px); }
+        .active-tab i { filter: drop-shadow(0 0 8px #ffcc00); }
+
+        /* Custom Range Slider */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { background: #333; height: 4px; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: #ffcc00; margin-top: -4px; border: 2px solid #000; }
     </style>
 </head>
-<body class="flex h-screen antialiased">
+<body class="selection:bg-brand/30">
 
-    <!-- SIDEBAR -->
-    <nav class="w-64 bg-bgPanel flex flex-col border-r border-white/5 hidden md:flex z-40">
-        <div class="p-8 flex items-center gap-3">
-            <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center rotate-3">
+    <!-- HEADER (Desktop Only) -->
+    <header class="hidden md:flex fixed top-0 left-0 right-0 h-20 items-center px-10 z-40 bg-black/50 backdrop-blur-md border-b border-white/5">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center rotate-3 shadow-lg shadow-brand/20">
                 <i data-lucide="music" class="text-black w-6 h-6"></i>
             </div>
-            <span class="text-xl font-black tracking-tighter italic">MUS.LIB</span>
+            <span class="text-2xl font-extrabold tracking-tighter italic">MUS.LIB</span>
         </div>
+    </header>
+
+    <!-- MOBILE SETTINGS ICON -->
+    <button onclick="toggleAuth()" class="md:hidden fixed top-4 right-4 z-50 p-3 bg-white/5 rounded-full backdrop-blur-md border border-white/10">
+        <i data-lucide="settings-2" class="w-5 h-5 text-brand"></i>
+    </button>
+
+    <!-- MAIN WRAPPER -->
+    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-safe pt-6 md:pt-24 px-4 md:px-10">
         
-        <div class="px-4 flex-1 space-y-2">
-            <button onclick="navTo('home')" id="btn-home" class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-xl text-white font-medium transition-all">
-                <i data-lucide="layout-grid" class="w-5 h-5"></i> Главная
-            </button>
-            <button onclick="navTo('chart')" id="btn-chart" class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-xl text-textDim font-medium transition-all hover:text-white">
-                <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Чарт
-            </button>
-            <button onclick="navTo('search')" id="btn-search" class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-xl text-textDim font-medium transition-all hover:text-white">
-                <i data-lucide="search" class="w-5 h-5"></i> Поиск
-            </button>
-        </div>
-
-        <div class="p-6 border-t border-white/5 space-y-4">
-            <div id="status-tag" class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-textDim">
-                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Offline
+        <!-- WELCOME SECTION -->
+        <section id="page-home" class="page">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-2 italic">Для тебя</h1>
+                <p class="text-gray-400 text-sm">Твой персональный поток музыки из GitHub</p>
             </div>
-            <button onclick="toggleAuth()" class="text-[10px] text-textDim hover:text-white uppercase tracking-widest opacity-50 block">Настройки API</button>
-        </div>
-    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 overflow-y-auto bg-bgDark relative pb-32" id="scroll-container">
-        
-        <!-- AUTH OVERLAY -->
-        <div id="auth-screen" class="fixed inset-0 z-[100] bg-bgDark/95 backdrop-blur-md flex items-center justify-center px-6 hidden">
-            <div class="max-w-md w-full bg-bgPanel p-8 rounded-3xl border border-white/10 shadow-2xl">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold">Настройки доступа</h2>
-                    <button onclick="toggleAuth()"><i data-lucide="x" class="w-5 h-5"></i></button>
-                </div>
-                <p class="text-textDim mb-6 text-sm">Для работы с базой данных GitHub введите ваш Token и путь к репозиторию.</p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-[10px] uppercase text-textDim mb-1 block">GitHub Token</label>
-                        <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 focus:outline-none focus:border-brand">
-                    </div>
-                    <div>
-                        <label class="text-[10px] uppercase text-textDim mb-1 block">Repository (user/repo)</label>
-                        <input type="text" id="repo-input" placeholder="username/music-repo" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 focus:outline-none focus:border-brand">
-                    </div>
-                    <button onclick="saveSettings()" class="w-full bg-brand hover:bg-brandHover text-black font-bold py-4 rounded-xl transition-all mt-2">Сохранить и обновить</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- LOADER -->
-        <div id="loader" class="absolute inset-0 z-[90] bg-bgDark flex items-center justify-center flex-col">
-            <div class="w-12 h-12 border-4 border-brand/20 border-t-brand rounded-full animate-spin mb-4"></div>
-            <p class="text-textDim animate-pulse uppercase tracking-widest text-[10px]">Синхронизация базы...</p>
-        </div>
-
-        <!-- PAGE: HOME -->
-        <div id="page-home" class="page page-transition hidden p-6 md:p-10">
-            <header class="mb-10 flex justify-between items-end">
-                <div>
-                    <p class="text-brand font-bold uppercase tracking-widest text-[10px] mb-1">Твой личный стриминг</p>
-                    <h1 class="text-4xl font-black italic tracking-tighter">Главная</h1>
-                </div>
-            </header>
-            
-            <section class="mb-12">
+            <!-- Artists Grid -->
+            <div class="mb-12">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <i data-lucide="users" class="w-5 h-5 text-brand"></i> Артисты
+                    <span class="w-1 h-6 bg-brand rounded-full"></span> Популярные артисты
                 </h2>
-                <div id="home-artists" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"></div>
-            </section>
-            
-            <section>
+                <div id="home-artists" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8">
+                    <!-- Dynamic Content -->
+                </div>
+            </div>
+
+            <!-- New Tracks -->
+            <div class="mb-12">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <i data-lucide="clock" class="w-5 h-5 text-brand"></i> Недавно добавленные
+                    <span class="w-1 h-6 bg-brand rounded-full"></span> Новинки
                 </h2>
-                <div id="home-tracks" class="grid grid-cols-1 lg:grid-cols-2 gap-2"></div>
-            </section>
-        </div>
-
-        <!-- PAGE: ARTIST -->
-        <div id="page-artist" class="page page-transition hidden">
-            <div id="artist-hero" class="h-[40vh] w-full relative flex items-end p-6 md:p-10 overflow-hidden">
-                <div id="artist-bg" class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-110"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-bgDark via-bgDark/40"></div>
-                <div class="relative z-10 flex items-center gap-6 md:gap-10">
-                    <img id="artist-img" class="w-32 h-32 md:w-48 md:h-48 rounded-2xl object-cover border-4 border-white/5 shadow-2xl">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <i data-lucide="badge-check" class="w-5 h-5 text-blue-400 fill-current"></i>
-                            <span class="text-xs font-bold uppercase tracking-widest">Верифицированный артист</span>
-                        </div>
-                        <h1 id="artist-name" class="text-5xl md:text-7xl font-black tracking-tighter mb-4"></h1>
-                        <p id="artist-stats" class="text-textDim font-medium text-sm"></p>
-                    </div>
+                <div id="home-tracks" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- Dynamic Content -->
                 </div>
             </div>
-            <div class="p-6 md:p-10">
-                <div class="flex items-center gap-4 mb-8">
-                    <button id="play-artist-btn" class="w-14 h-14 bg-brand text-black rounded-full flex items-center justify-center hover:scale-105 transition-all shadow-lg shadow-brand/20">
-                        <i data-lucide="play" class="fill-current w-6 h-6 ml-1"></i>
-                    </button>
-                    <button class="w-12 h-12 border border-white/10 rounded-full flex items-center justify-center hover:bg-white/5 transition-all">
-                        <i data-lucide="heart" class="w-5 h-5"></i>
-                    </button>
+        </section>
+
+        <!-- SEARCH PAGE -->
+        <section id="page-search" class="page hidden">
+            <h1 class="text-3xl font-extrabold mb-8 italic">Поиск</h1>
+            <div class="relative mb-10">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Трек или артист..." 
+                       class="w-full bg-accent border border-white/5 py-4 pl-12 pr-6 rounded-2xl focus:outline-none focus:border-brand/50 transition-all text-lg">
+            </div>
+            <div id="search-results" class="space-y-8"></div>
+        </section>
+
+        <!-- ARTIST PAGE -->
+        <section id="page-artist" class="page hidden">
+            <button onclick="navTo('home')" class="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад
+            </button>
+            <div class="flex flex-col md:flex-row items-center md:items-end gap-6 mb-12">
+                <img id="artist-view-img" class="w-48 h-48 md:w-64 md:h-64 rounded-3xl object-cover shadow-2xl border border-white/5">
+                <div class="text-center md:text-left">
+                    <h1 id="artist-view-name" class="text-5xl md:text-8xl font-black tracking-tighter mb-4"></h1>
+                    <div id="artist-view-stats" class="text-gray-400 font-medium uppercase tracking-widest text-xs"></div>
                 </div>
-                <div id="artist-tracks" class="flex flex-col gap-1 max-w-5xl"></div>
             </div>
-        </div>
-
-        <!-- PAGE: CHART & SEARCH (Simplified placeholders for logic) -->
-        <div id="page-chart" class="page page-transition hidden p-10">
-            <h1 class="text-5xl font-black mb-10">Топ Чарт</h1>
-            <div id="chart-list" class="flex flex-col gap-1 max-w-5xl"></div>
-        </div>
-
-        <div id="page-search" class="page page-transition hidden p-10">
-            <div class="relative max-w-2xl mb-12">
-                <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 text-textDim"></i>
-                <input type="text" id="search-bar" oninput="doSearch()" placeholder="Трек, артист или альбом..." class="w-full bg-white/5 border border-white/10 py-5 pl-14 pr-6 rounded-2xl text-xl focus:outline-none focus:border-brand transition-all">
-            </div>
-            <div id="search-results" class="grid grid-cols-1 gap-12">
-                <div id="res-artists-section" class="hidden"><h2 class="text-xl font-bold mb-6">Артисты</h2><div id="res-artists" class="grid grid-cols-2 md:grid-cols-6 gap-6"></div></div>
-                <div id="res-tracks-section" class="hidden"><h2 class="text-xl font-bold mb-6">Треки</h2><div id="res-tracks" class="flex flex-col gap-1"></div></div>
-            </div>
-        </div>
+            <div id="artist-view-tracks" class="grid grid-cols-1 gap-2"></div>
+        </section>
 
     </main>
 
-    <!-- PLAYER BAR -->
-    <div class="fixed bottom-0 left-0 right-0 h-24 glass-player z-50 px-6 flex items-center justify-between">
-        <div class="flex items-center gap-4 w-1/3 md:w-1/4">
-            <div class="relative group">
-                <img id="p-img" src="" class="w-14 h-14 rounded-lg object-cover bg-white/5 shadow-lg transition-transform group-hover:scale-105">
-                <button class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
-                    <i data-lucide="maximize-2" class="w-4 h-4"></i>
-                </button>
-            </div>
-            <div class="overflow-hidden">
-                <div id="p-title" class="font-bold text-sm truncate">Не выбрано</div>
-                <div id="p-artist" onclick="openArtistFromPlayer()" class="text-xs text-textDim truncate hover:text-brand cursor-pointer transition-colors">---</div>
-            </div>
+    <!-- FLOATING PLAYER -->
+    <div id="player-container" class="fixed bottom-0 left-0 right-0 z-[60] glass-nav px-4 pt-3 pb-6 md:px-10 md:py-4">
+        
+        <!-- Progress Bar (on top of player for mobile) -->
+        <div class="absolute top-0 left-0 right-0 h-0.5 bg-white/5">
+            <div id="player-progress" class="h-full bg-brand shadow-[0_0_10px_#ffcc00] w-0 transition-all duration-300"></div>
         </div>
 
-        <div class="flex flex-col items-center gap-2 flex-1 max-w-2xl px-4">
-            <div class="flex items-center gap-6 md:gap-10">
-                <button onclick="toggleShuffle()" id="p-shuffle" class="text-textDim hover:text-white transition-all"><i data-lucide="shuffle" class="w-4 h-4"></i></button>
-                <button onclick="prevTrack()" class="text-textDim hover:text-white transition-all"><i data-lucide="skip-back" class="w-6 h-6 fill-current"></i></button>
-                <button onclick="togglePlay()" class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-xl">
+        <div class="flex items-center justify-between gap-4">
+            <!-- Track Info -->
+            <div class="flex items-center gap-3 w-2/3 md:w-1/4 overflow-hidden">
+                <img id="p-img" class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-cover bg-accent">
+                <div class="truncate">
+                    <div id="p-title" class="font-bold text-sm truncate">Выберите трек</div>
+                    <div id="p-artist" class="text-xs text-gray-400 truncate">---</div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center gap-6">
+                <button onclick="prevTrack()" class="hidden md:block text-gray-400 hover:text-white"><i data-lucide="skip-back" class="w-6 h-6 fill-current"></i></button>
+                <button onclick="togglePlay()" class="w-12 h-12 md:w-14 md:h-14 bg-white text-black rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
                     <i id="p-play-icon" data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
                 </button>
-                <button onclick="nextTrack()" class="text-textDim hover:text-white transition-all"><i data-lucide="skip-forward" class="w-6 h-6 fill-current"></i></button>
-                <button onclick="toggleRepeat()" id="p-repeat" class="text-textDim hover:text-white transition-all"><i data-lucide="repeat" class="w-4 h-4"></i></button>
+                <button onclick="nextTrack()" class="text-gray-400 hover:text-white"><i data-lucide="skip-forward" class="w-6 h-6 fill-current"></i></button>
             </div>
-            <div class="flex items-center gap-3 w-full">
-                <span id="p-current" class="text-[10px] text-textDim w-8 text-right font-mono">0:00</span>
-                <div class="relative flex-1 h-1 group cursor-pointer" onclick="handleSeek(event)">
-                    <div class="absolute inset-0 bg-white/10 rounded-full"></div>
-                    <div id="p-progress" class="absolute inset-y-0 left-0 bg-brand rounded-full w-0"></div>
-                    <div id="p-handle" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" style="left: 0%"></div>
-                </div>
-                <span id="p-total" class="text-[10px] text-textDim w-8 font-mono">0:00</span>
-            </div>
-        </div>
 
-        <div class="w-1/4 flex justify-end items-center gap-4 hidden md:flex">
-            <button class="text-textDim hover:text-white"><i data-lucide="list-music" class="w-5 h-5"></i></button>
-            <div class="flex items-center gap-3 group">
-                <i data-lucide="volume-2" class="w-4 h-4 text-textDim group-hover:text-brand"></i>
+            <!-- Volume (Desktop) -->
+            <div class="hidden md:flex items-center gap-3 w-1/4 justify-end">
+                <i data-lucide="volume-2" class="w-4 h-4 text-gray-500"></i>
                 <input type="range" id="p-vol" min="0" max="1" step="0.01" value="0.8" class="w-24">
             </div>
         </div>
+
+        <!-- MOBILE TAB BAR -->
+        <div class="md:hidden flex justify-around items-center mt-6 pt-2 border-t border-white/5">
+            <button onclick="navTo('home')" id="tab-home" class="flex flex-col items-center gap-1 active-tab">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Главная</span>
+            </button>
+            <button onclick="navTo('search')" id="tab-search" class="flex flex-col items-center gap-1 text-gray-500">
+                <i data-lucide="search" class="w-5 h-5"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Поиск</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex items-center justify-center p-6 hidden">
+        <div class="w-full max-w-sm bg-surface p-8 rounded-[2rem] border border-white/10">
+            <h2 class="text-2xl font-bold mb-6 italic tracking-tight">Настройки API</h2>
+            <div class="space-y-4">
+                <input type="password" id="token-input" placeholder="GitHub Token" class="w-full bg-accent border border-white/10 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand">
+                <input type="text" id="repo-input" placeholder="username/repo" class="w-full bg-accent border border-white/10 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand">
+                <button onclick="saveSettings()" class="w-full bg-brand text-black font-black py-4 rounded-2xl hover:bg-brandHover transition-colors">Обновить данные</button>
+                <button onclick="toggleAuth()" class="w-full text-gray-500 text-sm font-bold">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADER -->
+    <div id="main-loader" class="fixed inset-0 z-[110] bg-black flex flex-col items-center justify-center">
+        <div class="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin mb-4"></div>
+        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest animate-pulse">Синхронизация...</p>
     </div>
 
     <audio id="audio-engine"></audio>
 
     <script>
-        // CONFIG
         let REPO = localStorage.getItem('gh_repo') || "allkks/mus";
         let db = { tracks: [], artists: {} };
         let currentPlaylist = [];
         let currentIndex = -1;
-        let isPlaying = false;
-
         const audio = document.getElementById('audio-engine');
-        const vol = document.getElementById('p-vol');
-        const progressBar = document.getElementById('p-progress');
-        const progressHandle = document.getElementById('p-handle');
 
-        // INITIALIZATION
-        window.onload = () => {
+        // INIT
+        window.onload = async () => {
             lucide.createIcons();
-            initApp();
-            
-            // Telegram WebApp support
-            if (window.Telegram && window.Telegram.WebApp) {
+            if (window.Telegram?.WebApp) {
                 window.Telegram.WebApp.ready();
                 window.Telegram.WebApp.expand();
             }
+            await loadApp();
         };
 
-        async function initApp() {
+        async function loadApp() {
             const token = localStorage.getItem('gh_token');
-            document.getElementById('loader').classList.remove('hidden');
-            
             try {
-                // Пытаемся загрузить database.json (результат работы Python-менеджера)
-                const dbUrl = `https://raw.githubusercontent.com/${REPO}/main/database.json`;
-                const res = await fetch(dbUrl, token ? { headers: { 'Authorization': `token ${token}` } } : {});
+                // Пытаемся взять database.json
+                const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/database.json`, 
+                    token ? { headers: { 'Authorization': `token ${token}` } } : {});
                 
                 if (res.ok) {
-                    const data = await res.json();
-                    db = data;
-                    console.log("Database loaded from JSON");
-                    updateStatus(true);
+                    db = await res.json();
                 } else {
-                    // Если JSON нет, сканируем дерево (Fallback)
-                    console.warn("database.json not found, falling back to tree scanning");
-                    await scanTree(token);
+                    alert("Database.json не найден. Используйте Python-скрипт или проверьте настройки.");
                 }
                 
-                renderUI();
-                navTo('home');
+                renderHome();
+                document.getElementById('main-loader').classList.add('hidden');
             } catch (e) {
-                console.error("Init error:", e);
-                updateStatus(false);
-            } finally {
-                document.getElementById('loader').classList.add('hidden');
+                console.error(e);
+                document.getElementById('main-loader').innerHTML = '<p class="text-red-500">Ошибка подключения к GitHub</p>';
             }
         }
 
-        async function scanTree(token) {
-            const res = await fetch(`https://api.github.com/repos/${REPO}/git/trees/main?recursive=1`, {
-                headers: token ? { 'Authorization': `token ${token}` } : {}
-            });
-            const data = await res.json();
-            
-            data.tree.forEach((item, index) => {
-                if (item.path.startsWith('all_music/') && item.path.endsWith('.mp3')) {
-                    const parts = item.path.split('/');
-                    const artistName = parts[1];
-                    const trackTitle = parts[parts.length - 1].replace('.mp3', '');
-                    const url = `https://raw.githubusercontent.com/${REPO}/main/${encodeURIComponent(item.path)}`;
-                    
-                    // Ищем обложку артиста в той же папке (artist.jpg)
-                    const imgUrl = `https://raw.githubusercontent.com/${REPO}/main/all_music/${encodeURIComponent(artistName)}/artist.jpg`;
-                    
-                    const track = {
-                        id: index,
-                        title: trackTitle,
-                        artist: artistName,
-                        url: url,
-                        plays: 0,
-                        img: imgUrl
-                    };
-
-                    db.tracks.push(track);
-                    if (!db.artists[artistName]) {
-                        db.artists[artistName] = { 
-                            name: artistName, 
-                            tracks: [], 
-                            img: imgUrl,
-                            plays: 0
-                        };
-                    }
-                    db.artists[artistName].tracks.push(track);
-                }
-            });
-        }
-
-        function renderUI() {
-            // Главная: Артисты
-            const artists = Object.values(db.artists).sort((a,b) => b.plays - a.plays).slice(0, 12);
-            document.getElementById('home-artists').innerHTML = artists.map(a => `
-                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="artist-card group cursor-pointer">
-                    <div class="relative aspect-square mb-4 overflow-hidden rounded-2xl bg-bgPanel shadow-xl">
-                        <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff&size=512'" 
-                             class="w-full h-full object-cover transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div class="w-12 h-12 bg-brand rounded-full flex items-center justify-center shadow-lg">
-                                <i data-lucide="play" class="text-black fill-current w-5 h-5 ml-0.5"></i>
-                            </div>
-                        </div>
+        function renderHome() {
+            // Artists
+            const artistContainer = document.getElementById('home-artists');
+            artistContainer.innerHTML = Object.values(db.artists).slice(0, 8).map(a => `
+                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-brand transition-all shadow-xl">
+                        <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
-                    <p class="font-bold truncate text-sm group-hover:text-brand transition-colors">${a.name}</p>
-                    <p class="text-[10px] text-textDim uppercase tracking-widest mt-1">Артист</p>
+                    <p class="text-center text-[11px] font-bold truncate uppercase tracking-tighter">${a.name}</p>
                 </div>
             `).join('');
 
-            // Главная: Треки
-            document.getElementById('home-tracks').innerHTML = db.tracks.slice(0, 8).map(t => createTrackRow(t, db.tracks)).join('');
-            
-            // Чарт
-            const chartData = [...db.tracks].sort((a,b) => b.plays - a.plays);
-            document.getElementById('chart-list').innerHTML = chartData.map((t, i) => createTrackRow(t, chartData, i+1)).join('');
-            
+            // Tracks
+            const trackContainer = document.getElementById('home-tracks');
+            trackContainer.innerHTML = db.tracks.slice(0, 10).map(t => createTrackItem(t, db.tracks)).join('');
             lucide.createIcons();
         }
 
-        function createTrackRow(track, playlist, index = null) {
+        function createTrackItem(track, playlist) {
             const playlistStr = JSON.stringify(playlist).replace(/"/g, '&quot;');
             return `
-                <div class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl cursor-pointer group transition-all" onclick="playTrack(${track.id}, ${playlistStr})">
-                    <div class="flex items-center gap-4 flex-1 overflow-hidden">
-                        ${index ? `<span class="w-6 text-center text-textDim font-mono text-xs">${index}</span>` : ''}
-                        <div class="relative w-12 h-12 flex-shrink-0">
-                            <img src="${track.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(track.artist)}&size=100'" class="w-full h-full rounded-lg object-cover">
-                            <i data-lucide="play" class="absolute inset-0 m-auto w-4 h-4 fill-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <div class="overflow-hidden">
-                            <div class="font-bold text-sm truncate group-hover:text-brand">${track.title}</div>
-                            <div class="text-xs text-textDim hover:underline" onclick="event.stopPropagation(); openArtist('${track.artist.replace(/'/g, "\\'")}')">${track.artist}</div>
-                        </div>
+                <div onclick="playTrack(${track.id}, ${playlistStr})" class="flex items-center gap-4 p-3 bg-accent/30 rounded-2xl hover:bg-accent/60 transition-all cursor-pointer group">
+                    <img src="${track.img}" class="w-12 h-12 rounded-lg object-cover bg-surface shadow-md">
+                    <div class="flex-1 overflow-hidden">
+                        <div class="font-bold text-sm truncate group-hover:text-brand transition-colors">${track.title}</div>
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">${track.artist}</div>
                     </div>
-                    <div class="flex items-center gap-6 pr-4">
-                        <span class="text-[10px] text-textDim font-mono">${track.plays || 0} <i data-lucide="play" class="w-2 h-2 inline ml-0.5"></i></span>
-                        <button class="opacity-0 group-hover:opacity-100 transition-all text-textDim hover:text-brand">
-                            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
-                        </button>
+                    <div class="pr-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="play" class="w-4 h-4 text-brand fill-current"></i>
                     </div>
                 </div>
             `;
         }
 
-        // PLAYER ENGINE
+        // NAVIGATION
+        function navTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page-${page}`).classList.remove('hidden');
+            
+            // Mobile Tab Styling
+            document.querySelectorAll('#player-container button').forEach(b => b.classList.remove('active-tab', 'text-gray-500'));
+            const tab = document.getElementById(`tab-${page}`);
+            if (tab) tab.classList.add('active-tab'); else document.getElementById('tab-home').classList.add('text-gray-500');
+            
+            document.getElementById('scroll-container').scrollTo(0, 0);
+        }
+
+        function openArtist(name) {
+            const artist = db.artists[name];
+            document.getElementById('artist-view-name').innerText = artist.name;
+            document.getElementById('artist-view-img').src = artist.img;
+            document.getElementById('artist-view-stats').innerText = `${artist.tracks.length} ТРЕКОВ • ${artist.plays || 0} СЛУШАНИЙ`;
+            document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map(t => createTrackItem(t, artist.tracks)).join('');
+            navTo('artist');
+            lucide.createIcons();
+        }
+
+        // PLAYER
         function playTrack(id, playlist) {
             currentPlaylist = playlist;
             currentIndex = currentPlaylist.findIndex(t => t.id === id);
@@ -392,140 +297,72 @@
             document.getElementById('p-title').innerText = track.title;
             document.getElementById('p-artist').innerText = track.artist;
             document.getElementById('p-img').src = track.img;
-
+            
             audio.src = track.url;
             audio.play();
-            isPlaying = true;
-            updatePlayerUI();
-            
-            // Имитация записи прослушивания
-            track.plays = (track.plays || 0) + 1;
+            updateUI(true);
         }
 
         function togglePlay() {
             if (!audio.src) return;
-            if (audio.paused) audio.play(); else audio.pause();
-            isPlaying = !audio.paused;
-            updatePlayerUI();
+            if (audio.paused) {
+                audio.play();
+                updateUI(true);
+            } else {
+                audio.pause();
+                updateUI(false);
+            }
         }
 
-        function updatePlayerUI() {
+        function updateUI(playing) {
             const icon = document.getElementById('p-play-icon');
-            icon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
             lucide.createIcons();
         }
 
         function nextTrack() {
             if (currentIndex < currentPlaylist.length - 1) {
-                playTrack(currentPlaylist[currentIndex+1].id, currentPlaylist);
+                playTrack(currentPlaylist[currentIndex + 1].id, currentPlaylist);
             }
         }
 
         function prevTrack() {
             if (currentIndex > 0) {
-                playTrack(currentPlaylist[currentIndex-1].id, currentPlaylist);
+                playTrack(currentPlaylist[currentIndex - 1].id, currentPlaylist);
             }
         }
 
         audio.ontimeupdate = () => {
             const pct = (audio.currentTime / audio.duration) * 100 || 0;
-            progressBar.style.width = pct + "%";
-            progressHandle.style.left = pct + "%";
-            document.getElementById('p-current').innerText = fmtTime(audio.currentTime);
-            document.getElementById('p-total').innerText = fmtTime(audio.duration);
+            document.getElementById('player-progress').style.width = pct + "%";
         };
 
-        function handleSeek(e) {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const pct = x / rect.width;
-            audio.currentTime = pct * audio.duration;
-        }
-
-        vol.oninput = () => audio.volume = vol.value;
         audio.onended = nextTrack;
 
-        function fmtTime(s) {
-            if (isNaN(s)) return "0:00";
-            const m = Math.floor(s / 60);
-            const sc = Math.floor(s % 60);
-            return `${m}:${sc < 10 ? '0' : ''}${sc}`;
-        }
-
-        // NAVIGATION
-        function navTo(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-            document.getElementById(`page-${id}`).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
-            const btn = document.getElementById(`btn-${id}`);
-            if (btn) btn.classList.add('nav-active');
-            document.getElementById('scroll-container').scrollTo(0,0);
-        }
-
-        function openArtist(name) {
-            const artist = db.artists[name];
-            if (!artist) return;
-            
-            document.getElementById('artist-name').innerText = artist.name;
-            document.getElementById('artist-img').src = artist.img;
-            document.getElementById('artist-bg').style.backgroundImage = `url(${artist.img})`;
-            document.getElementById('artist-stats').innerText = `${artist.tracks.length} треков • ${artist.plays || 0} прослушиваний`;
-            
-            document.getElementById('artist-tracks').innerHTML = artist.tracks.map(t => createTrackRow(t, artist.tracks)).join('');
-            document.getElementById('play-artist-btn').onclick = () => playTrack(artist.tracks[0].id, artist.tracks);
-            
-            lucide.createIcons();
-            navTo('artist');
-        }
-
-        function doSearch() {
-            const q = document.getElementById('search-bar').value.toLowerCase().trim();
-            if (!q) {
-                document.getElementById('res-artists-section').classList.add('hidden');
-                document.getElementById('res-tracks-section').classList.add('hidden');
-                return;
-            }
-            const filteredArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
-            const filteredTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
-
-            document.getElementById('res-artists-section').classList.toggle('hidden', !filteredArtists.length);
-            document.getElementById('res-artists').innerHTML = filteredArtists.map(a => `
-                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="text-center group cursor-pointer">
-                    <img src="${a.img}" class="w-full aspect-square rounded-full mb-3 object-cover group-hover:scale-105 transition-all bg-bgPanel">
-                    <p class="font-bold text-xs truncate">${a.name}</p>
-                </div>
-            `).join('');
-
-            document.getElementById('res-tracks-section').classList.toggle('hidden', !filteredTracks.length);
-            document.getElementById('res-tracks').innerHTML = filteredTracks.map(t => createTrackRow(t, filteredTracks)).join('');
-            lucide.createIcons();
-        }
-
-        // SETTINGS & AUTH
-        function toggleAuth() {
-            const screen = document.getElementById('auth-screen');
-            screen.classList.toggle('hidden');
-            if (!screen.classList.contains('hidden')) {
-                document.getElementById('token-input').value = localStorage.getItem('gh_token') || "";
-                document.getElementById('repo-input').value = localStorage.getItem('gh_repo') || REPO;
-            }
-        }
-
+        // SETTINGS
+        function toggleAuth() { document.getElementById('auth-modal').classList.toggle('hidden'); }
         function saveSettings() {
-            const token = document.getElementById('token-input').value.trim();
-            const repo = document.getElementById('repo-input').value.trim();
-            if (token) localStorage.setItem('gh_token', token);
-            if (repo) localStorage.setItem('gh_repo', repo);
+            const t = document.getElementById('token-input').value.trim();
+            const r = document.getElementById('repo-input').value.trim();
+            if (t) localStorage.setItem('gh_token', t);
+            if (r) localStorage.setItem('gh_repo', r);
             location.reload();
         }
 
-        function updateStatus(online) {
-            const tag = document.getElementById('status-tag');
-            tag.innerHTML = online 
-                ? `<span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span> Sync OK`
-                : `<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Sync Error`;
-        }
+        function handleSearch() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            const results = document.getElementById('search-results');
+            if (!q) { results.innerHTML = ""; return; }
 
+            const filteredTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+            results.innerHTML = `
+                <div>
+                    <h2 class="text-sm font-bold text-gray-500 uppercase mb-4 tracking-widest">Результаты</h2>
+                    <div class="grid grid-cols-1 gap-2">${filteredTracks.map(t => createTrackItem(t, filteredTracks)).join('')}</div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
     </script>
 </body>
 </html>
