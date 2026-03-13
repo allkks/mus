@@ -44,6 +44,126 @@
                     "album": "Дома",
                     "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/02 Больше стаффа.flac",
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 5,
+                    "title": "03 Под балконом",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/03 Под балконом.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 6,
+                    "title": "04 Не всё потеряно feat. Баста",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/04 Не всё потеряно feat. Баста.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 7,
+                    "title": "05 Заходит луна feat. Princip",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/05 Заходит луна feat. Princip.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 8,
+                    "title": "06 Для неё",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/06 Для неё.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 9,
+                    "title": "07 Провода feat. Миг29",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/07 Провода feat. Миг29.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 10,
+                    "title": "08 Skittles (skit) feat. Бу",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/08 Skittles (skit) feat. Бу.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 11,
+                    "title": "09 Ice Baby",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/09 Ice Baby.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 12,
+                    "title": "10 Сверху видно всё feat. ТАНДЕМ",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/10 Сверху видно всё feat. ТАНДЕМ.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 13,
+                    "title": "11 Хм... (skit)",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/11 Хм... (skit).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 14,
+                    "title": "12 Metropolitan Mail",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/12 Metropolitan Mail.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 15,
+                    "title": "13 Надо лечиться",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/13 Надо лечиться.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 16,
+                    "title": "14 Калпак feat. Mark",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/14 Калпак feat. Mark.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 17,
+                    "title": "15 Было давно",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/15 Было давно.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 18,
+                    "title": "16 Дома feat. Ба",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/16 Дома feat. Ба.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 19,
+                    "title": "17 Аутро",
+                    "artist": "ГУФ",
+                    "album": "Дома",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/17 Аутро.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 }
             ],
             "albums": [
@@ -99,6 +219,126 @@
             "artist": "ГУФ",
             "album": "Дома",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/02 Больше стаффа.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 5,
+            "title": "03 Под балконом",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/03 Под балконом.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 6,
+            "title": "04 Не всё потеряно feat. Баста",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/04 Не всё потеряно feat. Баста.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 7,
+            "title": "05 Заходит луна feat. Princip",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/05 Заходит луна feat. Princip.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 8,
+            "title": "06 Для неё",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/06 Для неё.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 9,
+            "title": "07 Провода feat. Миг29",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/07 Провода feat. Миг29.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 10,
+            "title": "08 Skittles (skit) feat. Бу",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/08 Skittles (skit) feat. Бу.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 11,
+            "title": "09 Ice Baby",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/09 Ice Baby.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 12,
+            "title": "10 Сверху видно всё feat. ТАНДЕМ",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/10 Сверху видно всё feat. ТАНДЕМ.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 13,
+            "title": "11 Хм... (skit)",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/11 Хм... (skit).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 14,
+            "title": "12 Metropolitan Mail",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/12 Metropolitan Mail.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 15,
+            "title": "13 Надо лечиться",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/13 Надо лечиться.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 16,
+            "title": "14 Калпак feat. Mark",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/14 Калпак feat. Mark.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 17,
+            "title": "15 Было давно",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/15 Было давно.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 18,
+            "title": "16 Дома feat. Ба",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/16 Дома feat. Ба.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 19,
+            "title": "17 Аутро",
+            "artist": "ГУФ",
+            "album": "Дома",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/17 Аутро.flac",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         }
     ]
