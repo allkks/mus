@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MUS.LIB — Ultra Premium</title>
+    <title>MUS.LIB — Premium</title>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -31,7 +31,6 @@
         .glass-player { background: rgba(26, 18, 37, 0.98); backdrop-filter: blur(30px); border-top: 1px solid rgba(138, 43, 226, 0.2); }
         .hero-bg { background: linear-gradient(180deg, transparent 0%, rgba(10, 5, 16, 1) 100%); }
         .yandex-gradient { background: linear-gradient(135deg, #8a2be2 0%, #ff2d55 100%); }
-        
         .h-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 10px; }
         .track-column { min-width: 85vw; scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
         .album-card { min-width: 140px; scroll-snap-align: start; }
@@ -44,12 +43,13 @@
         
         <!-- HEADER -->
         <div class="p-6 pt-10 sticky top-0 bg-bg/90 backdrop-blur-xl z-50 flex items-center gap-4">
-            <div class="flex-1 flex items-center gap-3 bg-surface/50 border border-white/5 rounded-2xl px-5 py-3 focus-within:border-accent">
+            <div class="flex-1 flex items-center gap-3 bg-surface/50 border border-white/5 rounded-2xl px-5 py-3 focus-within:border-accent transition-all">
                 <i data-lucide="search" class="w-4 h-4 text-dim"></i>
                 <input id="search-input" type="text" placeholder="Поиск музыки" class="bg-transparent outline-none w-full text-sm text-white" oninput="handleSearch()">
             </div>
-            <div id="user-avatar" class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 overflow-hidden text-accent">
-                <i data-lucide="user" class="w-5 h-5"></i>
+            <div id="user-avatar" class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 overflow-hidden">
+                <!-- Сюда вставится фото юзера -->
+                <i data-lucide="user" class="w-5 h-5 text-accent"></i>
             </div>
         </div>
 
@@ -71,7 +71,7 @@
 
             <div id="fav-section" class="hidden mb-10">
                 <h2 onclick="navTo('full-list', 'Мне нравится')" class="text-xl font-bold mb-4 px-2 flex items-center justify-between text-heart cursor-pointer">
-                    <span>Мне нравится</span><i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    <span>Мне нравится</span><i data-lucide="chevron-right" class="w-5 h-5 text-dim"></i>
                 </h2>
                 <div id="favorites-list" class="h-scroll no-scrollbar px-2"></div>
             </div>
@@ -116,10 +116,8 @@
             <div class="p-4 space-y-1" id="album-tracks-list"></div>
         </section>
 
-        <!-- PAGE: SEARCH -->
         <section id="page-search" class="page hidden p-6"><div id="search-results" class="space-y-2"></div></section>
         
-        <!-- PAGE: FULL LIST -->
         <section id="page-full-list" class="page hidden p-6">
             <button onclick="navTo('home')" class="flex items-center gap-2 text-dim mb-6"><i data-lucide="chevron-left"></i> Назад</button>
             <div id="full-list-content" class="space-y-1"></div>
@@ -133,16 +131,18 @@
             <div id="m-title" class="font-bold text-sm truncate text-white">...</div>
             <div id="m-artist" class="text-dim text-[10px] uppercase">...</div>
         </div>
-        <button onclick="event.stopPropagation(); togglePlay()" class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-lg"><i id="m-play-icon" data-lucide="play" class="fill-black w-5 h-5 ml-0.5"></i></button>
+        <button onclick="event.stopPropagation(); togglePlay()" class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all">
+            <i id="m-play-icon" data-lucide="play" class="fill-black w-5 h-5 ml-0.5"></i>
+        </button>
     </div>
 
     <!-- PLAYER (FULL) -->
     <div id="full-player" class="fixed inset-0 bg-bg z-[200] transition-transform duration-500 translate-y-full flex flex-col p-8">
         <div class="flex justify-between items-center mb-10"><button onclick="closeFullPlayer()"><i data-lucide="chevron-down" class="w-8 h-8 text-white"></i></button><span class="text-[10px] font-bold uppercase tracking-widest opacity-30 text-white">Моя волна</span><button><i data-lucide="more-horizontal" class="w-6 h-6 text-white"></i></button></div>
-        <div class="flex-1 flex items-center justify-center mb-10"><img id="f-img" class="w-full aspect-square max-w-[320px] rounded-[3rem] object-cover shadow-2xl"></div>
+        <div class="flex-1 flex items-center justify-center mb-10"><img id="f-img" class="w-full aspect-square max-w-[320px] rounded-[3rem] object-cover shadow-2xl border border-white/5"></div>
         <div class="flex items-center justify-between mb-8"><div class="flex-1 min-w-0 pr-4"><h2 id="f-title" class="text-3xl font-black italic text-white mb-1 truncate">...</h2><p id="f-artist" class="text-lg text-dim truncate">...</p></div><button onclick="toggleFavorite(currentTrackId)" class="p-2"><i id="f-heart" data-lucide="heart" class="w-8 h-8"></i></button></div>
         <div class="mb-10"><div class="relative h-1 bg-white/10 rounded-full mb-4 cursor-pointer" id="seek-bar" onclick="seek(event)"><div id="f-progress" class="absolute top-0 left-0 h-full bg-white rounded-full"></div><div id="f-handle" class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full" style="left: 0%"></div></div><div class="flex justify-between text-[10px] font-mono text-dim"><span id="f-current-time">0:00</span><span id="f-total-time">0:00</span></div></div>
-        <div class="flex items-center justify-around mb-12"><button class="opacity-20 text-white"><i data-lucide="shuffle"></i></button><button onclick="prevTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-back" class="w-10 h-10 fill-white text-white"></i></button><button onclick="togglePlay()" class="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center"><i id="f-play-icon" data-lucide="play" class="fill-black w-10 h-10 ml-1"></i></button><button onclick="nextTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-forward" class="w-10 h-10 fill-white text-white"></i></button><button class="opacity-20 text-white"><i data-lucide="repeat"></i></button></div>
+        <div class="flex items-center justify-around mb-12"><button class="opacity-20 text-white"><i data-lucide="shuffle"></i></button><button onclick="prevTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-back" class="w-10 h-10 fill-white"></i></button><button onclick="togglePlay()" class="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center shadow-2xl active:scale-95 transition-all"><i id="f-play-icon" data-lucide="play" class="fill-black w-10 h-10 ml-1"></i></button><button onclick="nextTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-forward" class="w-10 h-10 fill-white"></i></button><button class="opacity-20 text-white"><i data-lucide="repeat"></i></button></div>
     </div>
 
     <!-- NAVBAR -->
@@ -184,16 +184,26 @@
 
         window.onload = async () => {
             lucide.createIcons();
-            // СЛУШАЕМ КОРЕНЬ (на случай если music_data еще не создан менеджером)
+            
+            // Ставим аватарку юзера
+            if (user.photo_url) {
+                document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
+            }
+
+            // Загрузка базы
             rtdb.ref('/').on('value', (snap) => {
                 const data = snap.val();
-                const source = data.music_data || data; // Проверка: музыка в папке или в корне
+                const source = data.music_data || data;
                 if(source && source.tracks) {
                     db.tracks = source.tracks;
                     db.artists = source.artists;
                     renderHome();
+                    // Если страница 'Мне нравится' открыта, обновляем её
+                    const fullListTitle = document.getElementById('full-list-content')?.querySelector('h1')?.innerText;
+                    if (fullListTitle === 'Мне нравится') openFullList('Мне нравится', getFavorites());
                 }
             });
+
             initCloudSync();
             listenGlobalCharts();
         };
@@ -202,17 +212,12 @@
             document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
             document.getElementById('page-' + p).classList.remove('hidden');
             
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-brandY');
-                btn.classList.add('text-dim/40');
-            });
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-brandY', 'text-dim/40'));
 
             if(p === 'home') {
-                document.getElementById('nav-home').classList.add('text-brandY');
-                document.getElementById('nav-home').classList.remove('text-dim/40');
+                document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
             } else if(title === 'Мне нравится') {
-                document.getElementById('nav-fav').classList.add('text-brandY');
-                document.getElementById('nav-fav').classList.remove('text-dim/40');
+                document.getElementById('nav-fav').classList.replace('text-dim/40', 'text-brandY');
                 openFullList(title, getFavorites());
             }
         }
@@ -242,16 +247,32 @@
         }
 
         function listenGlobalCharts() {
-            rtdb.ref('global_charts').orderByValue().limitToLast(12).on('value', (snap) => {
+            rtdb.ref('global_charts').on('value', (snap) => {
                 const data = snap.val();
-                if (!data) return;
+                if (!data || !db.tracks.length) return;
                 const sortedIds = Object.keys(data).sort((a, b) => data[b] - data[a]);
-                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x);
+                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 12);
+                
                 document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks).map(group => `
                     <div class="track-column">${group.map(t => renderTrackItem(t, 'db.tracks')).join('')}</div>
                 `).join('');
                 lucide.createIcons();
             });
+        }
+
+        function renderTrackItem(t, src) {
+            const isFav = favorites.includes(t.id);
+            return `
+                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${src})">
+                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-sm text-white truncate">${t.title}</div>
+                        <div class="text-[10px] text-dim uppercase truncate">${t.artist}</div>
+                    </div>
+                    <button onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})">
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i>
+                    </button>
+                </div>`;
         }
 
         function openArtistPage(name) {
@@ -284,39 +305,6 @@
             lucide.createIcons();
         }
 
-        function renderTrackItem(t, src) {
-            const isFav = favorites.includes(t.id);
-            return `
-                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${src})">
-                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
-                    <div class="flex-1 min-w-0">
-                        <div class="font-bold text-sm text-white truncate">${t.title}</div>
-                        <div class="text-[10px] text-dim uppercase truncate">${t.artist}</div>
-                    </div>
-                    <button onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})">
-                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i>
-                    </button>
-                </div>`;
-        }
-
-        function playTrack(id, list) {
-            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
-            if(!t) return;
-            currentTrackId = id;
-            currentPlaylist = Array.isArray(list) ? list : db.tracks;
-            document.getElementById('m-title').innerText = t.title;
-            document.getElementById('m-artist').innerText = t.artist;
-            document.getElementById('m-img').src = imgBust(t.img);
-            document.getElementById('f-title').innerText = t.title;
-            document.getElementById('f-artist').innerText = t.artist;
-            document.getElementById('f-img').src = imgBust(t.img);
-            audio.src = t.url; audio.play();
-            document.getElementById('mini-player').classList.remove('translate-y-[200px]');
-            updatePlayIcons(true);
-            rtdb.ref('global_charts/' + id).transaction(c => (c || 0) + 1);
-            updateHeartIcons();
-        }
-
         function initCloudSync() {
             rtdb.ref('users/' + user.id + '/profile').update({ name: user.first_name, username: user.username || "" });
             rtdb.ref('users/' + user.id + '/favorites').on('value', (snap) => {
@@ -326,40 +314,72 @@
                 updateHeartIcons();
             });
         }
+
         function toggleFavorite(id) {
             if(!id) return;
             const isFav = favorites.includes(id);
             rtdb.ref('users/' + user.id + '/favorites/' + id).set(!isFav);
         }
+
         function updateHeartIcons() {
             const isFav = favorites.includes(currentTrackId);
             const btn = document.getElementById('f-heart');
-            if (isFav) { btn.classList.add('fill-heart', 'text-heart'); btn.classList.remove('text-white'); }
-            else { btn.classList.remove('fill-heart', 'text-heart'); btn.classList.add('text-white'); }
+            if (btn) {
+                if (isFav) { btn.classList.add('fill-heart', 'text-heart'); btn.classList.remove('text-white'); }
+                else { btn.classList.remove('fill-heart', 'text-heart'); btn.classList.add('text-white'); }
+            }
             lucide.createIcons();
         }
+
+        function playTrack(id, list) {
+            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
+            if(!t) return;
+            currentTrackId = id;
+            currentPlaylist = Array.isArray(list) ? list : db.tracks;
+            
+            document.getElementById('m-title').innerText = t.title;
+            document.getElementById('m-artist').innerText = t.artist;
+            document.getElementById('m-img').src = imgBust(t.img);
+            document.getElementById('f-title').innerText = t.title;
+            document.getElementById('f-artist').innerText = t.artist;
+            document.getElementById('f-img').src = imgBust(t.img);
+            
+            audio.src = t.url; audio.play();
+            document.getElementById('mini-player').classList.remove('translate-y-[200px]');
+            updatePlayIcons(true);
+            rtdb.ref('global_charts/' + id).transaction(c => (c || 0) + 1);
+            updateHeartIcons();
+        }
+
         function togglePlay() { 
             if(audio.paused) { audio.play(); updatePlayIcons(true); }
             else { audio.pause(); updatePlayIcons(false); }
         }
+
         function updatePlayIcons(playing) {
             const i = playing ? 'pause' : 'play';
             document.getElementById('m-play-icon').setAttribute('data-lucide', i);
             document.getElementById('f-play-icon').setAttribute('data-lucide', i);
             lucide.createIcons();
         }
+
         function nextTrack() {
+            if (!currentPlaylist.length) return;
             let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
             playTrack(currentPlaylist[(i+1)%currentPlaylist.length].id, currentPlaylist);
         }
+
         function prevTrack() {
+            if (!currentPlaylist.length) return;
             let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
             playTrack(currentPlaylist[(i-1+currentPlaylist.length)%currentPlaylist.length].id, currentPlaylist);
         }
+
         function seek(e) {
             const rect = document.getElementById('seek-bar').getBoundingClientRect();
             audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
         }
+
         audio.ontimeupdate = () => { 
             if(audio.duration) {
                 const p = (audio.currentTime/audio.duration)*100;
@@ -369,6 +389,7 @@
                 document.getElementById('f-total-time').innerText = formatTime(audio.duration);
             }
         };
+
         function openFullPlayer() { document.getElementById('full-player').classList.remove('translate-y-full'); }
         function closeFullPlayer() { document.getElementById('full-player').classList.add('translate-y-full'); }
         function imgBust(u) { return u ? `${u}${u.includes('?') ? '&' : '?'}v=${globalBust}` : ''; }
