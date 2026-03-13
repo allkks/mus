@@ -3,7 +3,6 @@
         "ГУФ": {
             "name": "ГУФ",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/artist.jpg",
-            "bio": "",
             "tracks": [
                 {
                     "id": 0,
@@ -575,12 +574,12 @@
                 {
                     "title": "Город дорог",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg",
-                    "year": "2007"
+                    "year": "2025"
                 },
                 {
                     "title": "Дома",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg",
-                    "year": "2009"
+                    "year": "2025"
                 },
                 {
                     "title": "Сам и",
