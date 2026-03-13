@@ -1,5 +1,12 @@
 {
     "artists": {
+        "1231245": {
+            "name": "1231245",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/1231245/artist.jpg",
+            "bio": "",
+            "tracks": [],
+            "albums": []
+        },
         "ГУФ": {
             "name": "ГУФ",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/artist.jpg",
