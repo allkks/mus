@@ -174,226 +174,252 @@
     <audio id="audio-engine"></audio>
 
     <script>
-        const USER = "allkks";
-        const REPO = "mus";
-        let db = { tracks: [], artists: {} };
-        let favorites = JSON.parse(localStorage.getItem('user_favorites') || '[]');
-        let currentTrackId = null;
-        let currentPlaylist = [];
-        let currentAlbumTracks = [];
-        let currentArtistName = '';
-        const audio = document.getElementById('audio-engine');
+    const USER = "allkks";
+    const REPO = "mus";
+    let db = { tracks: [], artists: {} };
+    let favorites = JSON.parse(localStorage.getItem('user_favorites') || '[]');
+    let currentTrackId = null;
+    let currentPlaylist = [];
+    let currentAlbumTracks = [];
+    let currentArtistName = '';
+    const audio = document.getElementById('audio-engine');
 
-        window.onload = async () => { 
-            lucide.createIcons(); 
-            await loadDatabase();
-            setInterval(loadDatabase, 30000); // Авто-синхронизация каждые 30 сек
-        };
+    window.onload = async () => { 
+        lucide.createIcons(); 
+        await loadDatabase();
+        // Проверка каждые 15 секунд для еще большей скорости
+        setInterval(loadDatabase, 15000); 
+    };
 
-        async function loadDatabase() {
-            const t = Date.now();
-            try {
-                const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/database.json?v=${t}`, {
-                    cache: "no-store",
-                    headers: { 'Accept': 'application/vnd.github.v3.raw' }
-                });
-                const newData = await res.json();
-                if (JSON.stringify(db) !== JSON.stringify(newData)) {
-                    db = newData;
-                    renderHome();
-                    console.log("Синхронизация успешна");
-                }
-            } catch (e) {
-                const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${t}`, { cache: "no-store" });
-                db = await res.json();
-                renderHome();
-            }
-        }
-
-        function formatTime(s) {
-            if (!s || isNaN(s)) return '0:00';
-            const m = Math.floor(s / 60);
-            const sec = Math.floor(s % 60);
-            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        function handleSearch() {
-            const q = document.getElementById('search-input').value.toLowerCase().trim();
-            if (!q) { navTo('home'); return; }
-            navTo('search');
-            const container = document.getElementById('search-results');
+    async function loadDatabase() {
+        // Каждый запрос имеет уникальный ID, чтобы GitHub не смел отдавать старый файл
+        const bust = Date.now();
+        try {
+            const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/database.json?v=${bust}`, {
+                cache: "no-store",
+                headers: { 'If-None-Match': '' } 
+            });
+            const newData = await res.json();
             
-            const foundArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
-            const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q));
-
-            let html = '';
-            if (foundArtists.length > 0) {
-                html += `<div class="text-[10px] font-black text-accent uppercase tracking-widest mb-4 px-2">Исполнители</div>`;
-                foundArtists.forEach(a => {
-                    html += `
-                        <div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 border border-white/5 mb-6 active:scale-95 transition-all cursor-pointer">
-                            <img src="${a.img}" class="w-16 h-16 rounded-full object-cover border border-accent/20">
-                            <div class="flex-1">
-                                <div class="font-bold text-lg text-white">${a.name}</div>
-                                <div class="text-[10px] text-dim font-bold uppercase tracking-widest">Артист</div>
-                            </div>
-                            <i data-lucide="chevron-right" class="text-dim"></i>
-                        </div>`;
-                });
+            // Если данные хоть чем-то отличаются — перерисовываем всё немедленно
+            if (JSON.stringify(db) !== JSON.stringify(newData)) {
+                db = newData;
+                refreshCurrentView(); // Умное обновление текущего экрана
+                console.log("Контент обновлен мгновенно");
             }
-            if (foundTracks.length > 0) {
-                html += `<div class="text-[10px] font-black text-dim uppercase tracking-widest mb-4 px-2">Треки</div>`;
-                html += foundTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
-            }
-            if (!foundArtists.length && !foundTracks.length) {
-                html = `<div class="py-20 text-center text-dim opacity-40">Ничего не найдено</div>`;
-            }
-            container.innerHTML = html;
-            lucide.createIcons();
+        } catch (e) {
+            const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/database.json?v=${bust}`, { cache: "no-store" });
+            db = await res.json();
+            refreshCurrentView();
         }
+    }
 
-        function renderHome() {
-            document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
-                <div onclick="openArtistPage('${a.name}')" class="w-32 text-center transform active:scale-90 transition-transform cursor-pointer">
-                    <img src="${a.img}" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 border border-white/5 shadow-2xl">
-                    <div class="text-[10px] font-bold uppercase tracking-widest truncate text-white">${a.name}</div>
-                </div>`).join('');
-            document.getElementById('home-trending').innerHTML = db.tracks.slice(0, 6).map(t => renderTrackItem(t, 'db.tracks')).join('');
-            renderFavorites();
-            lucide.createIcons();
+    // Функция, которая понимает, на какой странице сидит юзер и обновляет её
+    function refreshCurrentView() {
+        renderHome(); // Главную обновляем всегда в фоне
+        
+        const artistPage = document.getElementById('page-artist');
+        const albumPage = document.getElementById('page-album');
+        const searchPage = document.getElementById('page-search');
+
+        if (!artistPage.classList.contains('hidden') && currentArtistName) {
+            openArtistPage(currentArtistName);
         }
-
-        function renderFavorites() {
-            const favs = db.tracks.filter(t => favorites.includes(t.id));
-            const container = document.getElementById('favorites-list');
-            if(favs.length) {
-                document.getElementById('fav-section').classList.remove('hidden');
-                container.innerHTML = favs.map(t => renderTrackItem(t, 'db.tracks')).join('');
-            } else { document.getElementById('fav-section').classList.add('hidden'); }
+        if (!albumPage.classList.contains('hidden') && currentAlbumTracks.length) {
+            const albTitle = document.getElementById('album-view-title').innerText;
+            openAlbumPage(currentArtistName, albTitle);
         }
+        if (!searchPage.classList.contains('hidden')) {
+            handleSearch();
+        }
+    }
 
-        function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
+    // Добавляем ?v= к картинкам, чтобы они не кешировались при изменениях
+    function imgBust(url) {
+        return url ? `${url}${url.includes('?') ? '&' : '?'}v=${Date.now()}` : '';
+    }
 
-        function renderTrackItem(t, source) {
-            const isFav = favorites.includes(t.id);
-            return `
-                <div class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${source})">
-                    <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover">
-                    <div class="flex-1 min-w-0">
-                        <div class="font-bold text-sm truncate text-white">${t.title}</div>
-                        <div class="text-[10px] text-dim font-bold uppercase tracking-widest">${t.artist}</div>
-                    </div>
-                    <button onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i></button>
+    function renderHome() {
+        document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
+            <div onclick="openArtistPage('${a.name}')" class="w-32 text-center transform active:scale-90 transition-transform cursor-pointer">
+                <img src="${imgBust(a.img)}" class="w-24 h-24 rounded-full mx-auto object-cover mb-3 border border-white/5 shadow-2xl">
+                <div class="text-[10px] font-bold uppercase tracking-widest truncate text-white">${a.name}</div>
+            </div>`).join('');
+        
+        document.getElementById('home-trending').innerHTML = db.tracks.slice(0, 6).map(t => renderTrackItem(t, 'db.tracks')).join('');
+        renderFavorites();
+        lucide.createIcons();
+    }
+
+    function renderTrackItem(t, source) {
+        const isFav = favorites.includes(t.id);
+        return `
+            <div class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${source})">
+                <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
+                <div class="flex-1 min-w-0">
+                    <div class="font-bold text-sm truncate text-white">${t.title}</div>
+                    <div class="text-[10px] text-dim font-bold uppercase tracking-widest">${t.artist}</div>
+                </div>
+                <button onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i></button>
+            </div>`;
+    }
+
+    function handleSearch() {
+        const q = document.getElementById('search-input').value.toLowerCase().trim();
+        if (!q) return;
+        navTo('search');
+        const container = document.getElementById('search-results');
+        const foundArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
+        const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q));
+
+        let html = '';
+        if (foundArtists.length > 0) {
+            html += `<div class="text-[10px] font-black text-accent uppercase tracking-widest mb-4 px-2">Исполнители</div>`;
+            foundArtists.forEach(a => {
+                html += `<div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 border border-white/5 mb-6 active:scale-95 transition-all cursor-pointer">
+                    <img src="${imgBust(a.img)}" class="w-16 h-16 rounded-full object-cover border border-accent/20">
+                    <div class="flex-1"><div class="font-bold text-lg text-white">${a.name}</div><div class="text-[10px] text-dim font-bold uppercase tracking-widest">Артист</div></div>
+                    <i data-lucide="chevron-right" class="text-dim"></i>
                 </div>`;
+            });
         }
+        if (foundTracks.length > 0) {
+            html += `<div class="text-[10px] font-black text-dim uppercase tracking-widest mb-4 px-2">Треки</div>`;
+            html += foundTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+        }
+        container.innerHTML = html || `<div class="py-20 text-center text-dim opacity-40">Ничего не найдено</div>`;
+        lucide.createIcons();
+    }
 
-        function openArtistPage(name) {
-            currentArtistName = name;
-            const artist = db.artists[name];
-            if(!artist) return;
-            document.getElementById('artist-view-img').src = artist.img;
-            document.getElementById('artist-view-name').innerText = artist.name;
-            const groups = [];
-            for (let i = 0; i < artist.tracks.length; i += 3) groups.push(artist.tracks.slice(i, i + 3));
-            document.getElementById('artist-view-tracks-scroll').innerHTML = groups.map(group => `
-                <div class="track-column flex flex-col gap-2">
-                    ${group.map(t => `
-                        <div onclick="playTrack(${t.id}, db.artists['${name}'].tracks)" class="flex items-center gap-4 bg-surface/30 p-3 rounded-2xl active:bg-accent/20 transition-all cursor-pointer">
-                            <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover shadow-sm">
-                            <div class="flex-1 truncate font-bold text-sm text-white">${t.title}</div>
-                            <i data-lucide="play" class="w-4 h-4 text-dim opacity-20"></i>
-                        </div>`).join('')}
-                </div>`).join('');
-            document.getElementById('artist-view-albums').innerHTML = (artist.albums || []).map(alb => `
-                <div onclick="openAlbumPage('${name}', '${alb.title}')" class="w-44 transform active:scale-95 transition-all cursor-pointer">
-                    <img src="${alb.cover}" class="w-44 h-44 rounded-[2.5rem] object-cover mb-3">
-                    <div class="font-bold text-sm truncate px-1 text-white">${alb.title}</div>
-                    <div class="text-[10px] text-dim font-bold uppercase tracking-widest">${alb.year || '2025'}</div>
-                </div>`).join('');
-            navTo('artist'); lucide.createIcons();
-        }
+    // Все остальные функции (playTrack, next, formatTime и т.д.) просто скопируй из своего кода ниже
+    // Главное — везде, где выводится <img>, используй src="${imgBust(t.img)}"
 
-        function openAlbumPage(artistName, albumTitle) {
-            const artist = db.artists[artistName];
-            currentAlbumTracks = artist.tracks.filter(t => t.album === albumTitle);
-            document.getElementById('album-view-img').src = currentAlbumTracks[0].img;
-            document.getElementById('album-view-title').innerText = albumTitle;
-            document.getElementById('album-view-artist').innerText = artistName;
-            document.getElementById('album-year').innerText = '2025';
-            document.getElementById('album-tracks-list').innerHTML = currentAlbumTracks.map(t => renderTrackItem(t, 'currentAlbumTracks')).join('');
-            navTo('album'); lucide.createIcons();
-        }
+    function formatTime(s) {
+        if (!s || isNaN(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    }
 
-        function playCurrentAlbum() { if(currentAlbumTracks.length) playTrack(currentAlbumTracks[0].id, currentAlbumTracks); }
-        function openFullList(title, tracks) {
-            document.getElementById('full-list-title').innerText = title;
-            document.getElementById('full-list-content').innerHTML = tracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
-            navTo('full-list'); lucide.createIcons();
-        }
+    function openArtistPage(name) {
+        currentArtistName = name;
+        const artist = db.artists[name];
+        if(!artist) return;
+        document.getElementById('artist-view-img').src = imgBust(artist.img);
+        document.getElementById('artist-view-name').innerText = artist.name;
+        const groups = [];
+        for (let i = 0; i < artist.tracks.length; i += 3) groups.push(artist.tracks.slice(i, i + 3));
+        document.getElementById('artist-view-tracks-scroll').innerHTML = groups.map(group => `
+            <div class="track-column flex flex-col gap-2">
+                ${group.map(t => `
+                    <div onclick="playTrack(${t.id}, db.artists['${name}'].tracks)" class="flex items-center gap-4 bg-surface/30 p-3 rounded-2xl active:bg-accent/20 transition-all cursor-pointer">
+                        <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover shadow-sm">
+                        <div class="flex-1 truncate font-bold text-sm text-white">${t.title}</div>
+                        <i data-lucide="play" class="w-4 h-4 text-dim opacity-20"></i>
+                    </div>`).join('')}
+            </div>`).join('');
+        document.getElementById('artist-view-albums').innerHTML = (artist.albums || []).map(alb => `
+            <div onclick="openAlbumPage('${name}', '${alb.title}')" class="w-44 transform active:scale-95 transition-all cursor-pointer">
+                <img src="${imgBust(alb.cover)}" class="w-44 h-44 rounded-[2.5rem] object-cover mb-3">
+                <div class="font-bold text-sm truncate px-1 text-white">${alb.title}</div>
+                <div class="text-[10px] text-dim font-bold uppercase tracking-widest">${alb.year || '2025'}</div>
+            </div>`).join('');
+        navTo('artist'); lucide.createIcons();
+    }
 
-        function playTrack(id, list) {
-            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
-            if(!t) return;
-            currentTrackId = id;
-            currentPlaylist = Array.isArray(list) ? list : db.tracks;
-            document.getElementById('p-title').innerText = t.title;
-            document.getElementById('p-artist').innerText = t.artist;
-            document.getElementById('p-img').src = t.img;
-            audio.src = t.url; audio.play();
-            document.getElementById('p-play-icon').setAttribute('data-lucide', 'pause');
-            document.getElementById('player').classList.remove('translate-y-[300px]');
-            lucide.createIcons(); updateHeartIcons();
-        }
+    function openAlbumPage(artistName, albumTitle) {
+        const artist = db.artists[artistName];
+        currentAlbumTracks = artist.tracks.filter(t => t.album === albumTitle);
+        document.getElementById('album-view-img').src = imgBust(currentAlbumTracks[0].img);
+        document.getElementById('album-view-title').innerText = albumTitle;
+        document.getElementById('album-view-artist').innerText = artistName;
+        document.getElementById('album-year').innerText = '2025';
+        document.getElementById('album-tracks-list').innerHTML = currentAlbumTracks.map(t => renderTrackItem(t, 'currentAlbumTracks')).join('');
+        navTo('album'); lucide.createIcons();
+    }
 
-        function prevTrack() {
-            if(!currentPlaylist.length) return;
-            let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
-            i = (i - 1 + currentPlaylist.length) % currentPlaylist.length;
-            playTrack(currentPlaylist[i].id, currentPlaylist);
-        }
-        function nextTrack() {
-            if(!currentPlaylist.length) return;
-            let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
-            i = (i + 1) % currentPlaylist.length;
-            playTrack(currentPlaylist[i].id, currentPlaylist);
-        }
-        function togglePlay() { 
-            if(audio.paused) { audio.play(); document.getElementById('p-play-icon').setAttribute('data-lucide', 'pause'); }
-            else { audio.pause(); document.getElementById('p-play-icon').setAttribute('data-lucide', 'play'); }
-            lucide.createIcons();
-        }
-        function toggleFavorite(id) {
-            if(!id) return;
-            const i = favorites.indexOf(id);
-            if(i > -1) favorites.splice(i, 1); else favorites.push(id);
-            localStorage.setItem('user_favorites', JSON.stringify(favorites));
-            updateHeartIcons(); renderFavorites(); renderHome(); 
-        }
-        function updateHeartIcons() {
-            const isFav = favorites.includes(currentTrackId);
-            const btn = document.getElementById('p-heart-main');
+    function renderFavorites() {
+        const favs = db.tracks.filter(t => favorites.includes(t.id));
+        const container = document.getElementById('favorites-list');
+        if(favs.length) {
+            document.getElementById('fav-section').classList.remove('hidden');
+            container.innerHTML = favs.map(t => renderTrackItem(t, 'db.tracks')).join('');
+        } else { document.getElementById('fav-section').classList.add('hidden'); }
+    }
+
+    function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
+    function playCurrentAlbum() { if(currentAlbumTracks.length) playTrack(currentAlbumTracks[0].id, currentAlbumTracks); }
+    function openFullList(title, tracks) {
+        document.getElementById('full-list-title').innerText = title;
+        document.getElementById('full-list-content').innerHTML = tracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+        navTo('full-list'); lucide.createIcons();
+    }
+
+    function playTrack(id, list) {
+        const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
+        if(!t) return;
+        currentTrackId = id;
+        currentPlaylist = Array.isArray(list) ? list : db.tracks;
+        document.getElementById('p-title').innerText = t.title;
+        document.getElementById('p-artist').innerText = t.artist;
+        document.getElementById('p-img').src = imgBust(t.img);
+        audio.src = t.url; audio.play();
+        document.getElementById('p-play-icon').setAttribute('data-lucide', 'pause');
+        document.getElementById('player').classList.remove('translate-y-[300px]');
+        lucide.createIcons(); updateHeartIcons();
+    }
+
+    function prevTrack() {
+        if(!currentPlaylist.length) return;
+        let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
+        i = (i - 1 + currentPlaylist.length) % currentPlaylist.length;
+        playTrack(currentPlaylist[i].id, currentPlaylist);
+    }
+    function nextTrack() {
+        if(!currentPlaylist.length) return;
+        let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
+        i = (i + 1) % currentPlaylist.length;
+        playTrack(currentPlaylist[i].id, currentPlaylist);
+    }
+    function togglePlay() { 
+        if(audio.paused) { audio.play(); document.getElementById('p-play-icon').setAttribute('data-lucide', 'pause'); }
+        else { audio.pause(); document.getElementById('p-play-icon').setAttribute('data-lucide', 'play'); }
+        lucide.createIcons();
+    }
+    function toggleFavorite(id) {
+        if(!id) return;
+        const i = favorites.indexOf(id);
+        if(i > -1) favorites.splice(i, 1); else favorites.push(id);
+        localStorage.setItem('user_favorites', JSON.stringify(favorites));
+        updateHeartIcons(); renderFavorites(); renderHome(); 
+    }
+    function updateHeartIcons() {
+        const isFav = favorites.includes(currentTrackId);
+        const btn = document.getElementById('p-heart-main');
+        if (btn) {
             if (isFav) { btn.classList.add('fill-heart', 'text-heart'); btn.classList.remove('text-dim'); }
             else { btn.classList.remove('fill-heart', 'text-heart'); btn.classList.add('text-dim'); }
-            lucide.createIcons();
         }
-        function playArtistTracks() {
-            const artist = db.artists[document.getElementById('artist-view-name').innerText];
-            if(artist && artist.tracks.length) playTrack(artist.tracks[0].id, artist.tracks);
+        lucide.createIcons();
+    }
+    function playArtistTracks() {
+        const artist = db.artists[document.getElementById('artist-view-name').innerText];
+        if(artist && artist.tracks.length) playTrack(artist.tracks[0].id, artist.tracks);
+    }
+    function playRandom() { if(db.tracks.length) playTrack(db.tracks[Math.floor(Math.random()*db.tracks.length)].id, db.tracks); }
+    function navTo(p) {
+        document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
+        document.getElementById('page-'+p).classList.remove('hidden');
+        document.getElementById('scroll-container').scrollTo(0,0);
+    }
+    audio.ontimeupdate = () => { 
+        if(audio.duration) {
+            document.getElementById('player-progress').style.width = (audio.currentTime/audio.duration)*100 + "%"; 
+            document.getElementById('p-current-time').innerText = formatTime(audio.currentTime);
+            document.getElementById('p-total-time').innerText = formatTime(audio.duration);
         }
-        function playRandom() { if(db.tracks.length) playTrack(db.tracks[Math.floor(Math.random()*db.tracks.length)].id, db.tracks); }
-        function navTo(p) {
-            document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
-            document.getElementById('page-'+p).classList.remove('hidden');
-            document.getElementById('scroll-container').scrollTo(0,0);
-        }
-        audio.ontimeupdate = () => { 
-            if(audio.duration) {
-                document.getElementById('player-progress').style.width = (audio.currentTime/audio.duration)*100 + "%"; 
-                document.getElementById('p-current-time').innerText = formatTime(audio.currentTime);
-                document.getElementById('p-total-time').innerText = formatTime(audio.duration);
-            }
-        };
-        audio.onended = () => nextTrack();
-    </script>
+    };
+    audio.onended = () => nextTrack();
+</script>
 </body>
 </html>
