@@ -15,6 +15,13 @@
                 }
             ],
             "albums": []
+        },
+        "333": {
+            "name": "333",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/333/artist.jpg",
+            "bio": "",
+            "tracks": [],
+            "albums": []
         }
     },
     "tracks": [
