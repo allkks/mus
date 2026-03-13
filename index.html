@@ -1,221 +1,283 @@
-import customtkinter as ctk
-from github import Github, Auth
-from tkinter import filedialog, messagebox
-import os
-import json
-import uuid
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MUS.LIB — Premium Player</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { brand: '#ffcc00', surface: '#121212', accent: '#1e1e1e' },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
 
-# --- КОНФИГУРАЦИЯ ---
-GITHUB_TOKEN = "ТВОЙ_ТОКЕН" 
-REPO_NAME = "allkks/mus"
-ROOT_DIR = "all_music"
+    <style>
+        body { background-color: #000; color: #fff; -webkit-tap-highlight-color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .glass-nav { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom) + 5rem); }
+        .active-tab { color: #ffcc00; transform: translateY(-2px); }
+        .active-tab i { filter: drop-shadow(0 0 8px #ffcc00); }
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { background: #333; height: 4px; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: #ffcc00; margin-top: -4px; border: 2px solid #000; }
+    </style>
+</head>
+<body class="selection:bg-brand/30">
 
-auth = Auth.Token(GITHUB_TOKEN)
-g = Github(auth=auth)
-repo = g.get_repo(REPO_NAME)
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 h-20 flex items-center px-6 md:px-10 z-40 bg-black/50 backdrop-blur-md border-b border-white/5">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center rotate-3 shadow-lg shadow-brand/20">
+                <i data-lucide="music" class="text-black w-6 h-6"></i>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tighter italic">MUS.LIB</span>
+        </div>
+    </header>
 
-ctk.set_appearance_mode("dark")
-
-class PremiumManager(ctk.CTk):
-    def __init__(self):
-        super().__init__()
-        self.title("MUS.LIB — Database Generator")
-        self.geometry("1100x700")
-
-        self.current_artist = None
-        self.current_album = None
+    <!-- MAIN WRAPPER -->
+    <main id="scroll-container" class="h-screen overflow-y-auto no-scrollbar pb-safe pt-24 px-4 md:px-10">
         
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure(0, weight=1)
+        <!-- WELCOME SECTION -->
+        <section id="page-home" class="page">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-2 italic">Для тебя</h1>
+                <p class="text-gray-400 text-sm">Твой персональный поток музыки</p>
+            </div>
 
-        # Сайдбар
-        self.sidebar = ctk.CTkFrame(self, width=280, corner_radius=0)
-        self.sidebar.grid(row=0, column=0, sticky="nsew")
-        
-        ctk.CTkLabel(self.sidebar, text="MUS.LIB ADMIN", font=("Arial", 24, "bold"), text_color="#ffcc00").pack(pady=30)
-        
-        self.artist_list = ctk.CTkScrollableFrame(self.sidebar, fg_color="transparent")
-        self.artist_list.pack(fill="both", expand=True, padx=10)
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand rounded-full"></span> Популярные артисты
+                </h2>
+                <div id="home-artists" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8"></div>
+            </div>
 
-        ctk.CTkButton(self.sidebar, text="+ Новый артист", command=self.add_artist).pack(pady=5, padx=20)
-        ctk.CTkButton(self.sidebar, text="🔄 Обновить список", fg_color="gray30", command=self.load_artists).pack(pady=5, padx=20)
-        ctk.CTkButton(self.sidebar, text="🚀 ОПУБЛИКОВАТЬ НА САЙТ", fg_color="#ffcc00", text_color="black", font=("Arial", 14, "bold"), command=self.sync_database).pack(pady=20, padx=20)
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand rounded-full"></span> Все треки
+                </h2>
+                <div id="home-tracks" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+        </section>
 
-        self.main = ctk.CTkScrollableFrame(self, fg_color="transparent")
-        self.main.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
+        <!-- SEARCH PAGE -->
+        <section id="page-search" class="page hidden">
+            <h1 class="text-3xl font-extrabold mb-8 italic">Поиск</h1>
+            <div class="relative mb-10">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Трек или артист..." 
+                       class="w-full bg-accent border border-white/5 py-4 pl-12 pr-6 rounded-2xl focus:outline-none focus:border-brand/50 transition-all text-lg">
+            </div>
+            <div id="search-results" class="space-y-8"></div>
+        </section>
 
-        self.load_artists()
+        <!-- ARTIST PAGE -->
+        <section id="page-artist" class="page hidden">
+            <button onclick="navTo('home')" class="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад
+            </button>
+            <div class="flex flex-col md:flex-row items-center md:items-end gap-6 mb-12">
+                <img id="artist-view-img" class="w-48 h-48 md:w-64 md:h-64 rounded-3xl object-cover shadow-2xl border border-white/5">
+                <div class="text-center md:text-left">
+                    <h1 id="artist-view-name" class="text-5xl md:text-8xl font-black tracking-tighter mb-4"></h1>
+                    <div id="artist-view-stats" class="text-gray-400 font-medium uppercase tracking-widest text-xs"></div>
+                </div>
+            </div>
+            <div id="artist-view-tracks" class="grid grid-cols-1 gap-2"></div>
+        </section>
 
-    def load_artists(self):
-        for w in self.artist_list.winfo_children(): w.destroy()
-        try:
-            items = repo.get_contents(ROOT_DIR)
-            for item in items:
-                if item.type == "dir":
-                    ctk.CTkButton(self.artist_list, text=f"👤 {item.name}", fg_color="transparent", 
-                                 anchor="w", command=lambda n=item.name: self.open_artist(n)).pack(fill="x", pady=1)
-        except: pass
+    </main>
 
-    def open_artist(self, name):
-        self.current_artist = name
-        self.current_album = None
-        for w in self.main.winfo_children(): w.destroy()
+    <!-- FLOATING PLAYER -->
+    <div id="player-container" class="fixed bottom-0 left-0 right-0 z-[60] glass-nav px-4 pt-3 pb-6 md:px-10 md:py-4">
+        <div class="absolute top-0 left-0 right-0 h-0.5 bg-white/5">
+            <div id="player-progress" class="h-full bg-brand shadow-[0_0_10px_#ffcc00] w-0 transition-all duration-300"></div>
+        </div>
 
-        header = ctk.CTkFrame(self.main, fg_color="transparent")
-        header.pack(fill="x", pady=10)
-        ctk.CTkLabel(header, text=f"🎤 {name}", font=("Arial", 28, "bold")).pack(side="left")
-        ctk.CTkButton(header, text="Удалить артиста", fg_color="#a83232", width=120, command=self.delete_artist).pack(side="right")
+        <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3 w-2/3 md:w-1/4 overflow-hidden">
+                <img id="p-img" class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-cover bg-accent">
+                <div class="truncate">
+                    <div id="p-title" class="font-bold text-sm truncate">Выберите трек</div>
+                    <div id="p-artist" class="text-xs text-gray-400 truncate">---</div>
+                </div>
+            </div>
 
-        btns = ctk.CTkFrame(self.main, fg_color="transparent")
-        btns.pack(fill="x", pady=10)
-        ctk.CTkButton(btns, text="📸 Загрузить фото", width=150, command=self.upload_artist_photo).pack(side="left", padx=5)
-        ctk.CTkButton(btns, text="💿 Создать альбом", width=150, command=self.add_album).pack(side="left", padx=5)
-        ctk.CTkButton(btns, text="🎵 Добавить трек", width=150, command=lambda: self.upload_track("singles")).pack(side="left", padx=5)
+            <div class="flex items-center gap-6">
+                <button onclick="prevTrack()" class="hidden md:block text-gray-400 hover:text-white"><i data-lucide="skip-back" class="w-6 h-6 fill-current"></i></button>
+                <button onclick="togglePlay()" class="w-12 h-12 md:w-14 md:h-14 bg-white text-black rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                    <i id="p-play-icon" data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                </button>
+                <button onclick="nextTrack()" class="text-gray-400 hover:text-white"><i data-lucide="skip-forward" class="w-6 h-6 fill-current"></i></button>
+            </div>
 
-        # Рендер альбомов и синглов
-        self.render_section("Альбомы", f"{ROOT_DIR}/{name}/albums", is_album=True)
-        self.render_section("Синглы", f"{ROOT_DIR}/{name}/singles", is_album=False)
+            <div class="hidden md:flex items-center gap-3 w-1/4 justify-end">
+                <i data-lucide="volume-2" class="w-4 h-4 text-gray-500"></i>
+                <input type="range" id="p-vol" min="0" max="1" step="0.01" value="0.8" class="w-24">
+            </div>
+        </div>
 
-    def render_section(self, title, path, is_album):
-        ctk.CTkLabel(self.main, text=title, font=("Arial", 18, "bold")).pack(anchor="w", pady=(20, 10))
-        try:
-            items = repo.get_contents(path)
-            for item in items:
-                if is_album and item.type == "dir":
-                    f = ctk.CTkFrame(self.main, fg_color="gray20")
-                    f.pack(fill="x", pady=2)
-                    ctk.CTkLabel(f, text=f"💿 {item.name}").pack(side="left", padx=15)
-                    ctk.CTkButton(f, text="Открыть", width=80, command=lambda n=item.name: self.open_album(n)).pack(side="right", padx=5, pady=5)
-                elif not is_album and item.name.endswith(".mp3"):
-                    f = ctk.CTkFrame(self.main, fg_color="gray15")
-                    f.pack(fill="x", pady=2)
-                    ctk.CTkLabel(f, text=f"🎶 {item.name}").pack(side="left", padx=15)
-                    ctk.CTkButton(f, text="🗑", width=30, fg_color="#a83232", command=lambda x=item: self.delete_file(x)).pack(side="right", padx=5, pady=5)
-        except: pass
+        <div class="md:hidden flex justify-around items-center mt-6 pt-2 border-t border-white/5">
+            <button onclick="navTo('home')" id="tab-home" class="flex flex-col items-center gap-1 active-tab">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Главная</span>
+            </button>
+            <button onclick="navTo('search')" id="tab-search" class="flex flex-col items-center gap-1 text-gray-500">
+                <i data-lucide="search" class="w-5 h-5"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest">Поиск</span>
+            </button>
+        </div>
+    </div>
 
-    def open_album(self, album_name):
-        self.current_album = album_name
-        for w in self.main.winfo_children(): w.destroy()
-        ctk.CTkButton(self.main, text="← Назад", command=lambda: self.open_artist(self.current_artist)).pack(anchor="w")
-        ctk.CTkLabel(self.main, text=f"Альбом: {album_name}", font=("Arial", 24, "bold")).pack(pady=10)
-        ctk.CTkButton(self.main, text="🖼 Загрузить обложку", command=self.upload_album_cover).pack(pady=5)
-        ctk.CTkButton(self.main, text="➕ Добавить трек в альбом", command=lambda: self.upload_track(f"albums/{album_name}")).pack(pady=5)
-        self.render_section("Треки в альбоме", f"{ROOT_DIR}/{self.current_artist}/albums/{album_name}", is_album=False)
+    <!-- LOADER -->
+    <div id="main-loader" class="fixed inset-0 z-[110] bg-black flex flex-col items-center justify-center">
+        <div class="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin mb-4"></div>
+        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest animate-pulse">Загрузка медиатеки...</p>
+    </div>
 
-    # --- ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ---
-    def add_artist(self):
-        name = ctk.CTkInputDialog(text="Имя артиста:", title="Новый артист").get_input()
-        if name and name.strip():
-            repo.create_file(f"{ROOT_DIR}/{name}/singles/.keep", "init", "")
-            repo.create_file(f"{ROOT_DIR}/{name}/albums/.keep", "init", "")
-            self.load_artists()
+    <audio id="audio-engine"></audio>
 
-    def add_album(self):
-        name = ctk.CTkInputDialog(text="Название альбома:", title="Новый альбом").get_input()
-        if name and name.strip():
-            repo.create_file(f"{ROOT_DIR}/{self.current_artist}/albums/{name}/.keep", "init", "")
-            self.open_artist(self.current_artist)
+    <script>
+        // ЗАШИТЫЕ НАСТРОЙКИ
+        const REPO = "allkks/mus";
+        const DB_URL = `https://raw.githubusercontent.com/${REPO}/main/database.json`;
 
-    def upload_track(self, subpath):
-        path = filedialog.askopenfilename(filetypes=[("Audio", "*.mp3")])
-        if path:
-            name = os.path.basename(path)
-            with open(path, "rb") as f: content = f.read()
-            repo.create_file(f"{ROOT_DIR}/{self.current_artist}/{subpath}/{name}", "upd", content)
-            if self.current_album: self.open_album(self.current_album)
-            else: self.open_artist(self.current_artist)
+        let db = { tracks: [], artists: {} };
+        let currentPlaylist = [];
+        let currentIndex = -1;
+        const audio = document.getElementById('audio-engine');
 
-    def upload_artist_photo(self):
-        path = filedialog.askopenfilename(filetypes=[("Image", "*.jpg;*.png")])
-        if path:
-            with open(path, "rb") as f: content = f.read()
-            p = f"{ROOT_DIR}/{self.current_artist}/artist.jpg"
-            try:
-                old = repo.get_contents(p)
-                repo.update_file(old.path, "upd", content, old.sha)
-            except: repo.create_file(p, "add", content)
-            messagebox.showinfo("OK", "Фото загружено")
+        window.onload = async () => {
+            lucide.createIcons();
+            if (window.Telegram?.WebApp) {
+                window.Telegram.WebApp.ready();
+                window.Telegram.WebApp.expand();
+            }
+            await loadApp();
+        };
 
-    def upload_album_cover(self):
-        path = filedialog.askopenfilename(filetypes=[("Image", "*.jpg;*.png")])
-        if path:
-            with open(path, "rb") as f: content = f.read()
-            p = f"{ROOT_DIR}/{self.current_artist}/albums/{self.current_album}/cover.jpg"
-            try:
-                old = repo.get_contents(p)
-                repo.update_file(old.path, "upd", content, old.sha)
-            except: repo.create_file(p, "add", content)
-            messagebox.showinfo("OK", "Обложка загружена")
+        async function loadApp() {
+            try {
+                // Добавляем ?v=... чтобы браузер не кешировал старую базу
+                const res = await fetch(`${DB_URL}?v=${Date.now()}`);
+                if (!res.ok) throw new Error("Database not found");
+                db = await res.json();
+                
+                renderHome();
+                document.getElementById('main-loader').classList.add('hidden');
+            } catch (e) {
+                console.error(e);
+                document.getElementById('main-loader').innerHTML = '<p class="text-red-500 font-bold">ОШИБКА ПОДКЛЮЧЕНИЯ</p>';
+            }
+        }
 
-    def delete_artist(self):
-        if messagebox.askyesno("Удаление", f"Удалить {self.current_artist}?"):
-            files = repo.get_contents(f"{ROOT_DIR}/{self.current_artist}", recursive=True)
-            for f in reversed(files): 
-                if f.type == "file": repo.delete_file(f.path, "del", f.sha)
-            self.load_artists()
+        function renderHome() {
+            const artistContainer = document.getElementById('home-artists');
+            artistContainer.innerHTML = Object.values(db.artists).map(a => `
+                <div onclick="openArtist('${a.name.replace(/'/g, "\\'")}')" class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-brand transition-all shadow-xl">
+                        <img src="${a.img}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=333&color=fff'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <p class="text-center text-[10px] font-bold truncate uppercase tracking-widest">${a.name}</p>
+                </div>
+            `).join('');
 
-    def delete_file(self, file_obj):
-        repo.delete_file(file_obj.path, "del", file_obj.sha)
-        if self.current_album: self.open_album(self.current_album)
-        else: self.open_artist(self.current_artist)
+            const trackContainer = document.getElementById('home-tracks');
+            trackContainer.innerHTML = db.tracks.map(t => createTrackItem(t, db.tracks)).join('');
+            lucide.createIcons();
+        }
 
-    # --- СИНХРОНИЗАЦИЯ (ПОД НОВЫЙ САЙТ) ---
-    def sync_database(self):
-        db = {"artists": {}, "tracks": []} # Artists теперь объект!
-        try:
-            dirs = repo.get_contents(ROOT_DIR)
-            track_count = 0
-            for d in dirs:
-                if d.type == "dir":
-                    artist_img = f"https://raw.githubusercontent.com/{REPO_NAME}/main/{ROOT_DIR}/{d.name}/artist.jpg"
-                    db["artists"][d.name] = {
-                        "name": d.name,
-                        "img": artist_img,
-                        "tracks": [],
-                        "plays": 0
-                    }
-                    
-                    # Синглы
-                    try:
-                        ss = repo.get_contents(f"{ROOT_DIR}/{d.name}/singles")
-                        for s in ss:
-                            if s.name.endswith(".mp3"):
-                                t_obj = {
-                                    "id": track_count, "title": s.name[:-4], 
-                                    "artist": d.name, "url": s.download_url, 
-                                    "img": artist_img, "plays": 0
-                                }
-                                db["tracks"].append(t_obj)
-                                db["artists"][d.name]["tracks"].append(t_obj)
-                                track_count += 1
-                    except: pass
+        function createTrackItem(track, playlist) {
+            const playlistStr = JSON.stringify(playlist).replace(/"/g, '&quot;');
+            return `
+                <div onclick="playTrack(${track.id}, ${playlistStr})" class="flex items-center gap-4 p-3 bg-accent/30 rounded-2xl hover:bg-accent/60 transition-all cursor-pointer group">
+                    <img src="${track.img}" class="w-12 h-12 rounded-lg object-cover bg-surface shadow-md">
+                    <div class="flex-1 overflow-hidden">
+                        <div class="font-bold text-sm truncate group-hover:text-brand transition-colors">${track.title}</div>
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">${track.artist}</div>
+                    </div>
+                    <div class="pr-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="play" class="w-4 h-4 text-brand fill-current"></i>
+                    </div>
+                </div>
+            `;
+        }
 
-                    # Альбомы
-                    try:
-                        albs = repo.get_contents(f"{ROOT_DIR}/{d.name}/albums")
-                        for al in albs:
-                            if al.type == "dir":
-                                alb_img = f"https://raw.githubusercontent.com/{REPO_NAME}/main/{al.path}/cover.jpg"
-                                ts = repo.get_contents(al.path)
-                                for t in ts:
-                                    if t.name.endswith(".mp3"):
-                                        t_obj = {
-                                            "id": track_count, "title": t.name[:-4], 
-                                            "artist": d.name, "url": t.download_url, 
-                                            "img": alb_img, "plays": 0
-                                        }
-                                        db["tracks"].append(t_obj)
-                                        db["artists"][d.name]["tracks"].append(t_obj)
-                                        track_count += 1
-                    except: pass
-            
-            content = json.dumps(db, indent=4, ensure_ascii=False)
-            try:
-                old = repo.get_contents("database.json")
-                repo.update_file("database.json", "sync", content, old.sha)
-            except: repo.create_file("database.json", "sync", content)
-            messagebox.showinfo("Успех", "Сайт обновлен!")
-        except Exception as e: messagebox.showerror("Ошибка", str(e))
+        function navTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page-${page}`).classList.remove('hidden');
+            document.querySelectorAll('#player-container button').forEach(b => b.classList.remove('active-tab', 'text-gray-500'));
+            const tab = document.getElementById(`tab-${page}`);
+            if (tab) tab.classList.add('active-tab');
+            document.getElementById('scroll-container').scrollTo(0, 0);
+        }
 
-if __name__ == "__main__":
-    PremiumManager().mainloop()
+        function openArtist(name) {
+            const artist = db.artists[name];
+            document.getElementById('artist-view-name').innerText = artist.name;
+            document.getElementById('artist-view-img').src = artist.img;
+            document.getElementById('artist-view-stats').innerText = `${artist.tracks.length} ТРЕКОВ • ${artist.plays || 0} СЛУШАНИЙ`;
+            document.getElementById('artist-view-tracks').innerHTML = artist.tracks.map(t => createTrackItem(t, artist.tracks)).join('');
+            navTo('artist');
+            lucide.createIcons();
+        }
+
+        function playTrack(id, playlist) {
+            currentPlaylist = playlist;
+            currentIndex = currentPlaylist.findIndex(t => t.id === id);
+            const track = currentPlaylist[currentIndex];
+            document.getElementById('p-title').innerText = track.title;
+            document.getElementById('p-artist').innerText = track.artist;
+            document.getElementById('p-img').src = track.img;
+            audio.src = track.url;
+            audio.play();
+            updateUI(true);
+        }
+
+        function togglePlay() {
+            if (!audio.src) return;
+            if (audio.paused) { audio.play(); updateUI(true); } 
+            else { audio.pause(); updateUI(false); }
+        }
+
+        function updateUI(playing) {
+            const icon = document.getElementById('p-play-icon');
+            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
+            lucide.createIcons();
+        }
+
+        function nextTrack() {
+            if (currentIndex < currentPlaylist.length - 1) playTrack(currentPlaylist[currentIndex + 1].id, currentPlaylist);
+        }
+
+        function prevTrack() {
+            if (currentIndex > 0) playTrack(currentPlaylist[currentIndex - 1].id, currentPlaylist);
+        }
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100 || 0;
+            document.getElementById('player-progress').style.width = pct + "%";
+        };
+        audio.onended = nextTrack;
+        document.getElementById('p-vol').oninput = (e) => audio.volume = e.target.value;
+
+        function handleSearch() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            const results = document.getElementById('search-results');
+            if (!q) { results.innerHTML = ""; return; }
+            const filteredTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+            results.innerHTML = `<div><h2 class="text-xs font-bold text-gray-500 uppercase mb-4 tracking-widest">Результаты</h2><div class="grid grid-cols-1 gap-2">${filteredTracks.map(t => createTrackItem(t, filteredTracks)).join('')}</div></div>`;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
