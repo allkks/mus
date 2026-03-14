@@ -2584,6 +2584,123 @@
                     "year": "2025"
                 }
             ]
+        },
+        "Тринадцать карат": {
+            "name": "Тринадцать карат",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/artist.jpg",
+            "tracks": [
+                {
+                    "id": 307,
+                    "title": "01. кассета 1",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/01. кассета 1.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 308,
+                    "title": "02. утонуть",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/02. утонуть.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 309,
+                    "title": "03. во снах",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/03. во снах.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 310,
+                    "title": "04. проваливаи",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/04. проваливаи.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 311,
+                    "title": "05. ты",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/05. ты.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 312,
+                    "title": "06. кассета 6",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/06. кассета 6.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 313,
+                    "title": "07. даваи расскажем",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/07. даваи расскажем.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 314,
+                    "title": "08. подружка",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/08. подружка.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 315,
+                    "title": "09. пока он тебя не бросит",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/09. пока он тебя не бросит.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 316,
+                    "title": "10. больше не буду feat Три дня дождя",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/10. больше не буду feat Три дня дождя.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 317,
+                    "title": "11. научился летать",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/11. научился летать.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 318,
+                    "title": "12. одна",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/12. одна.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                },
+                {
+                    "id": 319,
+                    "title": "13. жить после",
+                    "artist": "Тринадцать карат",
+                    "album": "13 причин почему",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/13. жить после.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+                }
+            ],
+            "albums": [
+                {
+                    "title": "13 причин почему",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg",
+                    "year": "2025"
+                }
+            ]
         }
     },
     "tracks": [
@@ -5042,6 +5159,110 @@
             "album": "Сам и",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Сам и/23 Выход.flac",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Сам и/cover.jpg"
+        },
+        {
+            "id": 307,
+            "title": "01. кассета 1",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/01. кассета 1.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 308,
+            "title": "02. утонуть",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/02. утонуть.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 309,
+            "title": "03. во снах",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/03. во снах.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 310,
+            "title": "04. проваливаи",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/04. проваливаи.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 311,
+            "title": "05. ты",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/05. ты.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 312,
+            "title": "06. кассета 6",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/06. кассета 6.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 313,
+            "title": "07. даваи расскажем",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/07. даваи расскажем.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 314,
+            "title": "08. подружка",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/08. подружка.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 315,
+            "title": "09. пока он тебя не бросит",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/09. пока он тебя не бросит.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 316,
+            "title": "10. больше не буду feat Три дня дождя",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/10. больше не буду feat Три дня дождя.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 317,
+            "title": "11. научился летать",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/11. научился летать.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 318,
+            "title": "12. одна",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/12. одна.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
+        },
+        {
+            "id": 319,
+            "title": "13. жить после",
+            "artist": "Тринадцать карат",
+            "album": "13 причин почему",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/13. жить после.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         }
     ]
 }
