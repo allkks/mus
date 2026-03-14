@@ -1,5 +1,11 @@
 {
     "artists": {
+        "Lida": {
+            "name": "Lida",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Lida/artist.jpg",
+            "tracks": [],
+            "albums": []
+        },
         "ROCKET": {
             "name": "ROCKET",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ROCKET/artist.jpg",
