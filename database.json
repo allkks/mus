@@ -6,142 +6,6 @@
             "tracks": [
                 {
                     "id": 0,
-                    "title": "01 Хэллоу",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/01 Хэллоу.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 1,
-                    "title": "02 Маугли",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/02 Маугли.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 2,
-                    "title": "03 Выдох-вдох",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/03 Выдох-вдох.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 3,
-                    "title": "04 Неделя",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/04 Неделя.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 4,
-                    "title": "05 До ста",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/05 До ста.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 5,
-                    "title": "06 На связи (Скит)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/06 На связи (Скит).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 6,
-                    "title": "07 Трамвай #2",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/07 Трамвай #2.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 7,
-                    "title": "08 На таран (feat. Centr)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/08 На таран (feat. Centr).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 8,
-                    "title": "09 Н.Г.2",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/09 Н.Г.2.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 9,
-                    "title": "10 А.С.А.В. (feat. Princip)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/10 А.С.А.В. (feat. Princip).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 10,
-                    "title": "11 На пальме",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/11 На пальме.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 11,
-                    "title": "12 Архив (Скит)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/12 Архив (Скит).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 12,
-                    "title": "13 Другой город (feat. Каспийский Груз)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/13 Другой город (feat. Каспийский Груз).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 13,
-                    "title": "14 Хочу ещё",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/14 Хочу ещё.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 14,
-                    "title": "15 Вживую (feat. Rigos)",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/15 Вживую (feat. Rigos).flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 15,
-                    "title": "16 Мысли вслух",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/16 Мысли вслух.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 16,
-                    "title": "17 Бай",
-                    "artist": "ГУФ",
-                    "album": "2015 - Guf - Еще",
-                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/17 Бай.flac",
-                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-                },
-                {
-                    "id": 17,
                     "title": "01 Вдох",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -149,7 +13,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 18,
+                    "id": 1,
                     "title": "02 Не тайна",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -157,7 +21,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 19,
+                    "id": 2,
                     "title": "03 Пали ЖК",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -165,7 +29,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 20,
+                    "id": 3,
                     "title": "04 Паразит",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -173,7 +37,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 21,
+                    "id": 4,
                     "title": "05 Путь далёк",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -181,7 +45,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 22,
+                    "id": 5,
                     "title": "06 Низкий профиль",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -189,7 +53,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 23,
+                    "id": 6,
                     "title": "07 Ренегат (feat. Брутто)",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -197,7 +61,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 24,
+                    "id": 7,
                     "title": "08 Запропастились",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -205,7 +69,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 25,
+                    "id": 8,
                     "title": "09 Безвылазно",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -213,7 +77,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 26,
+                    "id": 9,
                     "title": "10 Климат суров",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -221,7 +85,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 27,
+                    "id": 10,
                     "title": "11 Индустрия",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -229,7 +93,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 28,
+                    "id": 11,
                     "title": "12 Стало так",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -237,7 +101,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 29,
+                    "id": 12,
                     "title": "13 Без если или либо",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -245,7 +109,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 30,
+                    "id": 13,
                     "title": "14 Выдох",
                     "artist": "ГУФ",
                     "album": "4-20",
@@ -253,7 +117,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
                 },
                 {
-                    "id": 31,
+                    "id": 14,
                     "title": "01 Звуки гуслей",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -261,7 +125,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 32,
+                    "id": 15,
                     "title": "02 Фокусы",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -269,7 +133,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 33,
+                    "id": 16,
                     "title": "03 Хватит",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -277,7 +141,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 34,
+                    "id": 17,
                     "title": "04 Независимость",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -285,7 +149,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 35,
+                    "id": 18,
                     "title": "05 Было бы лучше",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -293,7 +157,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 36,
+                    "id": 19,
                     "title": "06 Пока-пока",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -301,7 +165,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 37,
+                    "id": 20,
                     "title": "07 В основе",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -309,7 +173,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 38,
+                    "id": 21,
                     "title": "08 За буйки",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -317,7 +181,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 39,
+                    "id": 22,
                     "title": "09 Фокусы (другая версия)",
                     "artist": "ГУФ",
                     "album": "GuSli",
@@ -325,7 +189,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
                 },
                 {
-                    "id": 40,
+                    "id": 23,
                     "title": "01 Другая волна (scratch Dj Tactics)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -333,7 +197,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 41,
+                    "id": 24,
                     "title": "02 Ходим по краю",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -341,7 +205,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 42,
+                    "id": 25,
                     "title": "03 Зеркало",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -349,7 +213,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 43,
+                    "id": 26,
                     "title": "04 Если бы... (scratch Dj Mixoid)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -357,7 +221,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 44,
+                    "id": 27,
                     "title": "05 Как есть",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -365,7 +229,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 45,
+                    "id": 28,
                     "title": "06 Китай (scratch Dj Mixoid)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -373,7 +237,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 46,
+                    "id": 29,
                     "title": "07 Вязки",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -381,7 +245,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 47,
+                    "id": 30,
                     "title": "08 Заколоченное (scratch Dj Бэка)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -389,7 +253,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 48,
+                    "id": 31,
                     "title": "09 Соответственно (scratch Dj Tactics)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -397,7 +261,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 49,
+                    "id": 32,
                     "title": "10 Самурай (scratch Dj Бэка)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -405,7 +269,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 50,
+                    "id": 33,
                     "title": "11 Не всё потеряно пока (scratch Dj Tactics)",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -413,7 +277,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 51,
+                    "id": 34,
                     "title": "12 ЧП",
                     "artist": "ГУФ",
                     "album": "Баста - Гуф",
@@ -421,7 +285,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
                 },
                 {
-                    "id": 52,
+                    "id": 35,
                     "title": "01 Интро",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -429,7 +293,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 53,
+                    "id": 36,
                     "title": "02 Кто как играет",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -437,7 +301,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 54,
+                    "id": 37,
                     "title": "03 Сплетни",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -445,7 +309,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 55,
+                    "id": 38,
                     "title": "04 Свадьба ft. Slim",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -453,7 +317,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 56,
+                    "id": 39,
                     "title": "05 Хлоп хлоп ft. Птаха",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -461,7 +325,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 57,
+                    "id": 40,
                     "title": "06 Ямакаси",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -469,7 +333,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 58,
+                    "id": 41,
                     "title": "07 Есть вопросы ft. Slim",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -477,7 +341,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 59,
+                    "id": 42,
                     "title": "08 Трамвайные пути",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -485,7 +349,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 60,
+                    "id": 43,
                     "title": "09 Скит от Принципа",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -493,7 +357,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 61,
+                    "id": 44,
                     "title": "10 Новогодняя",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -501,7 +365,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 62,
+                    "id": 45,
                     "title": "11 Ориджинал Ба ft. Ба",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -509,7 +373,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 63,
+                    "id": 46,
                     "title": "12 Вождь",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -517,7 +381,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 64,
+                    "id": 47,
                     "title": "13 Скит от Санька",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -525,7 +389,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 65,
+                    "id": 48,
                     "title": "14 Тринити (rmx) ft. Иезекииль 25-17 и Отрицательное Влияние",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -533,7 +397,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 66,
+                    "id": 49,
                     "title": "15 Мутные замуты ft. Slim и Птаха",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -541,7 +405,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 67,
+                    "id": 50,
                     "title": "16 Новости",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -549,7 +413,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 68,
+                    "id": 51,
                     "title": "17 Трамвайные пути (полная версия) ft. 5 Плюх",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -557,7 +421,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 69,
+                    "id": 52,
                     "title": "18 Аутро",
                     "artist": "ГУФ",
                     "album": "Город дорог",
@@ -565,7 +429,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
                 },
                 {
-                    "id": 70,
+                    "id": 53,
                     "title": "01 Интро",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -573,7 +437,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 71,
+                    "id": 54,
                     "title": "02 Больше стаффа",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -581,7 +445,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 72,
+                    "id": 55,
                     "title": "03 Под балконом",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -589,7 +453,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 73,
+                    "id": 56,
                     "title": "04 Не всё потеряно feat. Баста",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -597,7 +461,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 74,
+                    "id": 57,
                     "title": "05 Заходит луна feat. Princip",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -605,7 +469,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 75,
+                    "id": 58,
                     "title": "06 Для неё",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -613,7 +477,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 76,
+                    "id": 59,
                     "title": "07 Провода feat. Миг29",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -621,7 +485,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 77,
+                    "id": 60,
                     "title": "08 Skittles (skit) feat. Бу",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -629,7 +493,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 78,
+                    "id": 61,
                     "title": "09 Ice Baby",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -637,7 +501,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 79,
+                    "id": 62,
                     "title": "10 Сверху видно всё feat. ТАНДЕМ",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -645,7 +509,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 80,
+                    "id": 63,
                     "title": "11 Хм... (skit)",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -653,7 +517,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 81,
+                    "id": 64,
                     "title": "12 Metropolitan Mail",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -661,7 +525,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 82,
+                    "id": 65,
                     "title": "13 Надо лечиться",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -669,7 +533,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 83,
+                    "id": 66,
                     "title": "14 Калпак feat. Mark",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -677,7 +541,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 84,
+                    "id": 67,
                     "title": "15 Было давно",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -685,7 +549,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 85,
+                    "id": 68,
                     "title": "16 Дома feat. Ба",
                     "artist": "ГУФ",
                     "album": "Дома",
@@ -693,12 +557,148 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
                 },
                 {
-                    "id": 86,
+                    "id": 69,
                     "title": "17 Аутро",
                     "artist": "ГУФ",
                     "album": "Дома",
                     "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/17 Аутро.flac",
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+                },
+                {
+                    "id": 70,
+                    "title": "01 Хэллоу",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/01 Хэллоу.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 71,
+                    "title": "02 Маугли",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/02 Маугли.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 72,
+                    "title": "03 Выдох-вдох",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/03 Выдох-вдох.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 73,
+                    "title": "04 Неделя",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/04 Неделя.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 74,
+                    "title": "05 До ста",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/05 До ста.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 75,
+                    "title": "06 На связи (Скит)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/06 На связи (Скит).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 76,
+                    "title": "07 Трамвай #2",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/07 Трамвай #2.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 77,
+                    "title": "08 На таран (feat. Centr)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/08 На таран (feat. Centr).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 78,
+                    "title": "09 Н.Г.2",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/09 Н.Г.2.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 79,
+                    "title": "10 А.С.А.В. (feat. Princip)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/10 А.С.А.В. (feat. Princip).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 80,
+                    "title": "11 На пальме",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/11 На пальме.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 81,
+                    "title": "12 Архив (Скит)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/12 Архив (Скит).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 82,
+                    "title": "13 Другой город (feat. Каспийский Груз)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/13 Другой город (feat. Каспийский Груз).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 83,
+                    "title": "14 Хочу ещё",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/14 Хочу ещё.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 84,
+                    "title": "15 Вживую (feat. Rigos)",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/15 Вживую (feat. Rigos).flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 85,
+                    "title": "16 Мысли вслух",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/16 Мысли вслух.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+                },
+                {
+                    "id": 86,
+                    "title": "17 Бай",
+                    "artist": "ГУФ",
+                    "album": "Еще",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/17 Бай.flac",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
                 },
                 {
                     "id": 87,
@@ -887,11 +887,6 @@
             ],
             "albums": [
                 {
-                    "title": "2015 - Guf - Еще",
-                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg",
-                    "year": "2025"
-                },
-                {
                     "title": "4-20",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg",
                     "year": "2025"
@@ -917,6 +912,11 @@
                     "year": "2025"
                 },
                 {
+                    "title": "Еще",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg",
+                    "year": "2025"
+                },
+                {
                     "title": "Сам и",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Сам и/cover.jpg",
                     "year": "2025"
@@ -927,142 +927,6 @@
     "tracks": [
         {
             "id": 0,
-            "title": "01 Хэллоу",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/01 Хэллоу.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 1,
-            "title": "02 Маугли",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/02 Маугли.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 2,
-            "title": "03 Выдох-вдох",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/03 Выдох-вдох.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 3,
-            "title": "04 Неделя",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/04 Неделя.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 4,
-            "title": "05 До ста",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/05 До ста.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 5,
-            "title": "06 На связи (Скит)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/06 На связи (Скит).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 6,
-            "title": "07 Трамвай #2",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/07 Трамвай #2.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 7,
-            "title": "08 На таран (feat. Centr)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/08 На таран (feat. Centr).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 8,
-            "title": "09 Н.Г.2",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/09 Н.Г.2.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 9,
-            "title": "10 А.С.А.В. (feat. Princip)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/10 А.С.А.В. (feat. Princip).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 10,
-            "title": "11 На пальме",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/11 На пальме.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 11,
-            "title": "12 Архив (Скит)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/12 Архив (Скит).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 12,
-            "title": "13 Другой город (feat. Каспийский Груз)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/13 Другой город (feat. Каспийский Груз).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 13,
-            "title": "14 Хочу ещё",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/14 Хочу ещё.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 14,
-            "title": "15 Вживую (feat. Rigos)",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/15 Вживую (feat. Rigos).flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 15,
-            "title": "16 Мысли вслух",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/16 Мысли вслух.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 16,
-            "title": "17 Бай",
-            "artist": "ГУФ",
-            "album": "2015 - Guf - Еще",
-            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/17 Бай.flac",
-            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/2015 - Guf - Еще/cover.jpg"
-        },
-        {
-            "id": 17,
             "title": "01 Вдох",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1070,7 +934,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 18,
+            "id": 1,
             "title": "02 Не тайна",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1078,7 +942,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 19,
+            "id": 2,
             "title": "03 Пали ЖК",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1086,7 +950,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 20,
+            "id": 3,
             "title": "04 Паразит",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1094,7 +958,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 21,
+            "id": 4,
             "title": "05 Путь далёк",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1102,7 +966,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 22,
+            "id": 5,
             "title": "06 Низкий профиль",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1110,7 +974,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 23,
+            "id": 6,
             "title": "07 Ренегат (feat. Брутто)",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1118,7 +982,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 24,
+            "id": 7,
             "title": "08 Запропастились",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1126,7 +990,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 25,
+            "id": 8,
             "title": "09 Безвылазно",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1134,7 +998,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 26,
+            "id": 9,
             "title": "10 Климат суров",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1142,7 +1006,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 27,
+            "id": 10,
             "title": "11 Индустрия",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1150,7 +1014,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 28,
+            "id": 11,
             "title": "12 Стало так",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1158,7 +1022,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 29,
+            "id": 12,
             "title": "13 Без если или либо",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1166,7 +1030,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 30,
+            "id": 13,
             "title": "14 Выдох",
             "artist": "ГУФ",
             "album": "4-20",
@@ -1174,7 +1038,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/4-20/cover.jpg"
         },
         {
-            "id": 31,
+            "id": 14,
             "title": "01 Звуки гуслей",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1182,7 +1046,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 32,
+            "id": 15,
             "title": "02 Фокусы",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1190,7 +1054,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 33,
+            "id": 16,
             "title": "03 Хватит",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1198,7 +1062,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 34,
+            "id": 17,
             "title": "04 Независимость",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1206,7 +1070,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 35,
+            "id": 18,
             "title": "05 Было бы лучше",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1214,7 +1078,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 36,
+            "id": 19,
             "title": "06 Пока-пока",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1222,7 +1086,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 37,
+            "id": 20,
             "title": "07 В основе",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1230,7 +1094,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 38,
+            "id": 21,
             "title": "08 За буйки",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1238,7 +1102,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 39,
+            "id": 22,
             "title": "09 Фокусы (другая версия)",
             "artist": "ГУФ",
             "album": "GuSli",
@@ -1246,7 +1110,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/GuSli/cover.jpg"
         },
         {
-            "id": 40,
+            "id": 23,
             "title": "01 Другая волна (scratch Dj Tactics)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1254,7 +1118,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 41,
+            "id": 24,
             "title": "02 Ходим по краю",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1262,7 +1126,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 42,
+            "id": 25,
             "title": "03 Зеркало",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1270,7 +1134,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 43,
+            "id": 26,
             "title": "04 Если бы... (scratch Dj Mixoid)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1278,7 +1142,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 44,
+            "id": 27,
             "title": "05 Как есть",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1286,7 +1150,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 45,
+            "id": 28,
             "title": "06 Китай (scratch Dj Mixoid)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1294,7 +1158,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 46,
+            "id": 29,
             "title": "07 Вязки",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1302,7 +1166,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 47,
+            "id": 30,
             "title": "08 Заколоченное (scratch Dj Бэка)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1310,7 +1174,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 48,
+            "id": 31,
             "title": "09 Соответственно (scratch Dj Tactics)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1318,7 +1182,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 49,
+            "id": 32,
             "title": "10 Самурай (scratch Dj Бэка)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1326,7 +1190,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 50,
+            "id": 33,
             "title": "11 Не всё потеряно пока (scratch Dj Tactics)",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1334,7 +1198,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 51,
+            "id": 34,
             "title": "12 ЧП",
             "artist": "ГУФ",
             "album": "Баста - Гуф",
@@ -1342,7 +1206,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Баста - Гуф/cover.jpg"
         },
         {
-            "id": 52,
+            "id": 35,
             "title": "01 Интро",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1350,7 +1214,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 53,
+            "id": 36,
             "title": "02 Кто как играет",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1358,7 +1222,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 54,
+            "id": 37,
             "title": "03 Сплетни",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1366,7 +1230,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 55,
+            "id": 38,
             "title": "04 Свадьба ft. Slim",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1374,7 +1238,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 56,
+            "id": 39,
             "title": "05 Хлоп хлоп ft. Птаха",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1382,7 +1246,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 57,
+            "id": 40,
             "title": "06 Ямакаси",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1390,7 +1254,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 58,
+            "id": 41,
             "title": "07 Есть вопросы ft. Slim",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1398,7 +1262,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 59,
+            "id": 42,
             "title": "08 Трамвайные пути",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1406,7 +1270,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 60,
+            "id": 43,
             "title": "09 Скит от Принципа",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1414,7 +1278,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 61,
+            "id": 44,
             "title": "10 Новогодняя",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1422,7 +1286,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 62,
+            "id": 45,
             "title": "11 Ориджинал Ба ft. Ба",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1430,7 +1294,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 63,
+            "id": 46,
             "title": "12 Вождь",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1438,7 +1302,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 64,
+            "id": 47,
             "title": "13 Скит от Санька",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1446,7 +1310,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 65,
+            "id": 48,
             "title": "14 Тринити (rmx) ft. Иезекииль 25-17 и Отрицательное Влияние",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1454,7 +1318,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 66,
+            "id": 49,
             "title": "15 Мутные замуты ft. Slim и Птаха",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1462,7 +1326,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 67,
+            "id": 50,
             "title": "16 Новости",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1470,7 +1334,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 68,
+            "id": 51,
             "title": "17 Трамвайные пути (полная версия) ft. 5 Плюх",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1478,7 +1342,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 69,
+            "id": 52,
             "title": "18 Аутро",
             "artist": "ГУФ",
             "album": "Город дорог",
@@ -1486,7 +1350,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Город дорог/cover.jpg"
         },
         {
-            "id": 70,
+            "id": 53,
             "title": "01 Интро",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1494,7 +1358,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 71,
+            "id": 54,
             "title": "02 Больше стаффа",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1502,7 +1366,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 72,
+            "id": 55,
             "title": "03 Под балконом",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1510,7 +1374,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 73,
+            "id": 56,
             "title": "04 Не всё потеряно feat. Баста",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1518,7 +1382,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 74,
+            "id": 57,
             "title": "05 Заходит луна feat. Princip",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1526,7 +1390,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 75,
+            "id": 58,
             "title": "06 Для неё",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1534,7 +1398,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 76,
+            "id": 59,
             "title": "07 Провода feat. Миг29",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1542,7 +1406,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 77,
+            "id": 60,
             "title": "08 Skittles (skit) feat. Бу",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1550,7 +1414,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 78,
+            "id": 61,
             "title": "09 Ice Baby",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1558,7 +1422,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 79,
+            "id": 62,
             "title": "10 Сверху видно всё feat. ТАНДЕМ",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1566,7 +1430,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 80,
+            "id": 63,
             "title": "11 Хм... (skit)",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1574,7 +1438,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 81,
+            "id": 64,
             "title": "12 Metropolitan Mail",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1582,7 +1446,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 82,
+            "id": 65,
             "title": "13 Надо лечиться",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1590,7 +1454,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 83,
+            "id": 66,
             "title": "14 Калпак feat. Mark",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1598,7 +1462,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 84,
+            "id": 67,
             "title": "15 Было давно",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1606,7 +1470,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 85,
+            "id": 68,
             "title": "16 Дома feat. Ба",
             "artist": "ГУФ",
             "album": "Дома",
@@ -1614,12 +1478,148 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
         },
         {
-            "id": 86,
+            "id": 69,
             "title": "17 Аутро",
             "artist": "ГУФ",
             "album": "Дома",
             "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/17 Аутро.flac",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Дома/cover.jpg"
+        },
+        {
+            "id": 70,
+            "title": "01 Хэллоу",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/01 Хэллоу.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 71,
+            "title": "02 Маугли",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/02 Маугли.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 72,
+            "title": "03 Выдох-вдох",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/03 Выдох-вдох.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 73,
+            "title": "04 Неделя",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/04 Неделя.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 74,
+            "title": "05 До ста",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/05 До ста.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 75,
+            "title": "06 На связи (Скит)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/06 На связи (Скит).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 76,
+            "title": "07 Трамвай #2",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/07 Трамвай #2.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 77,
+            "title": "08 На таран (feat. Centr)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/08 На таран (feat. Centr).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 78,
+            "title": "09 Н.Г.2",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/09 Н.Г.2.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 79,
+            "title": "10 А.С.А.В. (feat. Princip)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/10 А.С.А.В. (feat. Princip).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 80,
+            "title": "11 На пальме",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/11 На пальме.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 81,
+            "title": "12 Архив (Скит)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/12 Архив (Скит).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 82,
+            "title": "13 Другой город (feat. Каспийский Груз)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/13 Другой город (feat. Каспийский Груз).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 83,
+            "title": "14 Хочу ещё",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/14 Хочу ещё.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 84,
+            "title": "15 Вживую (feat. Rigos)",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/15 Вживую (feat. Rigos).flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 85,
+            "title": "16 Мысли вслух",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/16 Мысли вслух.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
+        },
+        {
+            "id": 86,
+            "title": "17 Бай",
+            "artist": "ГУФ",
+            "album": "Еще",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/17 Бай.flac",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/albums/Еще/cover.jpg"
         },
         {
             "id": 87,
