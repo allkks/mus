@@ -1,0 +1,37 @@
+foobar2000 v2.25.7 / DR Meter v1.0.6
+log date: 2026-03-03 10:16:00
+
+--------------------------------------------------------------------------------
+Analyzed: Rocket / F*ck The Industry
+--------------------------------------------------------------------------------
+
+DR         Peak           RMS       Duration Track
+--------------------------------------------------------------------------------
+DR5       -0.27 dBFS    -8.64 dBFS      1:30 01-MP3
+DR6       -0.26 dBFS    -7.27 dBFS      1:44 02-GT 63
+DR7       -0.29 dBFS    -8.15 dBFS      1:33 03-Devil Jin
+DR4       -0.25 dBFS    -4.97 dBFS      1:30 04-Сталин
+DR4       -0.25 dBFS    -4.52 dBFS      1:37 05-Nike Air
+DR4       -0.24 dBFS    -5.22 dBFS      1:59 06-Нет Времени
+DR7       -0.28 dBFS    -8.81 dBFS      1:25 07-Кик Бутовски
+DR8       -0.28 dBFS    -8.56 dBFS      2:08 08-Go Crazy
+DR5       -0.29 dBFS    -7.09 dBFS      2:05 09-Blizzard
+DR8       -0.21 dBFS    -9.60 dBFS      2:02 10-Легко
+DR5       -0.26 dBFS    -6.67 dBFS      2:02 11-Rock Star Shit
+DR8       -0.29 dBFS   -10.23 dBFS      1:49 12-Эстафета
+DR8       -0.27 dBFS    -9.07 dBFS      1:29 13-Сивцев Вражек
+DR5       -0.28 dBFS    -6.04 dBFS      1:31 14-Wanna Be Me
+DR8       -0.29 dBFS    -9.56 dBFS      1:40 15-Darth Vader
+DR7       -0.29 dBFS    -8.72 dBFS      2:02 16-New Guala
+DR11      -0.28 dBFS   -11.84 dBFS      1:35 17-Ранетки
+--------------------------------------------------------------------------------
+
+Number of tracks:  17
+Official DR value: DR6
+
+Samplerate:        44100 Hz
+Channels:          2
+Bits per sample:   16
+Bitrate:           833 kbps
+Codec:             FLAC
+================================================================================
