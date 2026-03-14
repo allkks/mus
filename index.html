@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- ПРИНУДИТЕЛЬНОЕ ОБНОВЛЕНИЕ КЭША -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <title>MUS.LIB — Premium</title>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -63,7 +69,7 @@
             <div class="mb-10">
                 <h2 onclick="openFullList('Мировой чарт', currentGlobalTracks)" class="text-xl font-bold mb-4 px-2 flex items-center justify-between cursor-pointer">
                     <span class="flex items-center gap-2"><i data-lucide="trending-up" class="w-5 h-5 text-brandY"></i>Мировой чарт</span>
-                    <i data-lucide="chevron-right" class="text-dim"></i>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-dim"></i>
                 </h2>
                 <div id="home-charts" class="h-scroll no-scrollbar px-2"></div>
             </div>
@@ -86,16 +92,16 @@
         <!-- PAGE: ARTIST -->
         <section id="page-artist" class="page hidden">
             <div class="relative h-[55vh] w-full flex flex-col justify-end overflow-hidden">
-                <img id="artist-view-img" class="absolute inset-0 w-full h-full object-cover">
+                <img id="artist-view-img" class="absolute inset-0 w-full h-full object-cover shadow-2xl">
                 <div class="absolute inset-0 hero-bg"></div>
                 <button onclick="navTo('home')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10 text-white"><i data-lucide="chevron-left"></i></button>
                 <div class="relative p-6 pb-8 z-10">
-                    <h1 id="artist-view-name" class="text-5xl font-black italic tracking-tighter mb-4 leading-tight"></h1>
+                    <h1 id="artist-view-name" class="text-5xl font-black italic tracking-tighter mb-4 text-white leading-tight"></h1>
                     <button class="bg-brandY text-black px-12 py-4 rounded-full font-black shadow-xl" onclick="playArtistTracks()">СЛУШАТЬ</button>
                 </div>
             </div>
             <div class="p-4 mt-4">
-                <h2 onclick="openFullList('Треки артиста', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer">
+                <h2 onclick="openFullList('Треки артиста', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer text-white">
                     <span>Треки</span><i data-lucide="chevron-right" class="text-dim"></i>
                 </h2>
                 <div id="artist-view-tracks" class="h-scroll no-scrollbar"></div>
@@ -109,9 +115,9 @@
             <div class="relative h-[45vh] w-full flex flex-col justify-end overflow-hidden text-center">
                 <img id="album-view-img" class="absolute inset-0 w-full h-full object-cover">
                 <div class="absolute inset-0 hero-bg"></div>
-                <button onclick="navTo('artist')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10"><i data-lucide="chevron-left"></i></button>
+                <button onclick="navTo('artist')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10"><i data-lucide="chevron-left" class="text-white"></i></button>
                 <div class="relative p-6 pb-8 z-10">
-                    <h1 id="album-view-title" class="text-3xl font-black mb-1"></h1>
+                    <h1 id="album-view-title" class="text-3xl font-black text-white mb-1"></h1>
                     <p id="album-view-artist" class="text-dim mb-4"></p>
                     <button class="bg-white text-black px-10 py-3 rounded-full font-bold shadow-xl" onclick="playCurrentAlbum()">СЛУШАТЬ ВСЁ</button>
                 </div>
@@ -132,7 +138,7 @@
     <div id="mini-player" onclick="openFullPlayer()" class="glass-player fixed bottom-24 left-2 right-2 rounded-3xl p-3 z-[100] transition-all duration-500 translate-y-[200px] shadow-2xl flex items-center gap-3 cursor-pointer">
         <img id="m-img" class="w-12 h-12 rounded-xl object-cover" src="">
         <div class="flex-1 min-w-0">
-            <div id="m-title" class="font-bold text-sm truncate">...</div>
+            <div id="m-title" class="font-bold text-sm truncate text-white">...</div>
             <div id="m-artist" class="text-dim text-[10px] uppercase truncate">...</div>
         </div>
         <button onclick="event.stopPropagation(); togglePlay()" class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all">
@@ -142,11 +148,11 @@
 
     <!-- FULL PLAYER -->
     <div id="full-player" class="fixed inset-0 bg-bg z-[200] transition-transform duration-500 translate-y-full flex flex-col p-8 pb-12">
-        <div class="flex justify-between items-center mb-4"><button onclick="closeFullPlayer()"><i data-lucide="chevron-down" class="w-8 h-8"></i></button><span class="text-[10px] font-bold uppercase tracking-widest opacity-30">Моя волна</span><button><i data-lucide="more-horizontal" class="w-6 h-6"></i></button></div>
+        <div class="flex justify-between items-center mb-4"><button onclick="closeFullPlayer()"><i data-lucide="chevron-down" class="w-8 h-8 text-white"></i></button><span class="text-[10px] font-bold uppercase tracking-widest opacity-30 text-white">Моя волна</span><button><i data-lucide="more-horizontal" class="w-6 h-6 text-white"></i></button></div>
         <div class="flex-1 flex items-center justify-center mb-6"><img id="f-img" class="w-full aspect-square max-w-[300px] rounded-[3rem] object-cover shadow-2xl border border-white/5"></div>
         <div class="flex items-center justify-between mb-4">
-            <div class="flex-1 min-w-0 pr-4"><h2 id="f-title" class="text-3xl font-black italic mb-1 truncate leading-tight">...</h2><p id="f-artist" class="text-lg text-dim truncate">...</p></div>
-            <button onclick="toggleFavorite(currentTrackId)" class="p-2"><i id="f-heart" data-lucide="heart" class="w-8 h-8"></i></button>
+            <div class="flex-1 min-w-0 pr-4 text-white"><h2 id="f-title" class="text-3xl font-black italic mb-1 truncate leading-tight">...</h2><p id="f-artist" class="text-lg text-dim truncate">...</p></div>
+            <button onclick="toggleFavorite(currentTrackId)" class="p-2 text-white"><i id="f-heart" data-lucide="heart" class="w-8 h-8"></i></button>
         </div>
         <div class="mb-6">
             <div class="relative h-1 bg-white/10 rounded-full mb-3 cursor-pointer" id="seek-bar" onclick="seek(event)">
@@ -159,11 +165,11 @@
             </div>
         </div>
         <div class="flex items-center justify-around mb-8">
-            <button id="shuffle-btn" onclick="toggleShuffle()" class="p-2 active:scale-90 opacity-20 transition-all"><i data-lucide="shuffle" class="w-6 h-6"></i></button>
-            <button onclick="prevTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-back" class="w-10 h-10 fill-white"></i></button>
+            <button id="shuffle-btn" onclick="toggleShuffle()" class="p-2 active:scale-90 opacity-20 transition-all text-white"><i data-lucide="shuffle" class="w-6 h-6"></i></button>
+            <button onclick="prevTrack()" class="p-2 active:scale-75 transition-all text-white"><i data-lucide="skip-back" class="w-10 h-10 fill-white"></i></button>
             <button onclick="togglePlay()" class="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center shadow-xl active:scale-95 transition-all"><i id="f-play-icon" data-lucide="play" class="fill-black w-10 h-10 ml-1"></i></button>
-            <button onclick="nextTrack()" class="p-2 active:scale-75 transition-all"><i data-lucide="skip-forward" class="w-10 h-10 fill-white"></i></button>
-            <button id="repeat-btn" onclick="toggleRepeat()" class="p-2 active:scale-90 opacity-20 transition-all"><i data-lucide="repeat" class="w-6 h-6"></i></button>
+            <button onclick="nextTrack()" class="p-2 active:scale-75 transition-all text-white"><i data-lucide="skip-forward" class="w-10 h-10 fill-white"></i></button>
+            <button id="repeat-btn" onclick="toggleRepeat()" class="p-2 active:scale-90 opacity-20 transition-all text-white"><i data-lucide="repeat" class="w-6 h-6"></i></button>
         </div>
     </div>
 
@@ -210,6 +216,7 @@
             lucide.createIcons();
             if (user.photo_url) document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
 
+            // СЛУШАЕМ ПАПКУ music_data
             rtdb.ref('/').on('value', (snap) => {
                 const data = snap.val();
                 const source = data.music_data || data;
@@ -220,8 +227,9 @@
                     refreshCharts();
                     
                     const container = document.getElementById('full-list-content');
-                    const currentTitle = container?.querySelector('h1')?.innerText;
-                    if (currentTitle === 'Мне нравится') renderFullListHTML('Мне нравится', getFavorites());
+                    if (container?.querySelector('h1')?.innerText === 'Мне нравится') {
+                        renderFullListHTML('Мне нравится', getFavorites());
+                    }
                 }
             });
             initCloudSync();
@@ -233,6 +241,7 @@
                 if (!data || !db.tracks.length) return;
                 const sortedIds = Object.keys(data).sort((a, b) => data[b] - data[a]);
                 currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 100);
+                
                 document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks.slice(0,12)).map(group => `
                     <div class="track-column">${group.map((t) => renderTrackItem(t, 'db.tracks', currentGlobalTracks.indexOf(t) + 1)).join('')}</div>
                 `).join('');
@@ -243,7 +252,6 @@
         function navTo(p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
             document.getElementById('page-' + p).classList.remove('hidden');
-            
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-brandY', 'text-dim/40'));
             if(p === 'home') document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
             document.getElementById('scroll-container').scrollTop = 0;
@@ -265,9 +273,9 @@
             let itemsHtml = '';
             if (type === 'artists') {
                 itemsHtml = list.map(a => `
-                    <div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer">
-                        <img src="${imgBust(a.img)}" class="w-14 h-14 rounded-full object-cover shadow-lg border border-white/5">
-                        <div class="font-bold text-white text-lg">${a.name}</div>
+                    <div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer text-white">
+                        <img src="${imgBust(a.img)}" class="w-14 h-14 rounded-full object-cover shadow-lg">
+                        <div class="font-bold text-lg">${a.name}</div>
                     </div>`).join('');
             } else {
                 itemsHtml = list.length > 0 
@@ -289,7 +297,6 @@
 
         function renderHome() {
             if(!db.artists) return;
-            // Рендер артистов (по 3 в ряд)
             document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
                 <div onclick="openArtistPage('${a.name}')" class="flex-shrink-0 w-[28vw] text-center transform active:scale-90 transition-transform cursor-pointer">
                     <div class="aspect-square w-full mb-2 rounded-full overflow-hidden border border-white/5 shadow-2xl">
@@ -311,11 +318,11 @@
         function renderTrackItem(t, src, rank = null) {
             const isFav = favorites.includes(t.id);
             return `
-                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer" onclick="playTrack(${t.id}, ${src})">
-                    ${rank ? `<span class="w-6 text-sm font-black italic opacity-40 text-white">${rank}</span>` : ''}
-                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover shadow-md">
+                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer text-white" onclick="playTrack(${t.id}, ${src})">
+                    ${rank ? `<span class="w-6 text-sm font-black italic opacity-40">${rank}</span>` : ''}
+                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover">
                     <div class="flex-1 min-w-0">
-                        <div class="font-bold text-sm text-white truncate">${t.title}</div>
+                        <div class="font-bold text-sm truncate">${t.title}</div>
                         <div class="text-[10px] text-dim uppercase truncate">${t.artist}</div>
                     </div>
                     <button onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})">
@@ -334,9 +341,9 @@
                 <div class="track-column">${group.map(t => renderTrackItem(t, `db.artists['${name}'].tracks`)).join('')}</div>
             `).join('');
             document.getElementById('artist-view-albums').innerHTML = (a.albums || []).map(alb => `
-                <div onclick="openAlbumPage('${name}', '${alb.title}')" class="album-card transform active:scale-95 transition-all cursor-pointer">
+                <div onclick="openAlbumPage('${name}', '${alb.title}')" class="album-card transform active:scale-95 transition-all cursor-pointer text-white">
                     <img src="${imgBust(alb.cover)}" class="w-36 h-36 rounded-2xl object-cover mb-2 shadow-xl border border-white/5">
-                    <div class="text-xs font-bold text-white truncate">${alb.title}</div>
+                    <div class="text-xs font-bold truncate">${alb.title}</div>
                     <div class="text-[10px] text-dim">${alb.year}</div>
                 </div>`).join('');
             lucide.createIcons();
@@ -352,6 +359,24 @@
             document.getElementById('album-view-artist').innerText = artistName;
             document.getElementById('album-tracks-list').innerHTML = albumTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
             lucide.createIcons();
+        }
+
+        function playTrack(id, list) {
+            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
+            if(!t) return;
+            currentTrackId = id;
+            currentPlaylist = Array.isArray(list) ? list : db.tracks;
+            document.getElementById('m-title').innerText = t.title;
+            document.getElementById('m-artist').innerText = t.artist;
+            document.getElementById('m-img').src = imgBust(t.img);
+            document.getElementById('f-title').innerText = t.title;
+            document.getElementById('f-artist').innerText = t.artist;
+            document.getElementById('f-img').src = imgBust(t.img);
+            audio.src = t.url; audio.play();
+            document.getElementById('mini-player').classList.remove('translate-y-[200px]');
+            updatePlayIcons(true);
+            rtdb.ref('global_charts/' + id).transaction(c => (c || 0) + 1);
+            updateHeartIcons();
         }
 
         function initCloudSync() {
@@ -378,26 +403,6 @@
                 else { btn.classList.remove('fill-heart', 'text-heart'); btn.classList.add('text-white'); }
             }
             lucide.createIcons();
-        }
-
-        function playTrack(id, list) {
-            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
-            if(!t) return;
-            currentTrackId = id;
-            currentPlaylist = Array.isArray(list) ? list : db.tracks;
-            
-            document.getElementById('m-title').innerText = t.title;
-            document.getElementById('m-artist').innerText = t.artist;
-            document.getElementById('m-img').src = imgBust(t.img);
-            document.getElementById('f-title').innerText = t.title;
-            document.getElementById('f-artist').innerText = t.artist;
-            document.getElementById('f-img').src = imgBust(t.img);
-            
-            audio.src = t.url; audio.play();
-            document.getElementById('mini-player').classList.remove('translate-y-[200px]');
-            updatePlayIcons(true);
-            rtdb.ref('global_charts/' + id).transaction(c => (c || 0) + 1);
-            updateHeartIcons();
         }
 
         function togglePlay() { 
@@ -469,7 +474,6 @@
         function imgBust(u) { return u ? `${u}${u.includes('?') ? '&' : '?'}v=${globalBust}` : ''; }
         function formatTime(s) { const m = Math.floor(s/60); const sec = Math.floor(s%60); return `${m}:${sec < 10 ? '0' : ''}${sec}`; }
         function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
-
         function playRandom() { if(db.tracks.length) playTrack(db.tracks[Math.floor(Math.random()*db.tracks.length)].id, db.tracks); }
         function playArtistTracks() { 
             const n = document.getElementById('artist-view-name').innerText;
@@ -499,8 +503,6 @@
             document.getElementById('search-results').innerHTML = h || '<div class="text-dim text-center py-20">Ничего не найдено</div>';
             lucide.createIcons();
         }
-
-        audio.onended = () => nextTrack();
     </script>
 </body>
 </html>
