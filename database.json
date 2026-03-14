@@ -1,5 +1,11 @@
 {
     "artists": {
+        "ROCKET": {
+            "name": "ROCKET",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ROCKET/artist.jpg",
+            "tracks": [],
+            "albums": []
+        },
         "ГУФ": {
             "name": "ГУФ",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ГУФ/artist.jpg",
