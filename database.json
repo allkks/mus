@@ -5255,6 +5255,38 @@
                     "album": "Грустная_девчонка_с_глазами_как_у_собаки",
                     "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/Грустная_девчонка_с_глазами_как_у_собаки/06. Буду твоим песиком.mp3",
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/Грустная_девчонка_с_глазами_как_у_собаки/cover.jpg"
+                },
+                {
+                    "id": 622,
+                    "title": "01. ЛОЛ",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/01. ЛОЛ.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+                },
+                {
+                    "id": 623,
+                    "title": "02. CTRLZzz",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/02. CTRLZzz.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+                },
+                {
+                    "id": 624,
+                    "title": "03. ПОРНХАБ КРИСМАС КЛАБ",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/03. ПОРНХАБ КРИСМАС КЛАБ.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+                },
+                {
+                    "id": 625,
+                    "title": "04. ВСЕ ХОТЯТ МЕНЯ ПОЦЕЛОВАТЬ Ver 2",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/04. ВСЕ ХОТЯТ МЕНЯ ПОЦЕЛОВАТЬ Ver 2.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
                 }
             ],
             "albums": [
@@ -5267,6 +5299,11 @@
                     "title": "Грустная_девчонка_с_глазами_как_у_собаки",
                     "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/Грустная_девчонка_с_глазами_как_у_собаки/cover.jpg",
                     "year": "2025"
+                },
+                {
+                    "title": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg",
+                    "year": "2025"
                 }
             ]
         },
@@ -5275,7 +5312,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/artist.jpg",
             "tracks": [
                 {
-                    "id": 622,
+                    "id": 626,
                     "title": "01. кассета 1",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5283,7 +5320,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 623,
+                    "id": 627,
                     "title": "02. утонуть",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5291,7 +5328,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 624,
+                    "id": 628,
                     "title": "03. во снах",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5299,7 +5336,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 625,
+                    "id": 629,
                     "title": "04. проваливаи",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5307,7 +5344,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 626,
+                    "id": 630,
                     "title": "05. ты",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5315,7 +5352,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 627,
+                    "id": 631,
                     "title": "06. кассета 6",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5323,7 +5360,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 628,
+                    "id": 632,
                     "title": "07. даваи расскажем",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5331,7 +5368,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 629,
+                    "id": 633,
                     "title": "08. подружка",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5339,7 +5376,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 630,
+                    "id": 634,
                     "title": "09. пока он тебя не бросит",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5347,7 +5384,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 631,
+                    "id": 635,
                     "title": "10. больше не буду feat Три дня дождя",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5355,7 +5392,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 632,
+                    "id": 636,
                     "title": "11. научился летать",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5363,7 +5400,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 633,
+                    "id": 637,
                     "title": "12. одна",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5371,7 +5408,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 634,
+                    "id": 638,
                     "title": "13. жить после",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -10367,6 +10404,38 @@
         },
         {
             "id": 622,
+            "title": "01. ЛОЛ",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/01. ЛОЛ.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+        },
+        {
+            "id": 623,
+            "title": "02. CTRLZzz",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/02. CTRLZzz.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+        },
+        {
+            "id": 624,
+            "title": "03. ПОРНХАБ КРИСМАС КЛАБ",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/03. ПОРНХАБ КРИСМАС КЛАБ.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+        },
+        {
+            "id": 625,
+            "title": "04. ВСЕ ХОТЯТ МЕНЯ ПОЦЕЛОВАТЬ Ver 2",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/04. ВСЕ ХОТЯТ МЕНЯ ПОЦЕЛОВАТЬ Ver 2.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3 Ч 1/cover.jpg"
+        },
+        {
+            "id": 626,
             "title": "01. кассета 1",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10374,7 +10443,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 623,
+            "id": 627,
             "title": "02. утонуть",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10382,7 +10451,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 624,
+            "id": 628,
             "title": "03. во снах",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10390,7 +10459,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 625,
+            "id": 629,
             "title": "04. проваливаи",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10398,7 +10467,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 626,
+            "id": 630,
             "title": "05. ты",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10406,7 +10475,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 627,
+            "id": 631,
             "title": "06. кассета 6",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10414,7 +10483,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 628,
+            "id": 632,
             "title": "07. даваи расскажем",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10422,7 +10491,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 629,
+            "id": 633,
             "title": "08. подружка",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10430,7 +10499,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 630,
+            "id": 634,
             "title": "09. пока он тебя не бросит",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10438,7 +10507,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 631,
+            "id": 635,
             "title": "10. больше не буду feat Три дня дождя",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10446,7 +10515,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 632,
+            "id": 636,
             "title": "11. научился летать",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10454,7 +10523,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 633,
+            "id": 637,
             "title": "12. одна",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10462,7 +10531,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 634,
+            "id": 638,
             "title": "13. жить после",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
