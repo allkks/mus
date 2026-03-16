@@ -5140,12 +5140,89 @@
                 }
             ]
         },
+        "ПОШЛАЯ МОЛЛИ": {
+            "name": "ПОШЛАЯ МОЛЛИ",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/artist.jpg",
+            "tracks": [
+                {
+                    "id": 608,
+                    "title": "01. Любимая песня твоей сестры",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/01. Любимая песня твоей сестры.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 609,
+                    "title": "02. Даже моя бэйби не знает",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/02. Даже моя бэйби не знает.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 610,
+                    "title": "03. Нон Стоп",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/03. Нон Стоп.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 611,
+                    "title": "04. Ханнамонтана",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/04. Ханнамонтана.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 612,
+                    "title": "05. Супермаркет",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/05. Супермаркет.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 613,
+                    "title": "06. Паки Пуси",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/06. Паки Пуси.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 614,
+                    "title": "07. Молли",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/07. Молли.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                },
+                {
+                    "id": 615,
+                    "title": "08. ТМСТС",
+                    "artist": "ПОШЛАЯ МОЛЛИ",
+                    "album": "8 способов как бросить дрочить",
+                    "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/08. ТМСТС.mp3",
+                    "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+                }
+            ],
+            "albums": [
+                {
+                    "title": "8 способов как бросить дрочить",
+                    "cover": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg",
+                    "year": "2025"
+                }
+            ]
+        },
         "Тринадцать карат": {
             "name": "Тринадцать карат",
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/artist.jpg",
             "tracks": [
                 {
-                    "id": 608,
+                    "id": 616,
                     "title": "01. кассета 1",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5153,7 +5230,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 609,
+                    "id": 617,
                     "title": "02. утонуть",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5161,7 +5238,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 610,
+                    "id": 618,
                     "title": "03. во снах",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5169,7 +5246,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 611,
+                    "id": 619,
                     "title": "04. проваливаи",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5177,7 +5254,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 612,
+                    "id": 620,
                     "title": "05. ты",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5185,7 +5262,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 613,
+                    "id": 621,
                     "title": "06. кассета 6",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5193,7 +5270,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 614,
+                    "id": 622,
                     "title": "07. даваи расскажем",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5201,7 +5278,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 615,
+                    "id": 623,
                     "title": "08. подружка",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5209,7 +5286,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 616,
+                    "id": 624,
                     "title": "09. пока он тебя не бросит",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5217,7 +5294,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 617,
+                    "id": 625,
                     "title": "10. больше не буду feat Три дня дождя",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5225,7 +5302,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 618,
+                    "id": 626,
                     "title": "11. научился летать",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5233,7 +5310,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 619,
+                    "id": 627,
                     "title": "12. одна",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -5241,7 +5318,7 @@
                     "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
                 },
                 {
-                    "id": 620,
+                    "id": 628,
                     "title": "13. жить после",
                     "artist": "Тринадцать карат",
                     "album": "13 причин почему",
@@ -10125,6 +10202,70 @@
         },
         {
             "id": 608,
+            "title": "01. Любимая песня твоей сестры",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/01. Любимая песня твоей сестры.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 609,
+            "title": "02. Даже моя бэйби не знает",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/02. Даже моя бэйби не знает.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 610,
+            "title": "03. Нон Стоп",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/03. Нон Стоп.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 611,
+            "title": "04. Ханнамонтана",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/04. Ханнамонтана.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 612,
+            "title": "05. Супермаркет",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/05. Супермаркет.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 613,
+            "title": "06. Паки Пуси",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/06. Паки Пуси.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 614,
+            "title": "07. Молли",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/07. Молли.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 615,
+            "title": "08. ТМСТС",
+            "artist": "ПОШЛАЯ МОЛЛИ",
+            "album": "8 способов как бросить дрочить",
+            "url": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/08. ТМСТС.mp3",
+            "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/ПОШЛАЯ МОЛЛИ/albums/8 способов как бросить дрочить/cover.jpg"
+        },
+        {
+            "id": 616,
             "title": "01. кассета 1",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10132,7 +10273,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 609,
+            "id": 617,
             "title": "02. утонуть",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10140,7 +10281,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 610,
+            "id": 618,
             "title": "03. во снах",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10148,7 +10289,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 611,
+            "id": 619,
             "title": "04. проваливаи",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10156,7 +10297,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 612,
+            "id": 620,
             "title": "05. ты",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10164,7 +10305,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 613,
+            "id": 621,
             "title": "06. кассета 6",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10172,7 +10313,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 614,
+            "id": 622,
             "title": "07. даваи расскажем",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10180,7 +10321,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 615,
+            "id": 623,
             "title": "08. подружка",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10188,7 +10329,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 616,
+            "id": 624,
             "title": "09. пока он тебя не бросит",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10196,7 +10337,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 617,
+            "id": 625,
             "title": "10. больше не буду feat Три дня дождя",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10204,7 +10345,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 618,
+            "id": 626,
             "title": "11. научился летать",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10212,7 +10353,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 619,
+            "id": 627,
             "title": "12. одна",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
@@ -10220,7 +10361,7 @@
             "img": "https://raw.githubusercontent.com/allkks/mus/main/all_music/Тринадцать карат/albums/13 причин почему/cover.jpg"
         },
         {
-            "id": 620,
+            "id": 628,
             "title": "13. жить после",
             "artist": "Тринадцать карат",
             "album": "13 причин почему",
