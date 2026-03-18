@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- ПРИНУДИТЕЛЬНОЕ ОБНОВЛЕНИЕ КЭША -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -33,23 +32,20 @@
     </script>
     <style>
         body { background-color: #000; color: #ffffff; font-family: 'Manrope', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .app-container { background-color: #0a0510; width: 100%; max-width: 480px; margin: 0 auto; height: 100vh; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(138,43,226,0.1); }
+        .app-container { background-color: #0a0510; width: 100%; max-width: 480px; margin: 0 auto; height: 100vh; position: relative; overflow: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .glass-player { background: rgba(26, 18, 37, 0.98); backdrop-filter: blur(30px); border-top: 1px solid rgba(138, 43, 226, 0.2); }
         .hero-bg { background: linear-gradient(180deg, transparent 0%, rgba(10, 5, 16, 1) 100%); }
         .yandex-gradient { background: linear-gradient(135deg, #8a2be2 0%, #ff2d55 100%); }
         .h-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 10px; }
-        .track-column { width: 85vw; max-width: 380px; scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
-        .album-card { width: 130px; scroll-snap-align: start; }
+        .track-column { min-width: 85vw; max-width: 380px; scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; }
+        .album-card { min-width: 130px; scroll-snap-align: start; }
         .page { transition: opacity 0.3s ease; }
     </style>
 </head>
-<body class="selection:bg-accent/30 text-white sm:bg-zinc-950 flex items-center justify-center">
+<body class="flex items-center justify-center sm:bg-zinc-950">
 
-    <!-- Обертка для ПК (ограничение ширины интерфейса) -->
     <div class="app-container sm:border-x sm:border-white/10">
-
-        <!-- Главный скролл-контейнер -->
         <main id="scroll-container" class="absolute inset-0 overflow-y-auto no-scrollbar pb-40">
             
             <!-- HEADER -->
@@ -72,9 +68,8 @@
                 </div>
 
                 <div class="mb-10">
-                    <h2 onclick="openFullList('Мировой чарт', currentGlobalTracks)" class="text-xl font-bold mb-4 px-2 flex items-center justify-between cursor-pointer">
+                    <h2 class="text-xl font-bold mb-4 px-2 flex items-center justify-between">
                         <span class="flex items-center gap-2"><i data-lucide="trending-up" class="w-5 h-5 text-brandY"></i>Мировой чарт</span>
-                        <i data-lucide="chevron-right" class="w-5 h-5 text-dim"></i>
                     </h2>
                     <div id="home-charts" class="h-scroll no-scrollbar px-2"></div>
                 </div>
@@ -87,8 +82,8 @@
                 </div>
 
                 <div class="mb-10">
-                    <h2 onclick="openFullList('Исполнители', Object.values(db.artists), 'artists')" class="text-xl font-bold mb-4 px-2 flex items-center justify-between cursor-pointer">
-                        <span>Исполнители</span><i data-lucide="chevron-right" class="text-dim"></i>
+                    <h2 class="text-xl font-bold mb-4 px-2 flex items-center justify-between">
+                        <span>Исполнители</span>
                     </h2>
                     <div id="home-artists" class="h-scroll no-scrollbar px-2"></div>
                 </div>
@@ -101,15 +96,13 @@
                     <div class="absolute inset-0 hero-bg"></div>
                     <button onclick="navTo('home')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10 text-white"><i data-lucide="chevron-left"></i></button>
                     <div class="relative p-6 pb-8 z-10">
-                        <h1 id="artist-view-name" class="text-5xl font-black italic tracking-tighter mb-4 text-white leading-tight drop-shadow-lg"></h1>
-                        <button class="bg-brandY text-black px-12 py-4 rounded-full font-black shadow-xl" onclick="playArtistTracks()">СЛУШАТЬ</button>
+                        <h1 id="artist-view-name" class="text-5xl font-black italic tracking-tighter mb-4 text-white leading-tight"></h1>
+                        <button class="bg-brandY text-black px-12 py-4 rounded-full font-black shadow-xl" id="btn-play-artist">СЛУШАТЬ</button>
                     </div>
                 </div>
                 <div class="p-4 mt-4">
-                    <h2 onclick="openFullList('Треки артиста', db.artists[currentArtistName]?.tracks)" class="text-xl font-bold mb-4 flex items-center justify-between cursor-pointer text-white">
-                        <span>Треки</span><i data-lucide="chevron-right" class="text-dim"></i>
-                    </h2>
-                    <div id="artist-view-tracks" class="h-scroll no-scrollbar"></div>
+                    <h2 class="text-xl font-bold mb-4 text-white">Треки</h2>
+                    <div id="artist-view-tracks" class="space-y-1"></div>
                     <h2 class="text-xl font-bold mb-4 mt-8">Альбомы</h2>
                     <div id="artist-view-albums" class="h-scroll no-scrollbar"></div>
                 </div>
@@ -120,11 +113,11 @@
                 <div class="relative h-[40vh] w-full flex flex-col justify-end overflow-hidden text-center">
                     <img id="album-view-img" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 hero-bg"></div>
-                    <button onclick="navTo('artist')" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10"><i data-lucide="chevron-left" class="text-white"></i></button>
+                    <button id="btn-album-back" class="absolute top-6 left-6 bg-black/40 p-3 rounded-full backdrop-blur-xl border border-white/10 z-10"><i data-lucide="chevron-left" class="text-white"></i></button>
                     <div class="relative p-6 pb-8 z-10">
-                        <h1 id="album-view-title" class="text-3xl font-black text-white mb-1 drop-shadow-md"></h1>
+                        <h1 id="album-view-title" class="text-3xl font-black text-white mb-1"></h1>
                         <p id="album-view-artist" class="text-dim mb-4"></p>
-                        <button class="bg-white text-black px-10 py-3 rounded-full font-bold shadow-xl" onclick="playCurrentAlbum()">СЛУШАТЬ ВСЁ</button>
+                        <button class="bg-white text-black px-10 py-3 rounded-full font-bold shadow-xl" id="btn-play-album">СЛУШАТЬ ВСЁ</button>
                     </div>
                 </div>
                 <div class="p-4 space-y-1" id="album-tracks-list"></div>
@@ -154,30 +147,18 @@
         <!-- FULL PLAYER -->
         <div id="full-player" class="absolute inset-0 bg-bg z-[200] transition-transform duration-500 translate-y-full flex flex-col p-8 pb-12 overflow-y-auto no-scrollbar">
             <div class="flex justify-between items-center mb-6 shrink-0"><button onclick="closeFullPlayer()"><i data-lucide="chevron-down" class="w-8 h-8 text-white"></i></button><span class="text-[10px] font-bold uppercase tracking-widest opacity-30 text-white">Плеер</span><button><i data-lucide="more-horizontal" class="w-6 h-6 text-white"></i></button></div>
-            
-            <div class="flex-1 flex items-center justify-center mb-8 min-h-[30vh]">
-                <img id="f-img" class="w-full aspect-square max-w-[280px] max-h-[40vh] rounded-[3rem] object-cover shadow-2xl border border-white/5">
-            </div>
-            
+            <div class="flex-1 flex items-center justify-center mb-8 min-h-[30vh]"><img id="f-img" class="w-full aspect-square max-w-[280px] rounded-[3rem] object-cover shadow-2xl border border-white/5"></div>
             <div class="flex items-center justify-between mb-6 shrink-0">
-                <div class="flex-1 min-w-0 pr-4 text-white">
-                    <h2 id="f-title" class="text-3xl font-black italic mb-1 truncate leading-tight">...</h2>
-                    <p id="f-artist" class="text-lg text-dim truncate">...</p>
-                </div>
+                <div class="flex-1 min-w-0 pr-4 text-white"><h2 id="f-title" class="text-3xl font-black italic mb-1 truncate leading-tight">...</h2><p id="f-artist" class="text-lg text-dim truncate">...</p></div>
                 <button onclick="toggleFavorite(currentTrackId)" class="p-2 text-white shrink-0"><i id="f-heart" data-lucide="heart" class="w-8 h-8"></i></button>
             </div>
-            
             <div class="mb-8 shrink-0">
                 <div class="relative h-1.5 bg-white/10 rounded-full mb-3 cursor-pointer" id="seek-bar" onclick="seek(event)">
                     <div id="f-progress" class="absolute top-0 left-0 h-full bg-white rounded-full"></div>
                     <div id="f-handle" class="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg" style="left: 0%"></div>
                 </div>
-                <div class="flex justify-between text-[11px] font-mono text-dim">
-                    <span id="f-current-time">0:00</span>
-                    <span id="f-total-time">0:00</span>
-                </div>
+                <div class="flex justify-between text-[11px] font-mono text-dim"><span id="f-current-time">0:00</span><span id="f-total-time">0:00</span></div>
             </div>
-            
             <div class="flex items-center justify-around mb-4 shrink-0">
                 <button id="shuffle-btn" onclick="toggleShuffle()" class="p-2 active:scale-90 opacity-20 transition-all text-white"><i data-lucide="shuffle" class="w-6 h-6"></i></button>
                 <button onclick="prevTrack()" class="p-2 active:scale-75 transition-all text-white"><i data-lucide="skip-back" class="w-10 h-10 fill-white"></i></button>
@@ -189,16 +170,12 @@
 
         <!-- NAVBAR -->
         <div class="absolute bottom-0 left-0 right-0 h-20 bg-bg/80 backdrop-blur-md border-t border-white/5 flex items-center justify-around z-[90] pb-safe">
-            <button id="nav-home" onclick="navTo('home')" class="nav-btn flex flex-col items-center gap-1 text-brandY">
-                <i data-lucide="home"></i><span class="text-[10px] font-bold">ГЛАВНАЯ</span>
-            </button>
-            <button id="nav-fav" onclick="openFullList('Мне нравится', getFavorites())" class="nav-btn flex flex-col items-center gap-1 text-dim/40">
-                <i data-lucide="heart"></i><span class="text-[10px] font-bold">МОЁ</span>
-            </button>
+            <button id="nav-home" onclick="navTo('home')" class="nav-btn flex flex-col items-center gap-1 text-brandY"><i data-lucide="home"></i><span class="text-[10px] font-bold">ГЛАВНАЯ</span></button>
+            <button id="nav-fav" onclick="openFullList('Мне нравится', getFavorites())" class="nav-btn flex flex-col items-center gap-1 text-dim/40"><i data-lucide="heart"></i><span class="text-[10px] font-bold">МОЁ</span></button>
         </div>
 
         <audio id="audio-engine"></audio>
-    </div> <!-- end app-container -->
+    </div>
 
     <script>
         const firebaseConfig = {
@@ -218,95 +195,69 @@
 
         let db = { tracks: [], artists: {} };
         let favorites = [];
-        let currentGlobalTracks = [];
         let currentTrackId = null;
         let currentPlaylist = [];
-        let currentArtistName = '';
-        let globalBust = Date.now();
         let isShuffle = false;
         let isRepeat = false;
+        let globalBust = Date.now();
         const audio = document.getElementById('audio-engine');
 
-        window.onload = async () => {
+        function sanitize(n) { return n ? n.replace(/[.$#\[\]\/]/g, "").strip : ""; }
+
+        window.onload = () => {
             lucide.createIcons();
             if (user.photo_url) document.getElementById('user-avatar').innerHTML = `<img src="${user.photo_url}" class="w-full h-full object-cover">`;
 
-            // СЛУШАЕМ ПАПКУ music_data
             rtdb.ref('/').on('value', (snap) => {
-                const data = snap.val();
+                const data = snap.val() || {};
                 const source = data.music_data || data;
-                if(source && source.tracks) {
-                    db.tracks = source.tracks;
-                    db.artists = source.artists;
-                    renderHome();
-                    refreshCharts();
-                    
-                    const container = document.getElementById('full-list-content');
-                    if (container?.querySelector('h1')?.innerText === 'Мне нравится') {
-                        renderFullListHTML('Мне нравится', getFavorites());
-                    }
-                }
+                
+                // Преобразуем объект треков в массив, если нужно
+                let rawTracks = source.tracks || [];
+                db.tracks = Array.isArray(rawTracks) ? rawTracks : Object.values(rawTracks);
+                db.artists = source.artists || {};
+                
+                renderHome();
+                initCloudSync();
             });
-            initCloudSync();
         };
 
-        function refreshCharts() {
-            rtdb.ref('global_charts').once('value', (snap) => {
-                const data = snap.val();
-                if (!data || !db.tracks.length) return;
-                const sortedIds = Object.keys(data).sort((a, b) => data[b] - data[a]);
-                currentGlobalTracks = sortedIds.map(tid => db.tracks.find(x => x.id == tid)).filter(x => x).slice(0, 100);
-                
-                document.getElementById('home-charts').innerHTML = groupTracks(currentGlobalTracks.slice(0,12)).map(group => `
-                    <div class="track-column">${group.map((t) => renderTrackItem(t, 'db.tracks', currentGlobalTracks.indexOf(t) + 1)).join('')}</div>
-                `).join('');
-                lucide.createIcons();
-            });
-        }
-
-        function navTo(p) {
-            document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
-            document.getElementById('page-' + p).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-brandY', 'text-dim/40'));
+        function renderHome() {
+            const artistsCont = document.getElementById('home-artists');
+            const chartsCont = document.getElementById('home-charts');
             
-            if(p === 'home') {
-                document.getElementById('nav-home').classList.replace('text-dim/40', 'text-brandY');
-                document.getElementById('search-input').value = ''; // Очищаем поиск при переходе домой
-            }
-            
-            document.getElementById('scroll-container').scrollTop = 0;
-        }
+            // Рендер артистов
+            artistsCont.innerHTML = Object.values(db.artists).map(a => `
+                <div onclick="openArtistPage('${a.name}')" class="flex-shrink-0 w-24 text-center transform active:scale-90 transition-transform cursor-pointer">
+                    <div class="aspect-square w-full mb-3 rounded-full overflow-hidden border border-white/5 shadow-2xl bg-surface">
+                        <img src="${imgBust(a.img)}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div class="text-[10px] font-bold truncate text-white uppercase tracking-wider">${a.name}</div>
+                </div>`).join('');
 
-        function openFullList(title, list, type = 'tracks') {
-            navTo('full-list');
-            if (title === 'Мне нравится') {
-                document.getElementById('nav-fav').classList.replace('text-dim/40', 'text-brandY');
-                document.getElementById('nav-home').classList.replace('text-brandY', 'text-dim/40');
-            }
-            renderFullListHTML(title, list, type);
-        }
+            // Рендер чарта (топ 12)
+            const topTracks = db.tracks.slice(0, 12);
+            chartsCont.innerHTML = groupTracks(topTracks).map(group => `
+                <div class="track-column">${group.map((t, i) => renderTrackItem(t)).join('')}</div>
+            `).join('');
 
-        function renderFullListHTML(title, list, type = 'tracks') {
-            const isChart = title === 'Мировой чарт';
-            const container = document.getElementById('full-list-content');
-            
-            let itemsHtml = '';
-            if (type === 'artists') {
-                itemsHtml = list.map(a => `
-                    <div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-3 rounded-2xl active:bg-white/5 transition-all cursor-pointer text-white">
-                        <img src="${imgBust(a.img)}" class="w-14 h-14 rounded-full object-cover shadow-lg shrink-0">
-                        <div class="font-bold text-lg">${a.name}</div>
-                    </div>`).join('');
-            } else {
-                itemsHtml = list.length > 0 
-                    ? list.map((t, i) => renderTrackItem(t, 'db.tracks', isChart ? i + 1 : null)).join('')
-                    : '<div class="py-20 text-center text-dim">Тут пока пусто...</div>';
-            }
-
-            container.innerHTML = `
-                <h1 class="text-3xl font-black mb-8 text-white">${title}</h1>
-                <div class="space-y-1">${itemsHtml}</div>`;
+            updateFavoritesUI();
             lucide.createIcons();
+        }
+
+        function renderTrackItem(t) {
+            const isFav = favorites.includes(t.id);
+            return `
+                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer text-white" onclick="playTrack(${t.id})">
+                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover bg-surface">
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-sm truncate">${t.title}</div>
+                        <div class="text-[10px] text-dim uppercase truncate">${t.artist}</div>
+                    </div>
+                    <button class="p-2" onclick="event.stopPropagation(); toggleFavorite(${t.id})">
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i>
+                    </button>
+                </div>`;
         }
 
         function groupTracks(tracks) {
@@ -315,172 +266,80 @@
             return groups;
         }
 
-        function renderHome() {
-            if(!db.artists) return;
-            // Улучшена адаптивность: фиксированная ширина для карточек исполнителей (w-24 sm:w-28)
-            document.getElementById('home-artists').innerHTML = Object.values(db.artists).map(a => `
-                <div onclick="openArtistPage('${a.name}')" class="flex-shrink-0 w-24 sm:w-28 text-center transform active:scale-90 transition-transform cursor-pointer">
-                    <div class="aspect-square w-full mb-3 rounded-full overflow-hidden border border-white/5 shadow-2xl">
-                        <img src="${imgBust(a.img)}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="text-[10px] font-bold truncate text-white uppercase tracking-wider">${a.name}</div>
-                </div>`).join('');
-            
-            const favs = getFavorites();
-            if(favs.length) {
-                document.getElementById('fav-section').classList.remove('hidden');
-                document.getElementById('favorites-list').innerHTML = groupTracks(favs.slice(0,12)).map(group => `
-                    <div class="track-column">${group.map(t => renderTrackItem(t, 'db.tracks')).join('')}</div>
-                `).join('');
-            } else document.getElementById('fav-section').classList.add('hidden');
-            lucide.createIcons();
-        }
-
-        function renderTrackItem(t, src, rank = null) {
-            const isFav = favorites.includes(t.id);
-            return `
-                <div class="flex items-center gap-4 p-2 rounded-xl active:bg-white/5 transition-all cursor-pointer text-white" onclick="playTrack(${t.id}, ${src})">
-                    ${rank ? `<span class="w-6 text-sm font-black italic opacity-40 shrink-0 text-center">${rank}</span>` : ''}
-                    <img src="${imgBust(t.img)}" class="w-12 h-12 rounded-lg object-cover shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <div class="font-bold text-sm truncate">${t.title}</div>
-                        <div class="text-[10px] text-dim uppercase truncate">${t.artist}</div>
-                    </div>
-                    <button class="shrink-0 p-2" onclick="event.stopImmediatePropagation(); toggleFavorite(${t.id})">
-                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-heart text-heart' : 'text-dim/20'}"></i>
-                    </button>
-                </div>`;
-        }
-
         function openArtistPage(name) {
-            currentArtistName = name;
-            const a = db.artists[name]; if(!a) return;
+            // Ищем артиста по имени в объекте
+            const artistKey = Object.keys(db.artists).find(key => db.artists[key].name === name);
+            const a = db.artists[artistKey];
+            if(!a) return;
+
             navTo('artist');
             document.getElementById('artist-view-img').src = imgBust(a.img);
             document.getElementById('artist-view-name').innerText = a.name;
-            document.getElementById('artist-view-tracks').innerHTML = groupTracks(a.tracks || []).map(group => `
-                <div class="track-column">${group.map(t => renderTrackItem(t, `db.artists['${name}'].tracks`)).join('')}</div>
-            `).join('');
-            document.getElementById('artist-view-albums').innerHTML = (a.albums || []).map(alb => `
+            
+            const aTracks = db.tracks.filter(t => t.artist === name);
+            document.getElementById('artist-view-tracks').innerHTML = aTracks.map(t => renderTrackItem(t)).join('');
+            
+            const albums = a.albums || [];
+            document.getElementById('artist-view-albums').innerHTML = albums.map(alb => `
                 <div onclick="openAlbumPage('${name}', '${alb.title}')" class="album-card transform active:scale-95 transition-all cursor-pointer text-white flex-shrink-0">
-                    <img src="${imgBust(alb.cover)}" class="w-full aspect-square rounded-2xl object-cover mb-2 shadow-xl border border-white/5">
+                    <img src="${imgBust(alb.cover)}" class="w-full aspect-square rounded-2xl object-cover mb-2 shadow-xl border border-white/5 bg-surface">
                     <div class="text-xs font-bold truncate">${alb.title}</div>
-                    <div class="text-[10px] text-dim">${alb.year}</div>
+                    <div class="text-[10px] text-dim">${alb.year || '2026'}</div>
                 </div>`).join('');
+
+            document.getElementById('btn-play-artist').onclick = () => { if(aTracks.length) playTrack(aTracks[0].id, aTracks); };
             lucide.createIcons();
         }
 
         function openAlbumPage(artistName, albumTitle) {
-            const a = db.artists[artistName];
+            const artistKey = Object.keys(db.artists).find(key => db.artists[key].name === artistName);
+            const a = db.artists[artistKey];
             const album = a.albums.find(x => x.title === albumTitle);
-            const albumTracks = a.tracks.filter(t => t.album === albumTitle);
+            const albumTracks = db.tracks.filter(t => t.artist === artistName && t.album === albumTitle);
+            
             navTo('album');
             document.getElementById('album-view-img').src = imgBust(album.cover);
             document.getElementById('album-view-title').innerText = albumTitle;
             document.getElementById('album-view-artist').innerText = artistName;
-            document.getElementById('album-tracks-list').innerHTML = albumTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+            document.getElementById('album-tracks-list').innerHTML = albumTracks.map(t => renderTrackItem(t)).join('');
+            
+            document.getElementById('btn-album-back').onclick = () => openArtistPage(artistName);
+            document.getElementById('btn-play-album').onclick = () => { if(albumTracks.length) playTrack(albumTracks[0].id, albumTracks); };
             lucide.createIcons();
         }
 
-        function playTrack(id, list) {
-            const t = Array.isArray(list) ? list.find(x => x.id === id) : db.tracks.find(x => x.id === id);
+        function playTrack(id, playlist = null) {
+            const t = db.tracks.find(x => x.id === id);
             if(!t) return;
+            
             currentTrackId = id;
-            currentPlaylist = Array.isArray(list) ? list : db.tracks;
+            currentPlaylist = playlist || db.tracks;
             
             document.getElementById('m-title').innerText = t.title;
             document.getElementById('m-artist').innerText = t.artist;
             document.getElementById('m-img').src = imgBust(t.img);
-            
             document.getElementById('f-title').innerText = t.title;
             document.getElementById('f-artist').innerText = t.artist;
             document.getElementById('f-img').src = imgBust(t.img);
             
-            audio.src = t.url; 
-            
-            // Защита от ошибки прерывания (Play request was interrupted)
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => console.log('Аудио прервано или не загружено:', error));
-            }
+            audio.src = t.url;
+            audio.play().catch(e => console.log("Play failed"));
             
             document.getElementById('mini-player').classList.remove('translate-y-[200px]');
             updatePlayIcons(true);
-            
-            // Запись прослушивания в базу
-            rtdb.ref('global_charts/' + id).transaction(c => (c || 0) + 1);
             updateHeartIcons();
         }
 
-        // Кнопка "Случайный трек"
-        function playRandom() { 
-            if(db.tracks.length) {
-                // Принудительно включаем перемешивание
-                if (!isShuffle) {
-                    toggleShuffle(true);
-                }
-                const randomTrack = db.tracks[Math.floor(Math.random() * db.tracks.length)];
-                playTrack(randomTrack.id, db.tracks); 
-            }
-        }
-
-        function initCloudSync() {
-            rtdb.ref('users/' + user.id + '/profile').update({ name: user.first_name, username: user.username || "" });
-            rtdb.ref('users/' + user.id + '/favorites').on('value', (snap) => {
-                const data = snap.val();
-                favorites = data ? Object.keys(data).filter(k => data[k] === true).map(Number) : [];
-                renderHome();
-                updateHeartIcons();
-            });
-        }
-
-        function toggleFavorite(id) {
-            if(!id) return;
-            const isFav = favorites.includes(id);
-            rtdb.ref('users/' + user.id + '/favorites/' + id).set(!isFav);
-        }
-
-        function updateHeartIcons() {
-            const isFav = favorites.includes(currentTrackId);
-            const btn = document.getElementById('f-heart');
-            if (btn) {
-                if (isFav) { btn.classList.add('fill-heart', 'text-heart'); btn.classList.remove('text-white'); }
-                else { btn.classList.remove('fill-heart', 'text-heart'); btn.classList.add('text-white'); }
-            }
-            lucide.createIcons();
-        }
-
         function togglePlay() { 
-            if(audio.paused) { 
-                const p = audio.play(); 
-                if(p !== undefined) p.catch(() => {});
-                updatePlayIcons(true); 
-            } else { 
-                audio.pause(); 
-                updatePlayIcons(false); 
-            }
+            if(audio.paused) { audio.play(); updatePlayIcons(true); }
+            else { audio.pause(); updatePlayIcons(false); }
         }
 
         function updatePlayIcons(playing) {
-            const i = playing ? 'pause' : 'play';
-            document.getElementById('m-play-icon').setAttribute('data-lucide', i);
-            document.getElementById('f-play-icon').setAttribute('data-lucide', i);
-            lucide.createIcons();
-        }
-
-        function toggleShuffle(forceEnable = null) {
-            isShuffle = forceEnable !== null ? forceEnable : !isShuffle;
-            const btn = document.getElementById('shuffle-btn');
-            if (isShuffle) { btn.classList.remove('opacity-20'); btn.classList.add('text-brandY'); }
-            else { btn.classList.add('opacity-20'); btn.classList.remove('text-brandY'); }
-            lucide.createIcons();
-        }
-
-        function toggleRepeat() {
-            isRepeat = !isRepeat;
-            const btn = document.getElementById('repeat-btn');
-            if (isRepeat) { btn.classList.remove('opacity-20'); btn.classList.add('text-brandY'); }
-            else { btn.classList.add('opacity-20'); btn.classList.remove('text-brandY'); }
+            const icon = playing ? 'pause' : 'play';
+            document.querySelectorAll('[data-lucide="play"], [data-lucide="pause"]').forEach(el => {
+                el.setAttribute('data-lucide', icon);
+            });
             lucide.createIcons();
         }
 
@@ -488,12 +347,9 @@
             if (!currentPlaylist.length) return;
             let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
             let nextIdx;
-            
             if (isShuffle) {
-                // Если включен случайный порядок, выбираем трек так, чтобы он не повторился 2 раза подряд
-                do {
-                    nextIdx = Math.floor(Math.random() * currentPlaylist.length);
-                } while (currentPlaylist.length > 1 && nextIdx === i);
+                do { nextIdx = Math.floor(Math.random() * currentPlaylist.length); } 
+                while (currentPlaylist.length > 1 && nextIdx === i);
             } else {
                 nextIdx = (i + 1) % currentPlaylist.length;
             }
@@ -503,7 +359,15 @@
         function prevTrack() {
             if (!currentPlaylist.length) return;
             let i = currentPlaylist.findIndex(t => t.id === currentTrackId);
-            playTrack(currentPlaylist[(i - 1 + currentPlaylist.length) % currentPlaylist.length].id, currentPlaylist);
+            let prevIdx = (i - 1 + currentPlaylist.length) % currentPlaylist.length;
+            playTrack(currentPlaylist[prevIdx].id, currentPlaylist);
+        }
+
+        function playRandom() {
+            if(!db.tracks.length) return;
+            isShuffle = true;
+            document.getElementById('shuffle-btn').classList.replace('opacity-20', 'text-brandY');
+            nextTrack();
         }
 
         function seek(e) {
@@ -520,24 +384,61 @@
                 document.getElementById('f-total-time').innerText = formatTime(audio.duration);
             }
         };
+        audio.onended = () => isRepeat ? (audio.currentTime = 0, audio.play()) : nextTrack();
 
-        audio.onended = () => { if(isRepeat) { audio.currentTime=0; audio.play(); } else nextTrack(); };
-
-        function openFullPlayer() { document.getElementById('full-player').classList.remove('translate-y-full'); }
-        function closeFullPlayer() { document.getElementById('full-player').classList.add('translate-y-full'); }
-        function imgBust(u) { return u ? `${u}${u.includes('?') ? '&' : '?'}v=${globalBust}` : ''; }
-        function formatTime(s) { const m = Math.floor(s/60); const sec = Math.floor(s%60); return `${m}:${sec < 10 ? '0' : ''}${sec}`; }
-        function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
-        
-        function playArtistTracks() { 
-            const n = document.getElementById('artist-view-name').innerText;
-            if(db.artists[n] && db.artists[n].tracks.length) playTrack(db.artists[n].tracks[0].id, db.artists[n].tracks);
+        function initCloudSync() {
+            rtdb.ref('users/' + user.id + '/favorites').on('value', (snap) => {
+                const data = snap.val() || {};
+                favorites = Object.keys(data).filter(k => data[k] === true).map(Number);
+                updateFavoritesUI();
+            });
         }
-        
-        function playCurrentAlbum() {
-            const title = document.getElementById('album-view-title').innerText;
-            const albumTracks = db.tracks.filter(t => t.album === title);
-            if(albumTracks.length) playTrack(albumTracks[0].id, albumTracks);
+
+        function updateFavoritesUI() {
+            const favs = getFavorites();
+            const section = document.getElementById('fav-section');
+            if(favs.length > 0) {
+                section.classList.remove('hidden');
+                document.getElementById('favorites-list').innerHTML = groupTracks(favs.slice(0, 12)).map(group => `
+                    <div class="track-column">${group.map(t => renderTrackItem(t)).join('')}</div>
+                `).join('');
+            } else section.classList.add('hidden');
+            updateHeartIcons();
+            lucide.createIcons();
+        }
+
+        function toggleFavorite(id) {
+            const isFav = favorites.includes(id);
+            rtdb.ref('users/' + user.id + '/favorites/' + id).set(!isFav);
+        }
+
+        function updateHeartIcons() {
+            const isFav = favorites.includes(currentTrackId);
+            const btn = document.getElementById('f-heart');
+            if (btn) {
+                btn.classList.toggle('fill-heart', isFav);
+                btn.classList.toggle('text-heart', isFav);
+                btn.classList.toggle('text-white', !isFav);
+            }
+        }
+
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            document.getElementById('shuffle-btn').classList.toggle('opacity-20', !isShuffle);
+            document.getElementById('shuffle-btn').classList.toggle('text-brandY', isShuffle);
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            document.getElementById('repeat-btn').classList.toggle('opacity-20', !isRepeat);
+            document.getElementById('repeat-btn').classList.toggle('text-brandY', isRepeat);
+        }
+
+        function navTo(p) {
+            document.querySelectorAll('.page').forEach(pg => pg.classList.add('hidden'));
+            document.getElementById('page-' + p).classList.remove('hidden');
+            document.getElementById('scroll-container').scrollTop = 0;
+            if(p === 'home') document.getElementById('search-input').value = '';
         }
 
         function handleSearch() {
@@ -545,19 +446,25 @@
             if (!q) { navTo('home'); return; }
             navTo('search');
             const foundArtists = Object.values(db.artists).filter(a => a.name.toLowerCase().includes(q));
-            const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q));
+            const foundTracks = db.tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
             let h = '';
             if(foundArtists.length) {
                 h += `<div class="text-[10px] text-dim uppercase mb-4 tracking-widest px-2">Исполнители</div>`;
-                foundArtists.forEach(a => h += `<div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 mb-4 cursor-pointer text-white font-bold"><img src="${imgBust(a.img)}" class="w-12 h-12 rounded-full object-cover shadow-lg shrink-0"><div>${a.name}</div></div>`);
+                foundArtists.forEach(a => h += `<div onclick="openArtistPage('${a.name}')" class="flex items-center gap-4 p-4 rounded-3xl bg-surface/40 mb-4 cursor-pointer"><img src="${imgBust(a.img)}" class="w-12 h-12 rounded-full object-cover bg-surface"><div>${a.name}</div></div>`);
             }
             if(foundTracks.length) {
                 h += `<div class="text-[10px] text-dim uppercase mb-4 tracking-widest px-2">Треки</div>`;
-                h += foundTracks.map(t => renderTrackItem(t, 'db.tracks')).join('');
+                h += foundTracks.map(t => renderTrackItem(t)).join('');
             }
             document.getElementById('search-results').innerHTML = h || '<div class="text-dim text-center py-20">Ничего не найдено</div>';
             lucide.createIcons();
         }
+
+        function openFullPlayer() { document.getElementById('full-player').classList.remove('translate-y-full'); }
+        function closeFullPlayer() { document.getElementById('full-player').classList.add('translate-y-full'); }
+        function formatTime(s) { const m = Math.floor(s/60); const sec = Math.floor(s%60); return `${m}:${sec < 10 ? '0' : ''}${sec}`; }
+        function imgBust(u) { return u ? `${u}?v=${globalBust}` : ''; }
+        function getFavorites() { return db.tracks.filter(t => favorites.includes(t.id)); }
     </script>
 </body>
 </html>
